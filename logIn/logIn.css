@@ -1,0 +1,130 @@
+.container{
+    
+    background:linear-gradient(to top,rgba(0,0,0,0.8)50%);
+    border-radius: 20px;
+    width: 250px;
+    height: 800px;
+    overflow: hidden;
+    left:870px;
+    position: absolute;
+    padding-bottom: 750px;
+    top: -70px;
+    padding: 25px;
+    
+}
+
+
+.form{
+
+    padding:30px 40px;
+    color: #ff7200;
+}
+.form-control{
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    position: relative;
+    color:#ff7200;
+}
+.form-control label{
+    display: inline-block;
+    margin-bottom:5px ;
+    color:antiquewhite;
+}
+.form-control input{
+    background: transparent;
+
+    border: 2px solid #837c76;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    font-size: 14px;;
+    font-family: inherit;
+    padding: 10px;
+}
+.form-control input:focus {
+	outline: 0;
+	border-color: #777;
+}
+.form-control i{
+    visibility: hidden;
+    position: absolute;
+    top: 40px;
+    right:-50px;
+}
+.form-control small{
+    visibility: hidden;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+.form button{
+    background-color:black ;
+    border: 2px solid rgb(66, 66, 2) ;
+    color:#ff7200 ;
+    font-family: inherit;
+    font-size: 16px;
+    border-radius:5px ;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+
+}
+.form button:hover{
+    background-color:rgb(120, 98, 71);
+    transition: 0.5s;
+
+}
+.form-control.success input{
+    border-color: rgb(36, 125, 36);
+
+}
+.form-control.error input{
+    border-color:#931414;
+
+}
+.form-control.success i.fa-check-circle {
+    background:none;
+	color: #3e721b;
+	visibility: visible;
+}
+.form-control.error i.fa-exclamation-circle {
+    visibility:visible;
+    background:none;
+
+    color: #931414;
+}
+.form-control.error small{
+    visibility:visible;
+    color:#931414;
+}
+
+.form .link{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: center;
+}
+.form .link a{
+    text-decoration: none;
+    color:antiquewhite;
+}
+
+
+.icons a{
+    text-decoration: none;
+    color: antiquewhite;
+}
+.icons ion-icon{
+    color:antiquewhite;
+    font-size: 25px;
+    
+    
+    transition: 0.3s ease;
+}
+.icons ion-icon:hover{
+    color: #ff7200;
+}
+.icons{
+    margin-left: 13px;
+
+}
