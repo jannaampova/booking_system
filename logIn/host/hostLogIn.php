@@ -10,7 +10,7 @@
     <?php include "../../config.php"; ?>
     <div class="container" id="vhod">
         <h2>Логирай се!</h2>
-        <form action="" class="form" method="POST" name="clientLogIn">
+        <form action="" class="form" method="POST" name="hostLogIn">
             <div class="form-control ">
                 <label for="username">Username</label>
                 <input type="text" name="username" placeholder="annamariya11" id="username">
