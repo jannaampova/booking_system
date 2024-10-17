@@ -1,49 +1,57 @@
-.container{
-    
-    background:linear-gradient(to top,rgba(0,0,0,0.8)50%);
+
+
+
+.container {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 50%);
     border-radius: 20px;
-    width: 250px;
-    height: 800px;
+    width: 30%; /* Adjust to desired width on mobile */
+    height: auto; /* Allow height to adjust dynamically */
     overflow: hidden;
-    left:870px;
-    position: absolute;
-    padding-bottom: 750px;
-    top: -70px;
-    padding: 25px;
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure the button is displayed as a block element */
     
+}
+
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    .container {
+        width: 90%; /* Make container wider on smaller screens */
+        padding-bottom: 20px; /* Reduce padding for better mobile experience */
+    }
 }
 
 
 .form{
-
     padding:30px 40px;
-    color: #ff7200;
+    color: #242321;
 }
 .form-control{
     margin-bottom: 5px;
     padding-bottom: 10px;
     position: relative;
-    color:#ff7200;
+    color:#2d2a26;
+    
 }
 .form-control label{
     display: inline-block;
-    margin-bottom:5px ;
-    color:antiquewhite;
+    text-align: center;
+    margin-bottom:3% ;
+    color:rgb(170, 164, 157);
+    
 }
 .form-control input{
     background: transparent;
-
     border: 2px solid #837c76;
-    border-radius: 4px;
+    border-radius: 15px;
     display: block;
-    width: 100%;
+    width: 92%;
+    height: 25px;
     font-size: 14px;;
     font-family: inherit;
     padding: 10px;
 }
 .form-control input:focus {
 	outline: 0;
-	border-color: #777;
+	border-color: #6c6228;
 }
 .form-control i{
     visibility: hidden;
@@ -58,19 +66,21 @@
     left: 0;
 }
 .form button{
-    background-color:black ;
+    background-color:rgb(153, 107, 27) ;
     border: 2px solid rgb(66, 66, 2) ;
-    color:#ff7200 ;
+    color:#070402 ;
     font-family: inherit;
-    font-size: 16px;
-    border-radius:5px ;
+    font-size: 25px;
+    border-radius:15px ;
     padding: 10px;
     margin-top: 20px;
-    width: 100%;
+    display: block; /* Ensure the button is displayed as a block element */
+    margin: 0 auto; /* Center the button horizontally */
+    width: 50%;
 
 }
 .form button:hover{
-    background-color:rgb(120, 98, 71);
+    background-color:rgb(194, 155, 107);
     transition: 0.5s;
 
 }
@@ -93,9 +103,24 @@
 
     color: #931414;
 }
+.form-control small {
+    visibility: hidden; /* Hide error message by default */
+    color: #931414; /* Error message color */
+    position: absolute; /* Position it absolutely */
+    bottom: -10px; /* Position below the input */
+    right: 0; /* Align to the right */
+    font-size: 12px; /* Smaller font size */
+}
+.form-control i {
+    visibility: hidden; /* Hide error message by default */
+    position: absolute; /* Position it absolutely */
+    right: -12px; /* Align to the right */
+    top:44px;
+}
 .form-control.error small{
     visibility:visible;
     color:#931414;
+    text-align: end;
 }
 
 .form .link{
@@ -117,8 +142,6 @@
 .icons ion-icon{
     color:antiquewhite;
     font-size: 25px;
-    
-    
     transition: 0.3s ease;
 }
 .icons ion-icon:hover{
@@ -127,4 +150,8 @@
 .icons{
     margin-left: 13px;
 
+}
+.greeting{
+    color: #624e24;
+    text-align: center;
 }
