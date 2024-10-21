@@ -42,13 +42,12 @@
     ?>
     
     <form action="" method="POST">
-        <h2 class="greetings">New here?</h2>
-        <button class="button" type="submit" name="toggleLinks">Choose how to sign up!</button>
+        <h2 class="greetings"></h2>
     </form>
     <?php if ($showLinks): ?>
         <div class="links">
-            <a href="logIn/client/clientSignUp.php" class="button">Client</a>
-            <a href="logIn/host/hostSignUp.php" class="button">Host</a>
+            <a href="userEntry/signUp.php" class="button">Sign Up</a>
+            <a href="userEntry/logIn.php" class="button">Log In</a>
         </div>
     <?php endif; ?>
 </body>

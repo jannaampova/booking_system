@@ -1,0 +1,12 @@
+.form-control select {
+    background: transparent;
+    border: 2px solid #837c76;
+    border-radius: 15px;
+    display: block;
+    width: 97%;
+    height: 48px;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 10px;
+  }
+  
