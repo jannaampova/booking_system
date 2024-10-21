@@ -44,11 +44,9 @@
     <form action="" method="POST">
         <h2 class="greetings"></h2>
     </form>
-    <?php if ($showLinks): ?>
         <div class="links">
             <a href="userEntry/signUp.php" class="button">Sign Up</a>
             <a href="userEntry/logIn.php" class="button">Log In</a>
         </div>
-    <?php endif; ?>
 </body>
 </html>
