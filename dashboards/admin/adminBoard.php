@@ -21,11 +21,8 @@ if (!isset($_SESSION['name'])) {
 
 <div class="section">
     <nav>
-    <a href='input.php'>Input</a>
-    <a href='seeUsers.php'>View</a>
-    <a href='queries.php'>Explore</a>
-    <a href='queries.php'>Explore</a>
-    <a href='queries.php'>Explore</a>
+    <a href='seeUsers.php'>View Users</a>
+    <a href='logOut.php'>Log Out</a>
     </nav>
 </div>
 
