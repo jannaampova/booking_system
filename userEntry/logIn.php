@@ -112,5 +112,8 @@ if (isset($_POST['logIn'])) {
             <button name="logIn" type="submit">Log In</button>
         </form>
     </div>
+    <div class="links">
+            <a href="signUp.php" class="button">Sign Up</a>
+        </div>
 </body>
 </html>

@@ -42,7 +42,7 @@
     ?>
     
     <form action="" method="POST">
-        <h2 class="greetings"></h2>
+        <h2 class="greetings">Hello!</h2>
     </form>
         <div class="links">
             <a href="userEntry/signUp.php" class="button">Sign Up</a>
