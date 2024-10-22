@@ -1,0 +1,35 @@
+  /* Apply styles to both the Edit link and Delete button inside the table */
+  .table-container td a, 
+  .table-container td button {
+    background-color: rgb(153, 107, 27);  /* Background color */
+    border: 1px solid rgb(66, 66, 2);     /* Border */
+    color: #ffffff;                       /* Text color */
+    font-family: inherit;                 /* Inherit font style */
+    font-size: 14px;                      /* Font size */
+    border-radius: 15px;                   /* Rounded corners */
+    padding: 5px 5px;                    /* Padding */
+    text-align: center;                   /* Center text */
+    text-decoration: none;                /* Remove underline from links */
+    display: inline-block;                /* Align button and link as block */
+    cursor: pointer;                      /* Change cursor to pointer */
+    width: 100%;                          /* Make it fill the table cell */
+    box-sizing: border-box;               /* Include padding in width */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+  }
+  
+  /* Hover effect for both */
+  .table-container td a:hover,
+  .table-container td button:hover {
+    background-color: rgb(194, 155, 107); /* Lighter color on hover */
+  }
+  
+  /* Additional styling for <a> to make it behave like a button */
+  .table-container td a {
+    display: inline-block;  /* Block style for links */
+  }
+  
+  /* Button-specific hover and styling */
+  .table-container td button {
+    border: none;           /* Remove default button border */
+  }
+  

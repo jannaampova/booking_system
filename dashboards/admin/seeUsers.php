@@ -4,6 +4,7 @@
   <title>View Clients</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="../../css/admin.css">
+  <link rel="stylesheet" href="../../css/table.css">
 </head>
 <body>
 <?php
@@ -30,7 +31,7 @@ $result = mysqli_query($dbConn, $sql);
 
 echo "<div class='table-container'>";
 echo "<table border='1'>";
-echo "<tr><th>Name</th><th>Phone</th><th>Role</th><th>Username</th><th>Email</th><th colspan=2>Actions</th></tr>";
+echo "<tr><th>Name</th><th>Phone</th><th>Role</th><th>Username</th><th>Email</th><th>Actions</th><th></th></tr>";
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
