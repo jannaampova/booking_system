@@ -45,8 +45,12 @@ if (isset($_POST['logIn'])) {
                 // Redirect based on role
                 if ($roleID == 1) {
                     header("Location: ../dashboards/admin/adminBoard.php");
+                } else if ($roleID == 3) {
+                    header("Location: ../dashboards/client/clientBoard.php");
+                } else if ($roleID == 2) {
+                    header("Location: ../dashboards/host/hostBoard.php");
                 } else {
-                    header("Location: ../../dashboards/clientBoard.php");
+                    setErrorFor($invalidRole, $roleClass, "Invalid role.");
                 }
                 exit();
             } else {
