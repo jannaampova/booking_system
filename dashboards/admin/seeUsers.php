@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/table.css">
+    <link rel="stylesheet" href="../../css/viewProp.css">
     <style>
         .action-button {
             display: inline-block;
@@ -26,8 +27,29 @@
     </style>
 </head>
 <body>
+<div class="section">
+        <nav>
+       
+            <a href="adminBoard.php">Home page</a>
+            <a href='../admin/logOut.php'>Log Out</a>
+
+        </nav>
+    </div>
+<div class="row">
+        <div class="section-title">
+            <h1>All users</h1>
+        </div>
+    </div>
 <?php
 include "../../config.php";
+
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['name'])) {
+    header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
+    exit();
+}
 
 // Handle the form submission and delete the user
 if (isset($_POST['deleteUser'])) {
@@ -44,6 +66,7 @@ if (isset($_POST['deleteUser'])) {
         }
 }
 
+
 // Query to get users
 $sql = "SELECT * FROM User";
 $result = mysqli_query($dbConn, $sql);
@@ -54,6 +77,9 @@ echo "<tr><th>Name</th><th>Phone</th><th>Role</th><th>Username</th><th>Email</th
 
 if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+            if($row['fullName']==$_SESSION['name']){
+                continue;
+            }
                 echo "<tr>";
                 echo "<td>".$row['fullName']."</td>";
                 echo "<td>".$row['phone']."</td>";
@@ -89,7 +115,6 @@ if ($result->num_rows > 0) {
 //mustnt see admins or be able to edit and delete them
 ?>
 
-<a href="adminBoard.php" class="button">Back</a>
 
 </body>
 </html>

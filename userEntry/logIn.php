@@ -113,7 +113,7 @@ if (isset($_POST['logIn'])) {
         </form>
     </div>
     <div class="links">
-            <a href="signUp.php" class="button">Sign Up</a>
+            <a href="signUp.php" class="button">Dont have an account? Sign Up!</a>
         </div>
 </body>
 </html>

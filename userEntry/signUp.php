@@ -179,6 +179,9 @@ $mail = new PHPMailer(true);
                     $sql = "SELECT * from roles";
                     $result = mysqli_query($dbConn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
+                        if($row['id']==1){
+                            continue;
+                        }
                         echo "<option value='" . $row["roleName"] . "'>" . $row["roleName"] . "</option>";
                     }
                     ?>

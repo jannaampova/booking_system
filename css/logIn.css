@@ -8,7 +8,7 @@
   display: block; /* Ensure the button is displayed as a block element */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   /* Adjust breakpoint as needed */
   .container {
     width: 90%; /* Make container wider on smaller screens */

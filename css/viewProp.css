@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.section-title {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.section-title h1 {
+    display: inline-block;
+    font-size: 40px;
+    color: black;
+    margin: 0;
+    font-weight: 700;
+    position: relative;
+}
+
+.section-title h1::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 80px;
+    height: 3px;
+    background-color: #c39b77;
+}
+
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Add space between rows and items */
+}
+
+.row {
+    width: 30%; /* Each property takes up 30% of the width */
+    margin-bottom: 20px; /* Add space between rows */
+}
+
+.service-item {
+    background-color: #f5f5f5; /* Add a background color to the service items */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-item-inner {
+    position: relative;
+}
+
+.swiper-container {
+    width: 100%; /* Full width for each swiper */
+    height: 250px; /* Set a fixed height for the swiper */
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the slide without distortion */
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5); /* Transparent overlay background */
+    color: white;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    .row {
+        width: 45%; /* Adjust to 2 properties per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .row {
+        width: 100%; /* Single column on small screens */
+    }
+}
+.service-item-inner:hover .overlay {
+    background-color: transparent;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: opacity 0.5s ease;
+}
+
+.overlay h3 {
+    color: white;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+    transition: all 0.5s ease;
+    text-transform: capitalize;
+}
+
+/* Swiper Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white; /* Change arrow color to white */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: #ccc; /* Change to a lighter shade on hover for visibility */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px; /* Adjust the size of the arrows */
+}
+
+/* Swiper Pagination Dots */
+.swiper-pagination-bullet {
+    background: white; /* Change bullet color to white */
+}
+
+.swiper-pagination-bullet-active {
+    background: #ccc; /* Change active bullet color to a lighter shade */
+}
+
+.swiper-pagination {
+    bottom: 10px; /* Adjust position of the pagination */
+}
+
+.section {
+    display: flex; 
+    flex-direction: column; /* Align items in a column */
+    align-items: center; /* Center the items horizontally */
+    width: 100%; /* Full width */
+    margin-bottom: 20px; /* Space below the section */
+}
+
+.section nav {
+    display: flex; /* Align items in a row */
+    justify-content: center; /* Center the links */
+    background-color: #c39b77; /* Background color for the navbar */
+    padding: 10px; /* Padding around the navbar */
+    border-radius: 10px; /* Rounded corners */
+    width: fit-content; /* Change to fit content */
+    margin: 0 auto; /* Center the nav horizontally */
+}
+.section a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: inherit;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}

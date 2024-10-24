@@ -1,0 +1,43 @@
+/* CSS Grid for 4-column layout */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 4 equal columns */
+    gap: 10px; /* Spacing between columns */
+    max-width: 800px; /* Control overall width */
+    margin: 0 auto; /* Center the grid horizontally */
+}
+
+/* Style the checkbox container */
+.checkbox-grid div {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center the items */
+}
+
+/* Style the checkbox */
+input[type="checkbox"] {
+    width: 20px; /* Width of the checkbox */
+    height: 20px; /* Height of the checkbox */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-right: 10px; /* Space between checkbox and label */
+}
+
+/* Adjust label styles */
+label {
+    flex: 1; /* Allow the label to take available space */
+    max-width: 150px; /* Set a max width for the labels */
+    white-space: normal; /* Allow wrapping for long text */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for cut-off text if necessary */
+}
+
+/* Change label color and alignment */
+label {
+    text-align: left; /* Left align the text */
+    color: rgb(170, 164, 157); /* Your label color */
+}
+
+/* Checkboxes' checked state */
+input[type="checkbox"]:checked {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Optional: add shadow */
+}
