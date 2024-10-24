@@ -224,7 +224,8 @@ $mail = new PHPMailer(true);
             </div>
             <div class="form-control <?php echo htmlspecialchars($classTelNum); ?>">
                 <label for="telNum">Phone</label>
-                <input type="text" name="telNum" placeholder="Phone number" id="telNum">
+                <input type="tel" name="telNum" id="telNum" placeholder="+359 XXX XXX XXX" 
+                pattern="\+359\s?\d{3}\s?\d{3}\s?\d{3}" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small><?php echo htmlspecialchars($telNumInvalid); ?></small>

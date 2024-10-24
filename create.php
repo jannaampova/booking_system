@@ -211,5 +211,19 @@ if (mysqli_query($dbConn, $img)) {
     echo "Error creating Img table: " . mysqli_error($dbConn) . "<br>";
 }
 
+$imgToProperty = "CREATE TABLE IF NOT EXISTS ImgToProp (
+    id int unsigned auto_increment primary key,
+    imgID int,
+    propertyID int
+    FOREIGN KEY (imgID) REFERENCES Images(id) ON DELETE CASCADE,
+    FOREIGN KEY (propertyID) REFERENCES Property(id) ON DELETE CASCADE
+
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+if (mysqli_query($dbConn, $img)) {
+    echo "ImgLink table created or already exists.<br>";
+} else {
+    echo "Error creating Img table: " . mysqli_error($dbConn) . "<br>";
+}
 mysqli_close($dbConn); // Close the database connection
 ?>
