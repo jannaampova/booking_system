@@ -86,9 +86,11 @@ if ($result->num_rows > 0) {
                 echo "</tr>";
         }
 }
+//mustnt see admins or be able to edit and delete them
 ?>
 
 <a href="adminBoard.php" class="button">Back</a>
 
 </body>
 </html>
+

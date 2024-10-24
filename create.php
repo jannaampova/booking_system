@@ -200,5 +200,16 @@ if (mysqli_query($dbConn, $messages)) {
     echo "Error creating Messages table: " . mysqli_error($dbConn) . "<br>";
 }
 
+$img = "CREATE TABLE IF NOT EXISTS Images (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    imgPath VARCHAR(255) NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+if (mysqli_query($dbConn, $img)) {
+    echo "Img table created or already exists.<br>";
+} else {
+    echo "Error creating Img table: " . mysqli_error($dbConn) . "<br>";
+}
+
 mysqli_close($dbConn); // Close the database connection
 ?>

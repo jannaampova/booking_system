@@ -33,16 +33,8 @@
     </style>
 </head>
 <body>
-    <?php
-    session_start();
-    $showLinks = isset($_SESSION['showLinks']) ? $_SESSION['showLinks'] : false;
-    if (isset($_POST['toggleLinks'])) {
-        $_SESSION['showLinks'] = true; // Set session variable to show links
-    }
-    ?>
-    
     <form action="" method="POST">
-        <h2 class="greetings">Hello!</h2>
+        <h2 class="greetings">Welcome!</h2>
     </form>
         <div class="links">
             <a href="userEntry/signUp.php" class="button">Sign Up</a>
