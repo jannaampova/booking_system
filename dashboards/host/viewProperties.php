@@ -3,7 +3,7 @@ session_start(); // Start the session
 
 // Check if the user is logged in
 if (!isset($_SESSION['name'])) {
-    header("Location: ../../userEntry/logIn.php"); 
+    header("Location: ../../userEntry/logIn.php");
     exit();
 }
 ?><!DOCTYPE html>
@@ -12,7 +12,7 @@ if (!isset($_SESSION['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Properties</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../../css/viewProp.css" />
@@ -24,7 +24,7 @@ if (!isset($_SESSION['name'])) {
 <body>
     <div class="section">
         <nav>
-       
+
             <a href="hostBoard.php">Home page</a>
             <a href='../admin/logOut.php'>Log Out</a>
 
@@ -42,6 +42,7 @@ if (!isset($_SESSION['name'])) {
 
             <?php
             include "../../config.php";
+
 
             $sql = "SELECT * FROM Property";
             $res = mysqli_query($dbConn, $sql);
@@ -63,6 +64,7 @@ if (!isset($_SESSION['name'])) {
                 }
 
                 $propertiesWithImages[] = [
+                    'id' => $row['id'],
                     'name' => $row['propName'], // Assuming the property name is stored in the 'name' field
                     'images' => $images
                 ];
@@ -78,12 +80,14 @@ if (!isset($_SESSION['name'])) {
                     <div class='swiper-wrapper'>";
 
                 foreach ($propertyData['images'] as $imagePath) {
+
                     echo "<div class='swiper-slide'>
+                 <a href='viewSingle.php?id=" . htmlspecialchars($propertyData['id']) . "'>
                 <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image'>
               </div>";
                 }
 
-                echo "      </div> <!-- swiper-wrapper -->
+                echo " </div> <!-- swiper-wrapper -->
                 <div class='swiper-pagination'></div>
                 <div class='swiper-button-next'></div>
                 <div class='swiper-button-prev'></div>
@@ -92,6 +96,7 @@ if (!isset($_SESSION['name'])) {
                 <h3>" . htmlspecialchars($propertyData['name']) . "</h3> <!-- Display Property Name -->
 
             </div>
+        </a>
         </div>
     </div>
 </div>";
@@ -115,13 +120,7 @@ if (!isset($_SESSION['name'])) {
                     });
                 });
             </script>
-
-
-
-
-
         </div>
     </section>
 </body>
-
 </html>
