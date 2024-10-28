@@ -200,7 +200,7 @@ if (!isset($_SESSION['name'])) {
             }
 
             header("Location: hostBoard.php");
-           
+
         } else {
             echo "Error adding property: " . mysqli_error($dbConn);
         }

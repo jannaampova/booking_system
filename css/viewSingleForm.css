@@ -10,18 +10,24 @@
     flex: 0 0 48%; /* Take up roughly 48% of the width for two columns */
     margin-bottom: 15px; /* Spacing between rows */
   }
+  .description {
+    flex: 0 0 100%; /* Take up roughly 48% of the width for two columns */
+    margin-bottom: 15px; /* Spacing between rows */
+  }
   
-  .form-control input {
+  .form-control input,
+  .description textarea {
     background: #ffffff;
     border: 2px solid #837c76;
     border-radius: 15px;
-    width: 100%; /* Full width within the column */
+    width: 94%; /* Full width within the column */
     height: 25px;
     font-size: 14px;
     padding: 10px;
   }
   
-  .form-control label {
+  .form-control label,
+  .description label{
     display: block;
     margin-bottom: 5px;
     color: rgb(170, 164, 157);
