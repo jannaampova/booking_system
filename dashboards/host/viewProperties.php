@@ -17,6 +17,7 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../../css/viewProp.css" />
     <link rel="stylesheet" href="../../css/admin.css" />
+    <link rel="stylesheet" href="../../css/buttonAndSelect.css" />
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>

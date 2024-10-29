@@ -79,6 +79,7 @@ if (isset($_POST['logIn'])) {
     <title>Log In</title>
     <link rel="stylesheet" href="../css/logIn.css">
     <link rel="stylesheet" href="../css/select.css">
+    <link rel="stylesheet" href="../css/button.css">
 </head>
 <body>
     <div class="container" id="vhod">

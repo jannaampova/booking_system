@@ -7,6 +7,7 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/logIn.css">
     <link rel="stylesheet" href="../css/select.css">
+    <link rel="stylesheet" href="../css/button.css">
 
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
 

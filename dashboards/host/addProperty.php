@@ -15,9 +15,9 @@ if (!isset($_SESSION['name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Host Properties Dashboard</title>
     <link rel="stylesheet" href="../../css/logIn.css">
-    <link rel="stylesheet" href="../../css/select.css">
     <link rel="stylesheet" href="../../css/check.css">
     <link rel="stylesheet" href="../../css/viewProp.css">
+    <link rel="stylesheet" href="../../css/buttonAndSelect.css">
 </head>
 
 <body>

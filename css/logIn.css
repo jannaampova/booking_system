@@ -60,23 +60,6 @@
   bottom: -5px;
   left: 0;
 }
-.form button {
-  background-color: rgb(153, 107, 27);
-  border: 2px solid rgb(66, 66, 2);
-  color: #070402;
-  font-family: inherit;
-  font-size: 25px;
-  border-radius: 15px;
-  padding: 10px;
-  margin-top: 20px;
-  display: block; /* Ensure the button is displayed as a block element */
-  margin: 0 auto; /* Center the button horizontally */
-  width: 50%;
-}
-.form button:hover {
-  background-color: rgb(194, 155, 107);
-  transition: 0.5s;
-}
 .form-control.success input {
   border-color: rgb(36, 125, 36);
 }

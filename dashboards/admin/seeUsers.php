@@ -3,13 +3,14 @@
 <head>
     <title>View Clients</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
+    <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/table.css">
     <link rel="stylesheet" href="../../css/viewProp.css">
     <style>
         .action-button {
-            display: inline-block;
-            padding: 5px 10px;
+            display: flex;
             text-align: center;
             text-decoration: none;
             color: white;
@@ -17,6 +18,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-right: 40px;
         }
         .action-button.delete {
             background-color: #DC3545;
@@ -99,13 +101,13 @@ if ($result->num_rows > 0) {
                 echo "<td>".$row['email']."</td>";
                 
                 // Edit link
-                echo "<td><a href='editUser.php?id=".$row['id']."' class='action-button'>Edit User</a></td>";
+                echo "<td><a href='editUser.php?id=".$row['id']."''><i class='fas fa-pencil-alt'></i> </a></td>";
 
                 // Delete form with hidden input to pass user ID
                 echo "<td>
                         <form class='form' name='deleteForm' method='post'>
                                 <input type='hidden' name='user_id' value='".$row['id']."'>
-                                <button type='submit' name='deleteUser' class='action-button delete'>DELETE</button>
+                                <button type='submit' name='deleteUser' class='action-button delete'><i class='fas fa-trash-alt'></i></button>
                         </form>
                 </td>";
 
