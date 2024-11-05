@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="../../css/buttonAndSelect.css" />
     <link rel="stylesheet" href="../../css/check.css" />
 </head>
+<?php
+include "../../config.php";
+session_start();
+
+if (!isset($_SESSION['name'])) {
+    header("Location: ../../userEntry/logIn.php");
+    exit();
+} ?>
 
 <body>
     <div class="section">
@@ -18,17 +26,12 @@
             <a href="hostBoard.php">Home page</a>
             <a href="../admin/logOut.php">Log Out</a>
         </nav>
-    </div>
+</div>
+
+
 
     <div class="cont">
         <?php
-        include "../../config.php";
-        session_start();
-
-        if (!isset($_SESSION['name'])) {
-            header("Location: ../../userEntry/logIn.php");
-            exit();
-        }
 
         $propertyId = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $sql = "SELECT * FROM Property WHERE id=$propertyId";
@@ -227,10 +230,24 @@
             <textarea rows="5" cols="180" name="desc" readonly><?php echo htmlspecialchars($propDesc); ?></textarea>
         </div>
         <button type='button' name='saveChanges' onclick="toggleEditMode(event)">Edit</button>
+        <button type='submit' name='deleteProp'>Delete Property</button>
+
     </form>
 
     <?php
+    
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+        if (isset($_POST['deleteProp'])) {
+            $sql = "DELETE FROM Property WHERE id=$propertyId";
+            if (mysqli_query($dbConn, $sql)) {
+                echo "<script>window.location.href='viewProperties.php';</script>";
+                exit();
+            } else {
+                echo "<p>Error deleting property: " . mysqli_error($dbConn) . "</p>";
+            }
+        }
+
         // Retrieve and sanitize input data
         $newName = mysqli_real_escape_string($dbConn, $_POST['propertyName']);
         $newTypeID = (int) $_POST['propertyType'];
@@ -288,6 +305,7 @@
                 }
             }
         }
+        
 
 
         if (mysqli_query($dbConn, $updateSQL)) {
