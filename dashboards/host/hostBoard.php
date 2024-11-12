@@ -17,21 +17,30 @@ if (!isset($_SESSION['name'])) {
     <title>Host</title>
     <link rel="icon" href="fav.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/admin.css">
+    <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+
 
 </head>
 
 <body>
     <div class="section">
         <nav>
-            <a href="accountSettings.php">Account Settings</a>
+            <?php
+            $fullName = $_SESSION['name'];
+            $firstName = explode(' ', $fullName)[0]; // Get the first name
+            ?>
+            <a href="hostSettings.php">
+                <i class="fas fa-user-edit"></i>
+                <?php echo htmlspecialchars($firstName); ?>
+            </a>
             <a href="viewProperties.php">View your properties</a>
             <a href="addProperty.php">Input Property</a>
             <a href='../admin/logOut.php'>Log Out</a>
-
         </nav>
         <header>
-        <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1>
-            <h3>Here you can manage your account settings and properties.</h3></header>
+            <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1>
+            <h3>Here you can manage your account settings and properties.</h3>
+        </header>
     </div>
 
     <footer>
