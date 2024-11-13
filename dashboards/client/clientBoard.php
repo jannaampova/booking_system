@@ -16,7 +16,7 @@ if (!isset($_SESSION['name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client</title>
     <link rel="stylesheet" href="../../css/client.css">
-    <link rel="stylesheet" href="../../css/nav.css">
+    <link rel="stylesheet" href="../../css/userOptions.css">
     <link rel="stylesheet" href="../../css/displayImages.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>

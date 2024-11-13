@@ -17,6 +17,7 @@ if (!isset($_SESSION['name'])) {
     <title>Host</title>
     <link rel="icon" href="fav.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/userOptions.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
 
 
