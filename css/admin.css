@@ -3,7 +3,8 @@ body {
     display: flex; 
     flex-direction: column; 
     font-family: 'Poppins', sans-serif;
-    width: 100vw; /* Full viewport width */}
+    max-width: 75%;
+}
 *{
     margin: 0;
     padding: 0;
@@ -40,6 +41,7 @@ footer {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    
 
 }
 .main{

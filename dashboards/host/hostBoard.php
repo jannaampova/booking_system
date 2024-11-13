@@ -23,26 +23,14 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    <style>
-        .section a {
-
-            color: #00272e;
-        }
-    </style>
+    
 </head>
 
 <body>
     <div class="main">
         <div class="left-container">
-        </div>
-        <div class="column">
-            <div class="first-line">
-                <header>
-                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</h1> <!-- Display admin name -->
-                </header>
-                <div class="section">
-                    <nav>
-                        <?php
+            <div class="options">
+            <?php
                         $fullName = $_SESSION['name'];
                         $firstName = explode(' ', $fullName)[0]; // Get the first name
                         ?>
@@ -50,9 +38,17 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                             <i class="fas fa-user-edit"></i>
                             <?php echo htmlspecialchars($firstName); ?>
                         </a>
-                        <a href='logOut.php'>Log Out</a>
-                    </nav>
-                </div>
+                        <a href="viewProperties.php">View Your Properties</a>
+                        <a href="addProperty.php">Add Property</a>
+                        <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+                        </div>
+        </div>
+        <div class="column">
+            <div class="first-line">
+                <header>
+                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</h1> <!-- Display admin name -->
+                </header>
+
             </div>
 
             <div class="info-bubbles">
