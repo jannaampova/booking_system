@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start(); // Start the session
 include "../config.php";
 include "functions.php";
@@ -73,6 +73,7 @@ if (isset($_POST['logIn'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,40 +82,56 @@ if (isset($_POST['logIn'])) {
     <link rel="stylesheet" href="../css/select.css">
     <link rel="stylesheet" href="../css/button.css">
 </head>
+
 <body>
-    <div class="container" id="vhod">
-        <h2 class="greeting">Log In <br>Welcome!</h2>
-        <form action="" class="form" method="POST" name="logInForm">
-            <div class="form-control <?php echo htmlspecialchars($roleClass); ?>">
-                <label for="name">Choose how you want to log in</label>
-                <select name="selectRole" id="selectRole" required>
-                    <?php
-                    $sql = "SELECT * from roles";
-                    $result = mysqli_query($dbConn, $sql);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<option value='" . $row["roleName"] . "'>" . $row["roleName"] . "</option>";
-                    }
-                    ?>
-                </select>
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small><?php echo htmlspecialchars($invalidRole); ?></small>
-            </div>
-            <div class="form-control <?php echo htmlspecialchars($usernameClass); ?>">
-                <label for="username">Username</label>
-                <input type="text" name="username" placeholder="annamariya11" id="username">
-                <small><?php echo htmlspecialchars($invalidUserName); ?></small>
-            </div>
-            <div class="form-control <?php echo htmlspecialchars($passwdClass); ?>">
-                <label for="password">Password</label>
-                <input type="password" name="password" placeholder="password" id="password">
-                <small><?php echo htmlspecialchars($invalidPasswd); ?></small>
-            </div>
-            <button name="logIn" type="submit">Log In</button>
-        </form>
-    </div>
-    <div class="links">
-            <a href="signUp.php" class="button">Dont have an account? Sign Up!</a>
+    <div class="main">
+        <div class="icon">
+            <a href="../home.php" class="logo">
+                <h3>TJ</h3>
+                <p>
+                    <h6>EasyStay</h6>
+                </p>
+            </a>
         </div>
+
+        <div class="container" id="vhod">
+            <form action="" class="form" method="POST" name="logInForm" id="signUp">
+                <div class="form-control <?php echo htmlspecialchars($roleClass); ?>">
+                    <label for="name">Role</label>
+                    <select name="selectRole" id="selectRole" required>
+                        <?php
+                        $sql = "SELECT * from roles";
+                        $result = mysqli_query($dbConn, $sql);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='" . $row["roleName"] . "'>" . $row["roleName"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small><?php echo htmlspecialchars($invalidRole); ?></small>
+                </div>
+                <div class="form-control <?php echo htmlspecialchars($usernameClass); ?>">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" placeholder="annamariya11" id="username">
+                    <small><?php echo htmlspecialchars($invalidUserName); ?></small>
+                </div>
+                <div class="form-control <?php echo htmlspecialchars($passwdClass); ?>">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="password" id="password">
+                    <small><?php echo htmlspecialchars($invalidPasswd); ?></small>
+                </div>
+                <div class="form-control">
+                    <button name="logIn" type="submit">Log In</button>
+                </div>
+                <div class="form-control">
+                    <a href="signUp.php">Don't have an account? <br>Sign Up!</a>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
 </body>
+
 </html>

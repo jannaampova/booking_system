@@ -10,5 +10,3 @@ if(!$dbConn=mysqli_connect($host, $dbUser, $dbPass)) {
     {
     die('Не може да се селектира базата от данни.');
     }
-    
-    ?>

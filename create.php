@@ -228,5 +228,3 @@ if (mysqli_query($dbConn, $imgToProperty)) {
 }
 
 mysqli_close($dbConn); // Close the database connection
-
-?>

@@ -16,6 +16,7 @@ if (!isset($_SESSION['name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client</title>
     <link rel="stylesheet" href="../../css/client.css">
+    <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/displayImages.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
@@ -24,6 +25,15 @@ if (!isset($_SESSION['name'])) {
 
 <body>
     <div class="main" id="main">
+        <div class="icon">
+            <a href="clientBoard.php" class="logo">
+                <h3>TJ</h3>
+                <p>
+                    <h6>EasyStay</h6>
+                </p>
+            </a>
+        </div>
+
         <div class="section">
 
             <nav>
@@ -40,21 +50,22 @@ if (!isset($_SESSION['name'])) {
 
             <header>
 
-                <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1>
+                <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</h1>
                 <form method="post" class="search-bubble">
                     <div class="search-field">
                         <input type="search" name="city" placeholder="Where?" list="city-options">
                         <datalist id="city-options">
-                            <option value="New York"></option>
-                            <option value="Los Angeles"></option>
-                            <option value="Chicago"></option>
-                            <option value="Houston"></option>
-                            <option value="Miami"></option>
-                            <option value="San Francisco"></option>
-                            <option value="Seattle"></option>
-                            <option value="Boston"></option>
-                            <option value="Atlanta"></option>
-                            <option value="Denver"></option>
+                            <option value="Varna"></option>
+                            <option value="Bansko"></option>
+                            <option value="Blagoevgrad"></option>
+                            <option value="Pleven"></option>
+                            <option value="Plovdiv"></option>
+                            <option value="Ruse"></option>
+                            <option value="Sandanski"></option>
+                            <option value="Shumen"></option>
+                            <option value="Sofia"></option>
+                            <option value="Targovishte"></option>
+                            <option value="Veliko Tarnovo"></option>
                         </datalist>
 
                     </div>

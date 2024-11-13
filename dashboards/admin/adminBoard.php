@@ -16,6 +16,7 @@ if (!isset($_SESSION['name'])) {
     <title>Store</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/nav.css">
 </head>
 <body>
 

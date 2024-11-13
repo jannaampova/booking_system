@@ -285,7 +285,7 @@ if (!isset($_SESSION['name'])) {
 
         // Handle image uploads
         if (isset($_FILES['images'])) {
-            $uploadDirectory = 'uploads/'; // Change this to your uploads directory
+            $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . '/booking system/upload/';
             foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
                 $fileName = basename($_FILES['images']['name'][$key]);
                 $targetFilePath = $uploadDirectory . $fileName;
@@ -293,7 +293,8 @@ if (!isset($_SESSION['name'])) {
                 // Move the uploaded file to the uploads directory
                 if (move_uploaded_file($tmpName, $targetFilePath)) {
                     // Insert image path into Images table
-                    $sqlImg = "INSERT INTO Images (imgPath) VALUES ('$targetFilePath')";
+                    $relativePath = '/booking system/upload/' . $fileName;
+                    $sqlImg = "INSERT INTO Images (imgPath) VALUES ('$relativePath')";
                     mysqli_query($dbConn, $sqlImg);
 
                     // Get the last inserted image ID
