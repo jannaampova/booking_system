@@ -32,8 +32,8 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
         </div>
         <div class="column">
-           <div class="first-line">
-              <header>
+            <div class="first-line">
+                <header>
                     <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1> <!-- Display admin name -->
                 </header>
                 <div class="section">
@@ -50,27 +50,59 @@ if (!isset($_SESSION['name'])) {
                         <a href='logOut.php'>Log Out</a>
                     </nav>
                 </div>
-                </div> 
+            </div>
 
-                <div class="info-bubbles">
-                    <div class="info-bubble"><p>Properties <br>
-<?php
-include "../../config.php";
-$propertyCounter=0;
-$sql="SELECT id FROM Property";
-$res=mysqli_query($dbConn,$sql);
-while($row=mysqli_fetch_assoc($res)){
-$propertyCounter++;
-}
-echo "$propertyCounter";
-
-?>
-
-                  </p>  </div>
-                    <div class="info-bubble">a</div>
-                    <div class="info-bubble">a</div>
+            <div class="info-bubbles">
+                <div class="info-bubble">
+                    <p><b>Properties</b> <br>
+                        <?php
+                        include "../../config.php";
+                        $propertyCounter = 0;
+                        $sql = "SELECT id FROM Property";
+                        $res = mysqli_query($dbConn, $sql);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $propertyCounter++;
+                        }
+                        echo "<i>$propertyCounter</i>";
+                        ?>
+                        <br>
+                        <i class="fa-solid fa-house"></i>
+                    </p>
                 </div>
-            
+                <div class="info-bubble">
+                    <p><b>Users</b> <br>
+                        <?php
+                        $userCounter = 0;
+                        $sql = "SELECT id FROM User";
+                        $res = mysqli_query($dbConn, $sql);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $userCounter++;
+                        }
+                        echo "<i>$userCounter</i>";
+                        ?>
+                        <br>
+                        <i class="fas fa-user"></i>
+                    </p>
+
+                </div>
+                <div class="info-bubble">
+                    <p><b>Bookings</b> <br>
+                        <?php
+                        $bookingsCounter = 0;
+                        $sql = "SELECT id FROM Booking";
+                        $res = mysqli_query($dbConn, $sql);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $bookingsCounter++;
+                        }
+                        echo "<i>$bookingsCounter</i>";
+                        ?>
+                        <br>
+                        <i class="fa-regular fa-calendar"></i>
+                    </p>
+
+                </div>
+            </div>
+
         </div>
 
     </div>
