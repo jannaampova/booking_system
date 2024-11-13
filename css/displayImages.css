@@ -1,0 +1,116 @@
+.cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    gap: 20px; /* Add space between rows and items */
+}
+
+.row {
+    width: 30%; /* Each property takes up 30% of the width */
+    margin-bottom: 20px; /* Add space between rows */
+}
+.swiper-container {
+    width: 100%; /* Full width for each swiper */
+    height: 250px; /* Set a fixed height for the swiper */
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the slide without distortion */
+}
+
+/* Swiper Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white; /* Change arrow color to white */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color: #ccc; /* Change to a lighter shade on hover for visibility */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px; /* Adjust the size of the arrows */
+}
+
+/* Swiper Pagination Dots */
+.swiper-pagination-bullet {
+    background: white; /* Change bullet color to white */
+}
+
+.swiper-pagination-bullet-active {
+    background: #ccc; /* Change active bullet color to a lighter shade */
+}
+
+.swiper-pagination {
+    bottom: 10px; /* Adjust position of the pagination */
+}
+
+.service-item {
+    background-color: #f5f5f5; /* Background color for the service items */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.service-item-inner {
+    position: relative;
+
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Ensures overlay doesn’t block clicks */
+
+}
+
+.service-item-inner:hover .overlay {
+    opacity: 1;
+    pointer-events: all; /* Overlay becomes interactive on hover */
+
+}
+
+.overlay h3 {
+    color: white;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+    transition: all 0.5s ease;
+    text-transform: capitalize;
+  }
+
+  .overlay button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.overlay button:hover {
+    background-color: darkred;
+}
+
+.imgTitle{
+    text-decoration: none;
+
+}

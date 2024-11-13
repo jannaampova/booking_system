@@ -15,11 +15,11 @@ if (!isset($_SESSION['name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client</title>
-    <link rel="icon" href="fav.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/client.css">
+    <link rel="stylesheet" href="../../css/displayImages.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -39,33 +39,81 @@ if (!isset($_SESSION['name'])) {
             </nav>
 
             <header>
+
                 <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1>
-                <div class="search-bubble">
+                <form method="post" class="search-bubble">
                     <div class="search-field">
-                        <input type="search" placeholder="Where?">
+                        <input type="search" name="city" placeholder="Where?" list="city-options">
+                        <datalist id="city-options">
+                            <option value="New York"></option>
+                            <option value="Los Angeles"></option>
+                            <option value="Chicago"></option>
+                            <option value="Houston"></option>
+                            <option value="Miami"></option>
+                            <option value="San Francisco"></option>
+                            <option value="Seattle"></option>
+                            <option value="Boston"></option>
+                            <option value="Atlanta"></option>
+                            <option value="Denver"></option>
+                        </datalist>
+
                     </div>
                     <div class="search-field">
-                        <input type="text" placeholder="Check In" onfocus="(this.type='date')">
+                        <input name="checkIn" type="text" placeholder="Check In" onfocus="(this.type='date')">
                     </div>
                     <div class="search-field">
-                    <input type="text" placeholder="Check Out" onfocus="(this.type='date')">
+                        <input name="checkOut" type="text" placeholder="Check Out" onfocus="(this.type='date')">
                     </div>
                     <div class="search-field">
-                        <input type="search" placeholder="Travelers">
+                        <input name="guests" type="search" placeholder="Travelers">
                     </div>
-                    <button type="'submit" name="search"><i class="fas fa-search"></i></button>
-                </div>
+                    <button type="submit" name="search"><i class="fas fa-search"></i></button>
+                </form>
+
             </header>
-            <?php
 
 
-
-            ?>
 
         </div>
-    </div>
 
+        <section class="service-section">
+            <div class="cont">
+                <?php
+                include '../../config.php';
+                include 'viewFunction.php';
+
+                if (isset($_POST['search'])) {
+                    $city = $_POST['city'];
+                    $checkIn = $_POST['checkIn'];
+                    $checkOut = $_POST['checkOut'];
+                    $guests = $_POST['guests'];
+                    if ($city != "") {
+                        $sql = "SELECT Property.id AS propertyID, Property.propName, City.city
+            FROM Property
+            JOIN City ON Property.cityID = City.id
+            WHERE City.city = '$city'";
+                        $res = mysqli_query($dbConn, $sql);
+                        view($res);
+
+                    }
+                    if ($checkIn != "") {
+
+
+                        if ($checkOut != "") {
+
+                        }
+                    }
+
+                    if ($guests != "") {
+
+                    }
+
+
+                }
+                ?>
+            </div>
+        </section>
+    </div>
 </body>
 
 </html>
-</ul>

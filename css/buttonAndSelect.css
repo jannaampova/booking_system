@@ -28,39 +28,7 @@
   }
 
 
-  .service-item {
-    background-color: #f5f5f5; /* Background color for the service items */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.service-item-inner {
-    position: relative;
-}
-
-.overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.service-item-inner:hover .overlay {
-    opacity: 1;
-}
-
-
+ 
 
 .overlay button {
     background-color: red;
@@ -89,11 +57,3 @@
     }
 }
 
-.overlay h3 {
-  color: white;
-  font-size: 30px;
-  margin: 0;
-  text-align: center;
-  transition: all 0.5s ease;
-  text-transform: capitalize;
-}
