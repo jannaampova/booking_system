@@ -57,7 +57,7 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
 
             <div class="info-bubbles">
                 <div class="info-bubble">
-                    <p>You own<br>
+                    <p><b>You own</b><br>
                         <?php
                         include "../../config.php"; // Include the database connection
                         $propertyCounter = 0;
@@ -73,10 +73,12 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         }
                         echo "$propertyCounter properties.";
                         ?>
+                        <br>
+                        <i class="fa-solid fa-house"></i>
                     </p>
                 </div>
                 <div class="info-bubble">
-                    <p>You were booked<br>
+                    <p><b>You were booked</b><br>
                         <?php
                         include "../../config.php"; // Include the database connection
                         
@@ -98,10 +100,12 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         echo "$bookingCounter times.";
 
                         ?>
+                      <br>
+                      <i class="fa-regular fa-calendar"></i>
                     </p>
                 </div>
                 <div class="info-bubble">
-                    <p>You had<br>
+                    <p><b>You had</b><br>
                         <?php
                         include "../../config.php"; // Include the database connection
                         
@@ -123,6 +127,9 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         echo "$clientCounter clients.";
 
                         ?>
+                        <br>
+                        <i class="fas fa-user"></i>
+                    </p>
                 </div>
             </div>
 
