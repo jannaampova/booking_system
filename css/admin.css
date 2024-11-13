@@ -52,26 +52,34 @@ footer {
 .info-bubbles{
     display: flex;
     flex-direction: row;
-    width: 180%;
+    width: 100%;
+    max-width: 120%;
     height: 40%;
     background-color: rgba(36, 90, 121, 0.486);
     box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
     border-radius: 35px;
     border-color: black;
-    margin-top: 15%;
-    margin-left: 40%;
+    margin-top: 10%;
+    margin-left: 20%;
     padding: 30px;
     gap: 100px;
+    
 
 }
-.info-bubble{
-    width: 40%;
-    height: auto;
-    padding: 30px;
+.info-bubble {
+    width: 200px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
     border-radius: 35px;
     box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
     background-color: rgba(240, 248, 255, 0.148);
+    overflow: hidden; /* Ensures text doesn’t expand the bubble */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
 }
+
 
 .first-line{
     display: flex;
@@ -84,6 +92,11 @@ footer {
     flex-direction: column;
     height:100vh;
     
+}
+.info-bubble p{
+    line-height:1.8;
+    font-size: 20px;
+    font-family:'Popins',sans-serif;
 }
 
 
