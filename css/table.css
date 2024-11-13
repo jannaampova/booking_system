@@ -7,6 +7,7 @@
   flex-direction: column;
 }
 
+
 .form-control {
   margin-bottom: 15px;
   position: relative;
@@ -29,86 +30,131 @@
 }
 
 
-.action-button {
-  display: flex;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 40px;
-}
-.action-button.delete {
-  background-color: #DC3545;
-}
-.action-button:hover {
-  opacity: 0.8;
+/* Custom Scrollbar Styling */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* Thinner scrollbar */
+  height: 8px; /* Thinner horizontal scrollbar */
 }
 
+.table-container::-webkit-scrollbar-track {
+  background: #f0f8ff; /* Track color (light background) */
+  border-radius: 10px;
+}
 
-/* Table styling */
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #688587a2; /* Thumb color (using your color) */
+  border-radius: 10px;
+  border: 2px solid #f0f8ff; /* Adds a small gap around the thumb */
+}
+
 .table-container {
-  width: 100%;
-  margin: 20px auto;
+  scrollbar-width: thin; /* Thinner scrollbar */
+  scrollbar-color: #688587a2 #f0f8ff; /* Thumb color, track color */
+  -ms-overflow-style: none; /* Removes scrollbar in older versions of IE/Edge */
+  height: 650px;
+  padding: 20px;
+  overflow-y: auto;
+  border: none; /* No outer border for a cleaner look */
+  border-radius: 15px;
+  box-shadow: 0 15px 15px rgba(48, 48, 76, 0.1); /* Subtle shadow with your blue tone */
+  background-color: #f0f8ff; /* Using your color for the table background */
+  margin-left: 5%;
+  margin-top: 3%;
 }
 
+/* Table Styling */
 .table-container table {
-  border-collapse: collapse;
   width: 100%;
-  margin-top: 20px;
-  border: 1px solid #837c76;
+  height: 70%;
+  border-collapse: collapse;
+  margin: 0;
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif; /* Clean modern font */
+  text-align: left;
+  background-color: #ffffff; /* Ensure background is white for the table */
 }
 
-.table-container td,
-.table-container th {
-  padding: 15px;
-  border: 1px solid #837c76;
+.table-container th,
+.table-container td {
+  padding: 12px 15px;
   text-align: left;
+  font-size: 16px; /* Slightly larger font for readability */
+  color: #333;
+  border-bottom: 1px solid #a3c1e1; /* Soft border using your blue color */
+}
+
+.table-container th {
+  background-color: rgba(36, 90, 121, 0.486); /* Your original header color */
+  color: rgb(247, 241, 233); /* Light text for header */
+  font-weight: 600;
+  text-transform: uppercase; /* Uppercase text for header */
+}
+
+.table-container tr:hover {
+  background-color: #f1f1f1; /* Light grey background on row hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .table-container td {
-  width: 50%; /* Two-column layout */
+  background-color: #fafafa; /* Light background for each cell */
+  transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
-/* Styling for input fields within the table cells */
-.table-container td input {
-  width: 95%; /* Adjusted width to fit inside table cell */
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #837c76;
-  border-radius: 10px;
-  margin: 5px 0;
+/* Alternating row colors for better readability */
+.table-container tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-.table-container td input:focus {
-  border-color: #6c6228;
-  outline: none;
-}
-
-/* Button and link styling */
-.table-container td a,
 .table-container td button {
-  background-color: none;
-  border: none;
-  color: #ffffff;
-  font-size: 16px;
-  border-radius: 15px;
-  padding: 5px 10px;
+  background-color: #DC3545; /* Your red color for buttons */
+  color: white;
+  font-size: 14px;
+  border-radius: 20px;
+  padding:10px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   cursor: pointer;
-  width: 100%;
+  text-decoration: none;
+  width: 100px; /* Button takes up the full width of the cell */
   box-sizing: border-box;
   transition: background-color 0.3s ease;
 }
 
+.table-container td button:hover {
+  background-color: #c82333; /* Darker red on hover */
 
-/* Ensuring form control alignment */
-.form-control label {
-  display: block;
-  margin-bottom: 5px;
-  color: rgb(170, 164, 157);
+}
+
+
+
+/* Edit link Styling */
+.table-container td a.edit-link {
+  color: #d6b552; /* Blue color for edit links */
+  font-weight: 600;
+  text-decoration: none;
+}
+.table-container td a.edit-link:hover {
+  color: #655317; /* Blue color for edit links */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .table-container td a,
+  .table-container td button {
+    width: 100%;
+    padding: 12px 15px;
+  }
 }

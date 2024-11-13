@@ -19,7 +19,8 @@
   margin: 0;
 }
 
-.section a {
+.section a,
+.options a{
   padding: 9px 15px;
   border-radius: 15px;
   text-decoration: none;
@@ -28,6 +29,7 @@
   transition: background-color 0.3s ease;
 }
 
-.section a:hover {
+.section a:hover,
+.options a:hover {
   background-color: #2b3a3ba2;
 }

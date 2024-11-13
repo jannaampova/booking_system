@@ -19,37 +19,33 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    <style>
-        .section a {
 
-            color: #00272e;
-        }
-    </style>
 </head>
 
 <body>
     <div class="main">
         <div class="left-container">
+            <div class="options">
+                <?php
+                $fullName = $_SESSION['name'];
+                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                ?>
+                <a href="hostSettings.php">
+                    <i class="fas fa-user-edit"></i>
+                    <?php echo htmlspecialchars($firstName); ?>
+                </a>
+
+                <a href='seeUsers.php'>View Users</a>
+                <a href='seeUsers.php'>View Users</a>
+                <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+
+            </div>
         </div>
         <div class="column">
             <div class="first-line">
                 <header>
                     <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1> <!-- Display admin name -->
                 </header>
-                <div class="section">
-                    <nav>
-                        <?php
-                        $fullName = $_SESSION['name'];
-                        $firstName = explode(' ', $fullName)[0]; // Get the first name
-                        ?>
-                        <a href="hostSettings.php">
-                            <i class="fas fa-user-edit"></i>
-                            <?php echo htmlspecialchars($firstName); ?>
-                        </a>
-                        <a href='seeUsers.php'>View Users</a>
-                        <a href='logOut.php'>Log Out</a>
-                    </nav>
-                </div>
             </div>
 
             <div class="info-bubbles">
