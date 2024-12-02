@@ -34,6 +34,7 @@
 .table-container::-webkit-scrollbar {
   width: 10px; /* Thinner scrollbar */
   height: 8px; /* Thinner horizontal scrollbar */
+
 }
 
 .table-container::-webkit-scrollbar-track {
@@ -51,21 +52,20 @@
   scrollbar-width: thin; /* Thinner scrollbar */
   scrollbar-color: #688587a2 #f0f8ff; /* Thumb color, track color */
   -ms-overflow-style: none; /* Removes scrollbar in older versions of IE/Edge */
-  height: 650px;
+  height: 700px;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   border: none; /* No outer border for a cleaner look */
   border-radius: 15px;
   box-shadow: 0 15px 15px rgba(48, 48, 76, 0.1); /* Subtle shadow with your blue tone */
   background-color: #f0f8ff; /* Using your color for the table background */
-  margin-left: 5%;
-  margin-top: 3%;
+  margin-left: 10%;
 }
 
 /* Table Styling */
 .table-container table {
   width: 100%;
-  height: 70%;
   border-collapse: collapse;
   margin: 0;
   border-radius: 20px;
@@ -109,33 +109,18 @@
   background-color: #DC3545; /* Your red color for buttons */
   color: white;
   font-size: 14px;
-  border-radius: 20px;
-  padding:10px;
+  border-radius: 6px;
+  padding: 8px 12px;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  width: 100px; /* Button takes up the full width of the cell */
+  width: 100%; /* Button takes up the full width of the cell */
   box-sizing: border-box;
   transition: background-color 0.3s ease;
 }
 
 .table-container td button:hover {
   background-color: #c82333; /* Darker red on hover */
-
-}
-
-
-
-/* Edit link Styling */
-.table-container td a.edit-link {
-  color: #d6b552; /* Blue color for edit links */
-  font-weight: 600;
-  text-decoration: none;
-}
-.table-container td a.edit-link:hover {
-  color: #655317; /* Blue color for edit links */
-  font-weight: 600;
-  text-decoration: none;
 }
 
 
@@ -157,4 +142,15 @@
     width: 100%;
     padding: 12px 15px;
   }
+}
+.edit-link {
+  color: #5f4902;
+  font-weight: bold;
+  text-decoration: none; /* Remove underline */
+}
+
+.edit-link:hover {
+  color: #5f4902; /* Custom color for the edit link */
+
+  text-decoration: underline; /* Optional: add underline on hover */
 }

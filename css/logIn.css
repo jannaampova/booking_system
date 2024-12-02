@@ -68,7 +68,8 @@ body {
 }
   
 .form-control input,
-.form-control select {
+.form-control select,
+.form-control textarea {
   background: #68858775;
   border: 2px solid #000000;
   border-radius: 15px;

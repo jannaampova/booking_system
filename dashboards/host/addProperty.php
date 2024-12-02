@@ -9,7 +9,6 @@ if (!isset($_SESSION['name'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,53 +18,8 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/check.css">
     <link rel="stylesheet" href="../../css/buttonAndSelect.css">
     <link rel="stylesheet" href="../../css/logIn.css">
+    <link rel="stylesheet" href="../../css/addEditAdminHost.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-
-    <style>
-        .left-container{
-    width: 20%;
-    height: 100vh;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../../newImg.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-     position: fixed; /* Make the container fixed during scrolling */
-    top: 0; /* Pin it to the top of the page */
-    left: 0; /* Pin it to the left of the page */
-    z-index: 1000; /* Ensure it stays above other content */
-
-}
-        .main {
-  width: 100%;
-  height: 127vh;
-  background:antiquewhite;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background-color:antiquewhite;
-}
-.container {
-
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 50%);
-  border-radius: 20px;
-  width: 50%; /* Adjust to desired width on mobile */
-  height: auto; /* Allow height to adjust dynamically */
-  overflow: hidden;
-margin-left:40%;  display: block; /* Ensure the button is displayed as a block element */
-}
-.form {
-  padding: 30px 20px;
-  color: #242321;
-
-}
-    </style>
-
 </head>
 
 <body>
@@ -77,21 +31,19 @@ margin-left:40%;  display: block; /* Ensure the button is displayed as a block e
                 $firstName = explode(' ', $fullName)[0]; // Get the first name
                 ?>
                 <a href="hostSettings.php">
-                <i class="fas fa-user-edit"></i>
-                <?php echo htmlspecialchars($firstName); ?>
+                    <i class="fas fa-user-edit"></i>
+                    <?php echo htmlspecialchars($firstName); ?>
                 </a>
                 <a href="hostBoard.php">Home page</a>
 
                 <a href="viewProperties.php">View Your Properties</a>
-                <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+                <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
 
             </div>
         </div>
-
-
         <div class="row">
             <div class="section-title">
-                <h1>Add Property</h1>
+                <h1>Add property</h1>
             </div>
         </div>
 
@@ -152,19 +104,22 @@ margin-left:40%;  display: block; /* Ensure the button is displayed as a block e
                         <?php
                         $sql = "SELECT * FROM Amenities";
                         $res = mysqli_query($dbConn, $sql);
-                        if (mysqli_num_rows($res) > 0) {
+
+                        if ($res && mysqli_num_rows($res) > 0) {
                             while ($row = mysqli_fetch_assoc($res)) {
                                 echo '<div>';
-                                echo '<input type="checkbox" name="amenities[]" id="amenity-' . htmlspecialchars($row['id']) . '" value="' . htmlspecialchars($row['id']) . '">';
-                                echo '<label for="amenity-' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['amenity']) . '</label>';
+                                echo '<input type="checkbox" name="amenities[]" id="' . htmlspecialchars($row['id']) . '" value="' . htmlspecialchars($row['id']) . '">';
+                                // Debug output to ensure label content is coming through
+                                echo '<label class="checkLabel" for="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['amenity']) . '</label>';
                                 echo '</div>';
                             }
                         } else {
-                            echo 'No amenities found.';
+                            echo '<div>No amenities found.</div>'; // Display this if no rows are fetched
                         }
                         ?>
                     </div>
                 </div>
+
                 <div class="form-control">
                     <label>Description:</label>
                     <textarea name="desc" required></textarea>

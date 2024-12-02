@@ -18,20 +18,12 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <style>
-
-.edit-link {
-  color: #a58010;
-
-  font-weight: bold;
-  text-decoration: none; /* Remove underline */
+        .main{
+            width: 120%;
+    flex-direction: row;
+    display: flex;
+    align-items: flex-start;
 }
-
-.edit-link:hover {
-  color: #5f4902; /* Custom color for the edit link */
-
-  text-decoration: underline; /* Optional: add underline on hover */
-}
-
     </style>
 </head>
 

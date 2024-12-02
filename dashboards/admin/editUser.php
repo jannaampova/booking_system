@@ -5,25 +5,46 @@
     <title>Edit User</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/logIn.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/addEditAdminHost.css">
+    <link rel="stylesheet" href="../../css/nav.css">
+    <link rel="stylesheet" href="../../css/buttonAndSelect.css">
+    <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
 </head>
-<style>
-    .main {
-  width: 100%;
-  height: 127vh;
-  background:antiquewhite;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+
+<?php
+session_start(); // Start the session
+// Check if the user is logged in
+if (!isset($_SESSION['name'])) {
+    header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
+    exit();
 }
-</style>
-
+?>
 <body>
-    <div class="main">
 
+ 
+        <div class="left-container">
+            <div class="options">
+                <?php
+                $fullName = $_SESSION['name'];
+                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                ?>
+                <a href="hostSettings.php">
+                    <i class="fas fa-user-edit"></i>
+                    <?php echo htmlspecialchars($firstName); ?>
+                </a>
+
+                <a href='seeUsers.php'>View Users</a>
+                <a href='seeUsers.php'>View Users</a>
+                <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+
+            </div>
+        </div>
         <?php
 
         include '../../config.php';
         include '../../userEntry/functions.php';
+        
 
         if (isset($_GET['id'])) {
             $userID = intval($_GET['id']); // Sanitize user ID
@@ -136,7 +157,7 @@
             }
         }
         ?>
-    </div>
+    
 </body>
 
 </html>

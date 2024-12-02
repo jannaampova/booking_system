@@ -1,8 +1,11 @@
 .cont {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center items horizontally */
-    gap: 20px; /* Add space between rows and items */
+ justify-content: center; /* Center items horizontally */
+gap: 30px; /* Add space between rows and items */
+margin-left: 20%;    
+width: 100%;
+margin-top: 10%;
 }
 
 .row {
