@@ -34,8 +34,9 @@ if (!isset($_SESSION['name'])) {
     z-index: 10; /* Ensure it stays on top */
 }
 
-
-
+.cont{
+    margin-left: 20%!important;
+}
     </style>
 </head>
 

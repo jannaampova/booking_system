@@ -3,7 +3,6 @@
     flex-wrap: wrap;
  justify-content: center; /* Center items horizontally */
 gap: 30px; /* Add space between rows and items */
-margin-left: 20%;    
 width: 100%;
 margin-top: 10%;
 }
