@@ -20,6 +20,10 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
     header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
     exit();
 }
+$checkInDate = isset($_GET['checkIN']) ? $_GET['checkIN'] : null;
+$checkOutDate = isset($_GET['checkOUT']) ? $_GET['checkOUT'] : null;
+$propertyId = isset($_GET['propertyID']) ? $_GET['propertyID'] : null;
+$userId = isset($_GET['id']) ? $_GET['id'] : null;
 ?>
 <body>
 
@@ -28,7 +32,6 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
             <div class="options">
                 <?php
                 $fullName = $_SESSION['name'];
-                
                 $firstName = explode(' ', $fullName)[0]; // Get the first name
                 ?>
                 <a href="../userSettings.php">
@@ -47,19 +50,15 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
         include '../../config.php';
         include '../../userEntry/functions.php';
         
-
-        $userid=$_SESSION['userID'];
-        $propertyID = $_GET['propertyID'];
         // Fetch user details from the database
-            $sql = "SELECT * FROM User WHERE id = '$userid'";
+            $sql = "SELECT * FROM User WHERE id = '$userId'";
             $result = mysqli_query($dbConn, $sql);
 
             if ($result && $user = mysqli_fetch_assoc($result)) {
                 // Display the user's current data in a form for editing
                 ?>
                 <div class="container">
-                    <form class='form' method="POST" action="" id="signUp"> <!-- Assuming you will update in another file -->
-                        <input type="hidden" name="userID" value="<?php echo $userID; ?>">
+                    <form class='form' method="POST"> 
 
                         <div class="form-control"> <label>Full Name:</label>
                             <input type="text" name="fullName" value="<?php echo htmlspecialchars($user['fullName']); ?>"
@@ -69,36 +68,37 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
                             <input type="text" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>"
                                 required><br>
                         </div>
-                        <div class="form-control"> <label>Username:</label>
-                            <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>"
-                                required><br>
-                        </div>
+                       
                         <div class="form-control"> <label>Email:</label>
-                            <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
+                            <input readonly type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
                                 required><br>
                         </div>
                         <div class="form-control"> <label>Check In:</label>
-                            <input type="date" name="checkIn" value="<?php echo htmlspecialchars($user['email']); ?>"
+                            <input type="text" name="checkIn" readonly value="<?php echo htmlspecialchars($checkInDate); ?>"
                                 required><br>
                         </div>
                         <div class="form-control"> <label>Check Out:</label>
-                            <input type="date" name="checkOut" value="<?php echo htmlspecialchars($user['email']); ?>"
+                            <input type="text" name="checkOut" readonly value="<?php echo htmlspecialchars($checkOutDate); ?>"
                                 required><br>
                         </div>
                         <div class="form-control">
-                            <label>Price:</label>
+                            <label>Total Price:</label>
                             <?php
                             // SQL query for fetching role name
-                            $sql2 = "SELECT pricePerNight FROM Property WHERE id= '$propertyID'";
+                            $sql2 = "SELECT pricePerNight FROM Property WHERE id= '$propertyId'";
                             $res2 = mysqli_query($dbConn, $sql2);
                             $row=mysqli_fetch_assoc($res2);
                             $price = $row['pricePerNight']; 
+                            $date1=new DateTime($checkInDate);
+                            $date2=new DateTime($checkOutDate);
+                            $interval=$date1->diff($date2);
+                            $totalPrice=$interval->days*$price;
                             
                             ?>
-                            <input type="text" name="price" value="<?php echo htmlspecialchars($price); ?>"><br>
+                            <input type="text" name="price" value="<?php echo htmlspecialchars($totalPrice); ?>"><br>
                         </div>
                         <div class="form-control">
-                            <button type="submit" name="confrimBooking">Confirm Booking</button>
+                            <button type="submit" name="confirmBooking">Request Booking</button>
                         </div>
                     </form>
                 </div>
@@ -109,57 +109,15 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
        
 
 
-        if (isset($_POST['updateUser'])) {
-            $usernameInvalid = $emailInvalid = $telNumInvalid = $nameInvalid = '';
-            // Retrieve the form inputs
-            $username = trim($_POST['username']);
-            $email = trim($_POST['email']);
-            $telNum = trim($_POST['phone']);
-            $name = trim($_POST['fullName']);
-            $userID = intval($_POST['userID']); // Make sure to retrieve user ID here
-        
-            // Validation logic
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailInvalid = "Not a valid email format.";
-            }
-
-            // Check for existing users with the same username, email, or phone number
-            $sqlCheck = "SELECT * FROM User WHERE (email = '$email' OR username = '$username' OR phone = '$telNum') AND id != $userID";
-            $resCheck = mysqli_query($dbConn, $sqlCheck);
-
-            if ($resCheck && mysqli_num_rows($resCheck) > 0) {
-                $row = mysqli_fetch_assoc($resCheck);
-                if ($row['email'] === $email) {
-                    $emailInvalid = "Email already taken.";
-                }
-                if ($row['username'] === $username) {
-                    $usernameInvalid = "Username already taken.";
-                }
-                if ($row['phone'] === $telNum) {
-                    $telNumInvalid = "Phone already taken.";
-                }
-            }
-
-            // Update user if no validation errors
-            if (empty($usernameInvalid) && empty($emailInvalid) && empty($telNumInvalid) && empty($nameInvalid)) {
-                // Get role ID based on role name (if needed)
-                $roleID = null; // Assuming you want to update the role based on its name
-                $sqlRole = "SELECT id FROM Roles WHERE roleName='" . mysqli_real_escape_string($dbConn, $_POST['roleName']) . "'";
-                $resRole = mysqli_query($dbConn, $sqlRole);
-
-                if ($resRole && $roleRow = mysqli_fetch_assoc($resRole)) {
-                    $roleID = $roleRow['id'];
-                }
-
-                // Update query
-                $sql = "UPDATE User SET fullName='$name', email='$email', username='$username', phone='$telNum', roleID='$roleID' WHERE id=$userID";
-                if (mysqli_query($dbConn, $sql)) {
-                    header("Location: seeUsers.php");
-                    exit(); // Always exit after a header redirect
-                } else {
-                    echo "Error updating user: " . mysqli_error($dbConn);
-                }
-            }
+        if (isset($_POST['confirmBooking'])) {   
+            $sql="INSERT INTO Booking (clientID,propID,bookingStatus,fromDate,toDate,totalPrice) 
+            VALUES ('$userId','$propertyId','pending','$checkInDate','$checkOutDate','$totalPrice')";
+            $res=mysqli_query($dbConn,$sql);
+           if(!$res){
+            echo"Unable to rquest booking!";
+           } else{
+            header("Location: clientBoard.php");
+           }
         }
         ?>
     

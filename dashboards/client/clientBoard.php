@@ -77,6 +77,7 @@ if (!isset($_SESSION['name'])) {
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
+                <a href='yourBookings.php'>Your Bookings <i class="fa-solid fa-house"></i></a>
                 <a href='../admin/logOut.php'>Log Out</a>
             </nav>
 
