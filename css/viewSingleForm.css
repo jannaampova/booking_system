@@ -1,9 +1,9 @@
  /* Add additional styles for the form */
  .form {
     display: flex;
-    flex-wrap: wrap; /* Allow flex items to wrap into multiple rows */
+    flex-wrap: wrap; 
     justify-content: space-between; /* Space out the columns */
-    margin-top: 20px; /* Add some margin above the form */
+    margin-left: 40%;
   }
   
   .form-control {

@@ -41,6 +41,7 @@ if (isset($_POST['logIn'])) {
             if ($roleID == $user['roleID']) {
                 // Store username in session
                 $_SESSION['name'] = $user['fullName']; // Store admin name in session
+                $_SESSION['userID'] = $user['id']; 
 
                 // Redirect based on role
                 if ($roleID == 1) {

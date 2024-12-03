@@ -98,28 +98,71 @@ if (!isset($_SESSION['name'])) {
                     $checkIn = $_POST['checkIn'];
                     $checkOut = $_POST['checkOut'];
                     $guests = $_POST['guests'];
-                    if ($city != "") {
-                        $sql = "SELECT Property.id AS propertyID, Property.propName, City.city
-            FROM Property
-            JOIN City ON Property.cityID = City.id
-            WHERE City.city = '$city'";
-                        $res = mysqli_query($dbConn, $sql);
-                        view($res);
+                    $conditions = [];
+                    if (!empty($city)) {
+                        $conditions[] = "City.city= '" . mysqli_real_escape_string($dbConn, $city) . "'";
 
                     }
-                    if ($checkIn != "") {
+                    if (!empty($checkIn) && !empty($checkOut)) {
+                        $searchIn = new DateTime($checkIn);
+                        $searchOut = new DateTime($checkOut);
 
+                        // Ensure the check-in is before the check-out
+                        if ($searchIn <= $searchOut) {
+                            $checkIn = mysqli_real_escape_string($dbConn, $searchIn->format('Y-m-d'));
+                            $checkOut = mysqli_real_escape_string($dbConn, $searchOut->format('Y-m-d'));
 
-                        if ($checkOut != "") {
+                            // SQL to find available properties
+                            $sql = "
+                                SELECT Property.id AS propertyID, Property.propName, City.city
+                                FROM Property
+                                JOIN City ON Property.cityID = City.id
+                                JOIN Availabilities ON Property.id = Availabilities.propID
+                                WHERE 
+                                    Availabilities.propStatus = 'free'
+                                    AND Availabilities.fromDate <= '$checkIn'
+                                    AND Availabilities.toDate >= '$checkOut'
+                                    AND Property.id NOT IN (
+                                        SELECT propID
+                                        FROM Booking
+                                        WHERE 
+                                            bookingStatus = 'approved'
+                                            AND (
+                                                (fromDate <= '$checkIn' AND toDate >= '$checkIn') OR
+                                                (fromDate <= '$checkOut' AND toDate >= '$checkOut') OR
+                                                (fromDate >= '$checkIn' AND toDate <= '$checkOut')
+                                            )
+                                    )
+                            ";
 
+                            $res = mysqli_query($dbConn, $sql);
+                            if ($res) {
+                                view($res);
+                            } else {
+                                echo "Error: " . mysqli_error($dbConn);
+                            }
+                        } else {
+                            echo "Invalid date range: Check-in date must be before the check-out date.";
                         }
                     }
 
+
                     if ($guests != "") {
+                        $conditions[] = "GuestNumber.guestNum= '" . mysqli_real_escape_string($dbConn, $guests) . "'";
 
                     }
 
 
+                    $sql = "SELECT Property.id AS propertyID, Property.propName, City.city
+                    FROM Property
+                    JOIN City ON Property.cityID = City.id
+                    JOIN GuestNumber on Property.guestNumID=GuestNumber.id";
+                    if (!empty($conditions)) {
+                        $sql .= " WHERE " . implode(' AND ', $conditions);
+                    }
+
+                    $res = mysqli_query($dbConn, $sql);
+                    view($res);
                 }
                 ?>
             </div>
