@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['name'])) {
+    header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
+    exit();
+}
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -218,6 +226,34 @@
             width: 50px;
             height: auto;
         }
+
+        .property-details-amenities ul {
+
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .property-details-amenities ul li {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #444;
+        }
+
+        .property-details-amenities ul li::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            background: url('../../img/tick.png') no-repeat center center;
+            background-size: contain;
+        }
     </style>
 </head>
 
@@ -230,11 +266,18 @@
     <div class="main">
         <div class="left-container">
             <div class="options">
+                <?php
+                $fullName = $_SESSION['name'];
+                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                ?>
+                <a href="../userSettings.php">
+                    <i class="fas fa-user-edit"></i>
+                    <?php echo htmlspecialchars($_SESSION['name']); ?>
+                </a>
 
-                <a href="../userSettings.php"><i class="fas fa-user-edit"></i>
-                    <a href="clientBoard.php">Dashboard</a>
-                    <a href="bookings.php">Bookings</a>
-                    <a href="../admin/logOut.php">Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+                <a href="clientBoard.php">Dashboard</a>
+                <a href="bookings.php">Bookings</a>
+                <a href="../admin/logOut.php">Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
 
@@ -354,7 +397,7 @@
 
                 <div class="property-details-amenities">
                     <h3>Amenities</h3>
-                    <ol>
+                    <ul style="list-style-type:disc;">
                         <?php
                         $sqlAmenities = "
             SELECT a.amenity 
@@ -372,7 +415,7 @@
                             echo "<li>No amenities listed for this property.</li>";
                         }
                         ?>
-                    </ol>
+                    </ul>
                 </div>
 
 
@@ -384,36 +427,50 @@
                     const availableFrom = "<?php echo htmlspecialchars($fromDate); ?>";
                     const availableTo = "<?php echo htmlspecialchars($toDate); ?>";
 
+                    let selectedCheckIn = null;
+                    let selectedCheckOut = null;
+
                     const checkIn = flatpickr("#checkInCalendar", {
                         dateFormat: "Y-m-d",
-                        inline: true, // Makes the calendar always visible
+                        inline: true,
                         minDate: availableFrom,
                         maxDate: availableTo,
-                        onChange: function (selectedDates, dateStr, instance) {
+                        onChange: function (selectedDates, dateStr) {
+                            selectedCheckIn = dateStr; // Store selected check-in date
                             checkOut.set("minDate", dateStr);
+                            updateBookingLink();
                         },
                     });
 
                     const checkOut = flatpickr("#checkOutCalendar", {
                         dateFormat: "Y-m-d",
-                        inline: true, // Makes the calendar always visible
+                        inline: true,
                         minDate: availableFrom,
                         maxDate: availableTo,
-                        onChange: function (selectedDates, dateStr, instance) {
+                        onChange: function (selectedDates, dateStr) {
+                            selectedCheckOut = dateStr; // Store selected check-out date
                             checkIn.set("maxDate", dateStr);
+                            updateBookingLink();
                         },
                     });
+
+                    function updateBookingLink() {
+                        const bookNowButton = document.querySelector(".book-now-button");
+                        const propertyID = "<?php echo htmlspecialchars($propertyId); ?>";
+                        const userID = "<?php echo htmlspecialchars($_SESSION['userID']); ?>";
+
+                        // Update the href dynamically
+                        if (selectedCheckIn && selectedCheckOut) {
+                            bookNowButton.parentElement.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
+                        }
+                    }
                 });
 
-
-                const checkInDate = document.querySelector("#checkInDate").value;
-                const checkOutDate = document.querySelector("#checkOutDate").value;
 
             </script>
 
             <!-- Booking Button -->
-            <a
-                href="confirmBooking.php?id=<?php echo htmlspecialchars($_SESSION['userID']); ?>&propertyID=<?php echo htmlspecialchars($propertyId); ?>&checkIN=<?php echo htmlspecialchars($propertyId); ?>">
+            <a href="#" id="bookNowLink">
                 <button class="book-now-button">Book Now</button>
             </a>
 
