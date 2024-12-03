@@ -34,7 +34,7 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         $fullName = $_SESSION['name'];
                         $firstName = explode(' ', $fullName)[0]; // Get the first name
                         ?>
-                        <a href="hostSettings.php">
+                        <a href="../userSettings.php">
                             <i class="fas fa-user-edit"></i>
                             <?php echo htmlspecialchars($firstName); ?>
                         </a>

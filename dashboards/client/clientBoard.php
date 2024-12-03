@@ -21,6 +21,38 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        
+.section nav {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 0;
+  margin-bottom: 20px;
+  position: fixed; 
+  top: 10px; 
+  right: 10px; 
+}
+
+.section a,
+.options a{
+  padding: 9px 15px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: antiquewhite;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.section a:hover,
+.options a:hover {
+  background-color: #2b3a3ba2;
+}
+
+    </style>
 </head>
 
 <body>
@@ -41,7 +73,7 @@ if (!isset($_SESSION['name'])) {
                 $fullName = $_SESSION['name'];
                 $firstName = explode(' ', $fullName)[0];
                 ?>
-                <a href="hostSettings.php">
+                <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
@@ -92,6 +124,7 @@ if (!isset($_SESSION['name'])) {
                 <?php
                 include '../../config.php';
                 include 'viewFunction.php';
+
 
                 if (isset($_POST['search'])) {
                     $city = $_POST['city'];
