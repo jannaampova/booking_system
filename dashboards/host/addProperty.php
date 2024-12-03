@@ -30,11 +30,11 @@ if (!isset($_SESSION['name'])) {
                 $fullName = $_SESSION['name'];
                 $firstName = explode(' ', $fullName)[0]; // Get the first name
                 ?>
-                <a href="hostSettings.php">
+                <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
-                <a href="hostBoard.php">Home page</a>
+                <a href="hostBoard.php">Dashboard</a>
 
                 <a href="viewProperties.php">View Your Properties</a>
                 <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
@@ -216,7 +216,6 @@ if (!isset($_SESSION['name'])) {
                     }
                 }
 
-                header("Location: hostBoard.php");
 
             } else {
                 echo "Error adding property: " . mysqli_error($dbConn);

@@ -47,11 +47,11 @@ if (!isset($_SESSION['name'])) {
                 $fullName = $_SESSION['name'];
                 $firstName = explode(' ', $fullName)[0]; // Get the first name
                 ?>
-                <a href="hostSettings.php">
+                <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
-                <a href="viewProperties.php">View Your Properties</a>
+                <a href="hostBoard.php">Dashboard</a>
                 <a href="addProperty.php">Add Property</a>
                 <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['name'])) {
             <div class="cont">
                 <?php
                 include "../../config.php";
-                $sql = "SELECT * FROM Property";
+                $sql = "SELECT * FROM Property WHERE hostID={$_SESSION['userID']}";
                 $res = mysqli_query($dbConn, $sql);
                 $propertiesWithImages = [];
 

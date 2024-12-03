@@ -31,7 +31,7 @@ if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {
                 
                 $firstName = explode(' ', $fullName)[0]; // Get the first name
                 ?>
-                <a href="hostSettings.php">
+                <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($_SESSION['name']); ?>
                 </a>
