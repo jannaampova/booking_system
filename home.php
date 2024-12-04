@@ -23,21 +23,19 @@
 
 
         <div class="homeText">
-            <h1> Explore Bulgaria! <br> Easier with us!</h1>
+            <h1> Explore Bulgaria! <br>
+                <h2 style="font-size: 40px;color: #ff7200;font-weight: 700;">Easier with us.</h2>
+            </h1>
             <br><br>
 
         </div>
 
         <div class="navbar">
-            <div class="menu">
-                <ul>
-                    <li><a href="#info">About us</a></li>
-                    <li><a href="#help">Help</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#signUp">Sign Up</a></li>
-                    <li><a href="#logIn">Log In</a></li>
-                </ul>
-            </div>
+            <ul>
+                <li><a href="#info">About us</a></li>
+                <li><a href="#signUp">Sign Up</a></li>
+                <li><a href="#logIn">Log In</a></li>
+            </ul>
         </div>
     </div>
 
@@ -94,13 +92,7 @@
             </div>
         </section>
 
-        <section id="help">
-            <div class="content">
-                <p>Help content</p>
-            </div>
-        </section>
-
-        <section >
+        <section>
             <div class="content" id="signUp">
                 <div class="info-content">
                     <div class="row">
@@ -116,7 +108,7 @@
                         unique
                         property, signing up opens the door to endless possibilities.
                         Your journey starts here, let's make it unforgettable together!</p>
-                        <p><b>Click the link below to start!</b></p>
+                    <p><b>Click the link below to start!</b></p>
 
 
                     <div class="links">
@@ -130,7 +122,7 @@
 
         </div>
 
-        <section >
+        <section>
             <div class="content" id="logIn">
                 <div class="info-content">
                     <div class="row">
@@ -141,7 +133,7 @@
                     <p>Welcome back to <b>EasyStay!</b> Log in to access your personalized dashboard and
                         explore new destinations.Your adventure continues, let’s make
                         the most of it!</p>
-                        <p><b>Click the link below and enjoy!</b></p>
+                    <p><b>Click the link below and enjoy!</b></p>
                     <div class="links">
                         <a href="userEntry/logIn.php" class="button">Log In</a>
                     </div>

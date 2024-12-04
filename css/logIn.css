@@ -24,9 +24,9 @@ body {
   display:flex;
   flex-direction: column;
   margin:30px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   color: #f9f4f4; /* Text color for better contrast, adjust as needed */
-  border-radius: 80px; /* Rounded corners */
+  border-radius: 60px; /* Rounded corners */
   box-shadow: 0 10px 12px rgba(12, 12, 12, 0.814);
   align-items: right;
   margin:0 auto;
@@ -96,6 +96,7 @@ body {
 .form-control button:hover {
   background-color: #ff7200;
   transition: 0.5s;
+  cursor:pointer;
 }
 .form-control a {
   text-decoration: none;

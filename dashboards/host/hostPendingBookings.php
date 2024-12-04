@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Approve the booking
             $approveSql = "UPDATE Booking SET bookingStatus = 'approved' WHERE id = '$bookingID'";
             if (mysqli_query($dbConn, $approveSql)) {
-                echo "<p>Booking with ID $bookingID has been approved.</p>";
 
                 // Update availabilities
                 $availabilitySql = "SELECT * FROM Availabilities 
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         mysqli_query($dbConn, $deleteSql);
                     } elseif ($checkInDate == $originalFromDate) {
                         $updateSql = "UPDATE Availabilities 
-                                      SET fromDate = DATE_ADD('$checkOutDate', INTERVAL 1 DAY) 
+                                      SET fromDate = $checkOutDate;
                                       WHERE id = {$row['id']}";
                         mysqli_query($dbConn, $updateSql);
                     } elseif ($checkOutDate == $originalToDate) {
@@ -58,15 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                       WHERE id = {$row['id']}";
 
                         $splitSql2 = "INSERT INTO Availabilities (fromDate, toDate, propStatus, propID)
-                                      VALUES (DATE_ADD('$checkOutDate', INTERVAL 1 DAY), '$originalToDate', 'free', $propertyID)";
+                                      VALUES ('$checkOutDate', '$originalToDate', 'free', $propertyID)";
 
                         mysqli_query($dbConn, $splitSql1);
                         mysqli_query($dbConn, $splitSql2);
                     }
 
-                    echo "<p>Availability updated successfully.</p>";
                 } else {
-                    echo "<p>No matching availability found for the selected period.</p>";
                 }
             } else {
                 echo "<p>Error approving booking: " . mysqli_error($dbConn) . "</p>";
