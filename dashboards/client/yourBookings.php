@@ -98,6 +98,8 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
 
         }
 
+      
+
         .button:hover {
             background-color: #2b3a3ba2;
 
@@ -139,6 +141,7 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
              g.guestNum AS guestNum,
              u.fullName AS hostName,
              p.id as propID,
+             b.id as bookingID,
              b.fromDate, 
              b.toDate, 
              b.totalPrice, 
@@ -152,6 +155,8 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
                 $res = mysqli_query($dbConn, $sqlBookings);
                 while ($row = mysqli_fetch_assoc($res)) {
                     $propID = $row['propID'];
+                    $bookID = $row['bookingID'];
+                    $bookingStatus = $row['bookingStatus'];
                     echo "<div class='property-details'>
         <div class='property-info'>
             <h3>" . htmlspecialchars($row['propName']) . "</h3>
@@ -164,21 +169,24 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
             <p>Total Price: $" . htmlspecialchars($row['totalPrice']) . "</p>
             <p>Status: " . htmlspecialchars($row['bookingStatus']) . "</p>
         </div>
-        <div class='property-info'>
-            <a class='button' href='cancelBooking.php?id=" . htmlspecialchars($propID) . "'>Cancel Booking</a>
-            <a class='button' href='browseSingle.php?id=" . htmlspecialchars($propID) . "'>View Property</a>
-        </div>
-    </div>";
+        <div class='property-info'>";
+                    ?>
+                    <form name='form'>
+                        <?php if ($bookingStatus === 'approved' || $bookingStatus === 'pending'): ?>
+                            <a class='button'
+                                href='cancelBooking.php?propid=<?= htmlspecialchars($propID) ?>&bookId=<?= htmlspecialchars($bookID) ?>'>Cancel
+                                Booking</a>
+                        <?php elseif ($bookingStatus === 'cancelled'): ?>
+                            <p><a href="#"  class='button' style="background-color: red;pointer-events: none;cursor:arrow;">Cancelled booking</a></p>
+                            <?php else:?>
+                                <p><a href="#"  class='button' style="background-color: grey;pointer-events: none;cursor:arrow;">Declined booking</a></p>
+                       <?php endif; ?>
+                        <a class='button' href='browseSingle.php?id=<?= htmlspecialchars($propID) ?>'>View Property</a>
+                    </form>
 
-                }
-
-
-
-
-                ?>
+                </div>
             </div>
-        </div>
-
+        <?php } ?>
     </div>
 </body>
 
