@@ -135,7 +135,9 @@ if (!isset($_SESSION['name'])) {
                             ?>
                         </span>
                     </div>
+
                 </div>
+
                 <?php
                 $sqlAvail = "SELECT fromDate, toDate FROM Availabilities WHERE propID = $propertyId AND propStatus = 'free'";
                 $availResult = mysqli_query($dbConn, $sqlAvail);
@@ -160,69 +162,95 @@ if (!isset($_SESSION['name'])) {
                         <div id="checkOutCalendar"></div>
                     </div>
                 </div>
-                <script>
-                    let selectedCheckIn = null;
-                    let selectedCheckOut = null;
+                <div class="property-details-amenities">
+                    <div class="property-info">
+                    <h2>Amenities</h2>
+                        <ul style="list-style-type:disc;">
+                            <?php
+                            $sqlAmenities = "
+            SELECT a.amenity 
+            FROM PropAmenities pa
+            JOIN Amenities a ON pa.amenityID = a.id
+            WHERE pa.propID = $propertyId
+        ";
+                            $amenitiesResult = mysqli_query($dbConn, $sqlAmenities);
 
-                    function handleBooking() {
-                        const bookNowLink = document.querySelector("#bookNowLink");
-                        const propertyID = "<?php echo htmlspecialchars($propertyId); ?>";
-                        const userID = "<?php echo htmlspecialchars($_SESSION['userID']); ?>";
-
-                        if (selectedCheckIn && selectedCheckOut) {
-                            // Update the link dynamically
-                            bookNowLink.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
-                        } else {
-                            // Alert the user if dates are not selected
-                            alert("Please select both Check-In and Check-Out dates.");
-                            event.preventDefault(); // Prevent navigation if no dates are selected
-                        }
-                    }
-                    const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const isDateDisabled = (date) => {
-                            const normalizedDate = new Date(date.toDateString()); // Remove time component
-                            return !availabilityRanges.some(range => {
-                                const fromDate = new Date(range.from);
-                                const toDate = new Date(range.to);
-                                return normalizedDate >= fromDate && normalizedDate <= toDate;
-                            });
-                        };
-
-                        const checkIn = flatpickr("#checkInCalendar", {
-                            dateFormat: "Y-m-d",
-                            inline: true,
-                            disable: [
-                                function (date) {
-                                    return isDateDisabled(date);
+                            if (mysqli_num_rows($amenitiesResult) > 0) {
+                                while ($amenityRow = mysqli_fetch_assoc($amenitiesResult)) {
+                                    echo "<li>" . htmlspecialchars($amenityRow['amenity']) . "</li>";
                                 }
-                            ],
-                            onChange: function (selectedDates, dateStr) {
-                                selectedCheckIn = dateStr;
-                                checkOut.set("minDate", dateStr);
-                            },
-                        });
-
-                        const checkOut = flatpickr("#checkOutCalendar", {
-                            dateFormat: "Y-m-d",
-                            inline: true,
-                            disable: [
-                                function (date) {
-                                    return isDateDisabled(date);
-                                }
-                            ],
-                            onChange: function (selectedDates, dateStr) {
-                                selectedCheckOut = dateStr;
-                                checkIn.set("maxDate", dateStr);
-                            },
-                        });
-                    });
-                </script>
-                <a href="#" id="bookNowLink">
-                    <button class="book-now-button" onclick="handleBooking()">Book Now</button>
-                </a>
+                            } else {
+                                echo "<li>No amenities listed for this property.</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <script>
+                let selectedCheckIn = null;
+                let selectedCheckOut = null;
+
+                function handleBooking() {
+                    const bookNowLink = document.querySelector("#bookNowLink");
+                    const propertyID = "<?php echo htmlspecialchars($propertyId); ?>";
+                    const userID = "<?php echo htmlspecialchars($_SESSION['userID']); ?>";
+
+                    if (selectedCheckIn && selectedCheckOut) {
+                        // Update the link dynamically
+                        bookNowLink.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
+                    } else {
+                        // Alert the user if dates are not selected
+                        alert("Please select both Check-In and Check-Out dates.");
+                        event.preventDefault(); // Prevent navigation if no dates are selected
+                    }
+                }
+                const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
+                document.addEventListener("DOMContentLoaded", function () {
+                    const isDateDisabled = (date) => {
+                        const normalizedDate = new Date(date.toDateString()); // Remove time component
+                        return !availabilityRanges.some(range => {
+                            const fromDate = new Date(range.from);
+                            const toDate = new Date(range.to);
+                            return normalizedDate >= fromDate && normalizedDate <= toDate;
+                        });
+                    };
+
+                    const checkIn = flatpickr("#checkInCalendar", {
+                        dateFormat: "Y-m-d",
+                        inline: true,
+                        disable: [
+                            function (date) {
+                                return isDateDisabled(date);
+                            }
+                        ],
+                        onChange: function (selectedDates, dateStr) {
+                            selectedCheckIn = dateStr;
+                            checkOut.set("minDate", dateStr);
+                        },
+                    });
+
+                    const checkOut = flatpickr("#checkOutCalendar", {
+                        dateFormat: "Y-m-d",
+                        inline: true,
+                        disable: [
+                            function (date) {
+                                return isDateDisabled(date);
+                            }
+                        ],
+                        onChange: function (selectedDates, dateStr) {
+                            selectedCheckOut = dateStr;
+                            checkIn.set("maxDate", dateStr);
+                        },
+                    });
+                });
+            </script>
+            <a href="#" id="bookNowLink">
+                <button class="book-now-button" onclick="handleBooking()">Book</button>
+            </a>
+
         </div>
+    </div>
     </div>
 </body>
 

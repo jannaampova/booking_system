@@ -85,7 +85,7 @@ input[type="option"] {
 }
 
 button{
-  background-color: #688587a2;
+  background-color: #688587a3;
   border: none;
   padding: 10px 15px;
   font-size: 10px;
@@ -94,7 +94,7 @@ button{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   margin-right:1%;
 
 }
