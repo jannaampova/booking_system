@@ -101,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin: 0 auto;
             justify-content: center;
             width: 60%;
+            margin-top: 50px;
+            /* Added margin-top */
         }
 
         .container {
@@ -139,7 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 15px;
         }
 
-        .form-control button {
+        .form-control button,
+        .form-control a {
             background-color: #ff7200;
             border: 2px solid #ff7200;
             color: black;
@@ -149,11 +152,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             display: block;
             margin: 0 auto;
             width: 30%;
+            text-align: center;
+            text-decoration: none;
         }
 
-        .form-control button:hover {
+        .form-control button:hover,
+        .form-control a:hover {
             background-color: #ff7200;
             transition: 0.5s;
+            cursor: pointer;
         }
 
         .greeting {
@@ -199,8 +206,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             placeholder="Leave blank to keep current password">
                     </div>
 
-                    <div class="form-control">
-                        <button type="submit">Save Changes</button>
+                    <div class="form-control" style="display:flex;flex-direction:row;">
+                        <button type="submit" style="font-size:16px;">Save</button>
+                        <a href="javascript:history.back()">Back</a>
                     </div>
                 </form>
             </div>
