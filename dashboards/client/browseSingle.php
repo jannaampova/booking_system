@@ -6,7 +6,8 @@ if (!isset($_SESSION['name'])) {
     header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
     exit();
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,249 +19,17 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/buttonAndSelect.css" />
     <link rel="stylesheet" href="../../css/client.css" />
     <link rel="stylesheet" href="../../css/addEditAdminHost.css" />
+    <link rel="stylesheet" href="../../css/propInfo.css" />
     <link rel="stylesheet" href="../../css/admin.css" />
     <link rel="stylesheet" href="../../css/nav.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    <style>
-        .cont {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-height: 700px;
-            overflow-y: auto;
-            margin: 0 auto;
-        }
-
-        .inner-flex {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            margin-left: 28%;
-        }
-
-        .images-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .images-gallery img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .images-gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .detail {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            width: 1050px;
-        }
-
-        .property-details {
-            width: 100%;
-            font-family: 'Roboto', Arial, sans-serif;
-            color: #444;
-            line-height: 1.8;
-            font-size: 16px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-        }
-
-        .property-details-amenities {
-            width: 203.5%;
-            font-family: 'Roboto', Arial, sans-serif;
-            color: #444;
-            line-height: 1.8;
-            font-size: 16px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-        }
-
-
-        h2,
-        h3 {
-            margin-top: 0;
-            color: #222;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .property-info {
-            margin-bottom: 25px;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .property-info label {
-            font-weight: 600;
-            color: #333;
-            margin-right: 10px;
-        }
-
-        .description {
-            margin-top: 20px;
-            font-size: 15px;
-            color: #555;
-        }
-
-        .book-now-button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 25px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .property-info input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .property-info input:focus {
-            border-color: #28a745;
-        }
-
-
-        .book-now-button:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
-
-        .book-now-button:active {
-            background-color: #1e7e34;
-            transform: translateY(0);
-        }
-
-        .main {
-            width: 120%;
-        }
-
-        .property-info input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            outline: none;
-            transition: border-color 0.3s ease;
-            color: #333;
-        }
-
-        .property-info input::placeholder {
-            color: #666;
-        }
-
-        .flatpickr-calendar {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background-color: #fff;
-            font-family: 'Roboto', Arial, sans-serif;
-        }
-
-
-        .flatpickr-calendar .flatpickr-day {
-            border-radius: 5px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .flatpickr-calendar .flatpickr-day:hover {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .flatpickr-calendar .flatpickr-day.today {
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        .flatpickr-calendar .flatpickr-day.selected {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-
-
-        #checkInCalendar,
-        #checkOutCalendar {
-            border: 1px solid #fff;
-            background-color: #fff;
-            width: 50px;
-            height: auto;
-        }
-
-        .property-details-amenities ul {
-
-
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .property-details-amenities ul li {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            font-family: 'Roboto', Arial, sans-serif;
-            color: #444;
-        }
-
-        .property-details-amenities ul li::before {
-            content: '';
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 10px;
-            background: url('../../img/tick.png') no-repeat center center;
-            background-size: contain;
-        }
-    </style>
 </head>
 
 <body>
     <?php
     include "../../config.php";
-
     ?>
 
     <div class="main">
@@ -311,14 +80,12 @@ if (!isset($_SESSION['name'])) {
                                 <div class='kol'>
                                     <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image' style='max-width:100%; height:auto;'>
                                 </div>
-                            
                             </div>
                           </div>";
                 }
                 ?>
             </div>
             <div class="detail">
-                <!-- Property Details -->
                 <div class="property-details">
                     <h2><?php echo htmlspecialchars($propName); ?></h2>
                     <div class="property-info">
@@ -333,7 +100,6 @@ if (!isset($_SESSION['name'])) {
                     <p><?php echo nl2br(htmlspecialchars($propDesc)); ?></p>
                 </div>
 
-                <!-- Additional Property Details -->
                 <div class="property-details">
                     <h3>Additional Details</h3>
                     <div class="property-info">
@@ -370,16 +136,17 @@ if (!isset($_SESSION['name'])) {
                         </span>
                     </div>
                 </div>
-
-
-                <!-- Amenities Section -->
-
                 <?php
-                $sqlAvail = "SELECT fromDate, toDate FROM Availabilities WHERE propID = $propertyId";
+                $sqlAvail = "SELECT fromDate, toDate FROM Availabilities WHERE propID = $propertyId AND propStatus = 'free'";
                 $availResult = mysqli_query($dbConn, $sqlAvail);
-                $availability = mysqli_fetch_assoc($availResult);
-                $fromDate = $availability['fromDate'];
-                $toDate = $availability['toDate'];
+
+                $availabilityRanges = [];
+                while ($availability = mysqli_fetch_assoc($availResult)) {
+                    $availabilityRanges[] = [
+                        'from' => $availability['fromDate'],
+                        'to' => $availability['toDate'],
+                    ];
+                }
                 ?>
                 <div class="property-details">
                     <div class="property-info">
@@ -393,91 +160,69 @@ if (!isset($_SESSION['name'])) {
                         <div id="checkOutCalendar"></div>
                     </div>
                 </div>
-
-
-                <div class="property-details-amenities">
-                    <h3>Amenities</h3>
-                    <ul style="list-style-type:disc;">
-                        <?php
-                        $sqlAmenities = "
-            SELECT a.amenity 
-            FROM PropAmenities pa
-            JOIN Amenities a ON pa.amenityID = a.id
-            WHERE pa.propID = $propertyId
-        ";
-                        $amenitiesResult = mysqli_query($dbConn, $sqlAmenities);
-
-                        if (mysqli_num_rows($amenitiesResult) > 0) {
-                            while ($amenityRow = mysqli_fetch_assoc($amenitiesResult)) {
-                                echo "<li>" . htmlspecialchars($amenityRow['amenity']) . "</li>";
-                            }
-                        } else {
-                            echo "<li>No amenities listed for this property.</li>";
-                        }
-                        ?>
-                    </ul>
-                </div>
-
-
-            </div>
-
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const availableFrom = "<?php echo htmlspecialchars($fromDate); ?>";
-                    const availableTo = "<?php echo htmlspecialchars($toDate); ?>";
-
+                <script>
                     let selectedCheckIn = null;
                     let selectedCheckOut = null;
 
-                    const checkIn = flatpickr("#checkInCalendar", {
-                        dateFormat: "Y-m-d",
-                        inline: true,
-                        minDate: availableFrom,
-                        maxDate: availableTo,
-                        onChange: function (selectedDates, dateStr) {
-                            selectedCheckIn = dateStr; // Store selected check-in date
-                            checkOut.set("minDate", dateStr);
-                            updateBookingLink();
-                        },
-                    });
-
-                    const checkOut = flatpickr("#checkOutCalendar", {
-                        dateFormat: "Y-m-d",
-                        inline: true,
-                        minDate: availableFrom,
-                        maxDate: availableTo,
-                        onChange: function (selectedDates, dateStr) {
-                            selectedCheckOut = dateStr; // Store selected check-out date
-                            checkIn.set("maxDate", dateStr);
-                            updateBookingLink();
-                        },
-                    });
-
-                    function updateBookingLink() {
-                        const bookNowButton = document.querySelector(".book-now-button");
+                    function handleBooking() {
+                        const bookNowLink = document.querySelector("#bookNowLink");
                         const propertyID = "<?php echo htmlspecialchars($propertyId); ?>";
                         const userID = "<?php echo htmlspecialchars($_SESSION['userID']); ?>";
 
-                        // Update the href dynamically
                         if (selectedCheckIn && selectedCheckOut) {
-                            bookNowButton.parentElement.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
+                            // Update the link dynamically
+                            bookNowLink.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
+                        } else {
+                            // Alert the user if dates are not selected
+                            alert("Please select both Check-In and Check-Out dates.");
+                            event.preventDefault(); // Prevent navigation if no dates are selected
                         }
                     }
-                });
+                    const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const isDateDisabled = (date) => {
+                            const normalizedDate = new Date(date.toDateString()); // Remove time component
+                            return !availabilityRanges.some(range => {
+                                const fromDate = new Date(range.from);
+                                const toDate = new Date(range.to);
+                                return normalizedDate >= fromDate && normalizedDate <= toDate;
+                            });
+                        };
 
+                        const checkIn = flatpickr("#checkInCalendar", {
+                            dateFormat: "Y-m-d",
+                            inline: true,
+                            disable: [
+                                function (date) {
+                                    return isDateDisabled(date);
+                                }
+                            ],
+                            onChange: function (selectedDates, dateStr) {
+                                selectedCheckIn = dateStr;
+                                checkOut.set("minDate", dateStr);
+                            },
+                        });
 
-            </script>
-
-            <!-- Booking Button -->
-            <a href="#" id="bookNowLink">
-                <button class="book-now-button">Book Now</button>
-            </a>
-
-
+                        const checkOut = flatpickr("#checkOutCalendar", {
+                            dateFormat: "Y-m-d",
+                            inline: true,
+                            disable: [
+                                function (date) {
+                                    return isDateDisabled(date);
+                                }
+                            ],
+                            onChange: function (selectedDates, dateStr) {
+                                selectedCheckOut = dateStr;
+                                checkIn.set("maxDate", dateStr);
+                            },
+                        });
+                    });
+                </script>
+                <a href="#" id="bookNowLink">
+                    <button class="book-now-button" onclick="handleBooking()">Book Now</button>
+                </a>
+            </div>
         </div>
-
-    </div>
     </div>
 </body>
 

@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="../../css/buttonAndSelect.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
 </head>
-<style>
-    
-</style>
 <?php
 session_start(); // Start the session
 if (!isset($_SESSION['name'])&& !isset($_SESSION['userID'])) {

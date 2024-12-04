@@ -40,6 +40,8 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         </a>
                         <a href="viewProperties.php">View Your Properties</a>
                         <a href="addProperty.php">Add Property</a>
+                        <a href="hostPendingBookings.php">Pending bookings</a>
+                        <a href="hostAllBookings.php">All bookings</a>
                         <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
                         </div>
         </div>
