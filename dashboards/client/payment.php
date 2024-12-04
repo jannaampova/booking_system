@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../config.php";
+include "../../config.php";
 
 if (!isset($_SESSION['name'])) {
     header("Location: logIn.php");
@@ -65,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Settings</title>
+    <title>Payment</title>
     <style>
         .main {
             width: 100%;
             height: 127vh;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../../newImg.jpg);
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -178,6 +178,94 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #624e24;
             text-align: center;
         }
+
+        .rightside {
+    background-color: #ffffff;
+	width: 35rem;
+	border-bottom-right-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 1rem 2rem 3rem 3rem;
+}
+
+p{
+    display:block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: .8rem 0;
+}
+
+.inputbox
+{
+    color:#030303;
+	width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    font-family: 'Roboto', sans-serif;
+    color: #615a5a;
+    font-size: 1.1rem;
+    font-weight: 500;
+  outline:none;
+}
+
+.expcvv {
+    display:flex;
+    justify-content: space-between;
+    padding-top: 0.6rem;
+}
+
+.expcvv_text{
+    padding-right: 1rem;
+}
+.expcvv_text2{
+    padding:0 1rem;
+}
+
+.button{
+    background: linear-gradient(
+135deg
+, #753370 0%, #298096 100%);
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    width:100%;
+    letter-spacing: .11rem;
+    outline:none;
+}
+
+.button:hover
+{
+	transform: scale(1.05) translateY(-3px);
+    box-shadow: 3px 3px 6px #38373785;
+}
+
+@media only screen and (max-width: 1000px) {
+    .card{
+        flex-direction: column;
+        width: auto;
+      
+    }
+
+    .leftside{
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+      border-top-right-radius:0;
+      border-radius:0;
+    }
+
+    .rightside{
+        width:auto;
+        border-bottom-left-radius: 1.5rem;
+        padding:0.5rem 3rem 3rem 2rem;
+      border-radius:0;
+    }
     </style>
 </head>
 
@@ -187,40 +275,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="container">
                 <form action="" method="POST" class="form">
                     <div class="greeting">
-                        <h2>Settings</h2>
+                        <h2>Payment</h2>
                     </div>
+                    <div class="rightside">
+            <h1>CheckOut</h1>
+            <h2>Payment Information</h2>
+            <p>Cardholder Name</p>
+            <input type="text" class="inputbox" name="name" required />
+            <p>Card Number</p>
+            <input type="number" class="inputbox" name="card_number" id="card_number" required />
 
-                    <div class="form-control">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" name="fullName" id="fullName"
-                            value="<?php echo htmlspecialchars($user['fullName'], ENT_QUOTES, 'UTF-8'); ?>" required>
-                        <small><?php echo $errors['fullName'] ?? ''; ?></small>
-                    </div>
+            <p>Card Type</p>
+            <select class="inputbox" name="card_type" id="card_type" required>
+              <option value="">--Select a Card Type--</option>
+              <option value="Visa">Visa</option>
+              <option value="RuPay">RuPay</option>
+              <option value="MasterCard">MasterCard</option>
+            </select>
+<div class="expcvv">
 
-                    <div class="form-control">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email"
-                            value="<?php echo htmlspecialchars($user['email']); ?>" required>
-                        <small><?php echo $errors['email'] ?? ''; ?></small>
-                    </div>
+            <p class="expcvv_text">Expiry</p>
+            <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
 
-                    <div class="form-control">
-                        <label for="phone">Phone</label>
-                        <input type="text" name="phone" id="phone"
-                            value="<?php echo htmlspecialchars($user['phone']); ?>" required>
-                        <small><?php echo $errors['phone'] ?? ''; ?></small>
-                    </div>
+            <p class="expcvv_text2">CVV</p>
+            <input type="password" class="inputbox" name="cvv" id="cvv" required />
+        </div>
+            <p></p>
+            <button type="submit" class="button">CheckOut</button>
+          </form>
+        </div>
 
-                    <div class="form-control">
-                        <label for="password">New Password (optional)</label>
-                        <input type="password" name="password" id="password"
-                            placeholder="Leave blank to keep current password">
-                    </div>
-
-                    <div class="form-control" style="display:flex;flex-direction:row;">
-                        <button type="submit" style="font-size:16px;">Save</button>
-                        <a href="javascript:history.back()">Back</a>
-                    </div>
                 </form>
             </div>
         </div>
