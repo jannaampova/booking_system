@@ -14,24 +14,55 @@ body {
 
 .main {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
+.homeText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  margin: 0 auto;
+  top:60%;
+  color: antiquewhite;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+
+.homeText h1,
+h3 {
+  font-family: Poppins, sans-serif;
+  font-size: 50px;
+  letter-spacing: 2px;
+  margin: 0;
+}
 
 .navbar {
-  position: absolute;
-  top: 20px;
-  right: 50px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:20vh;
+  top:20%;
+  margin: 0 auto;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  position: relative;
 }
 
 ul {
   display: flex;
   gap: 30px;
   flex-direction: row;
+  justify-content: center;
 }
 
 ul li {
@@ -41,15 +72,18 @@ ul li {
 
 ul li a {
   text-decoration: none;
-  color: antiquewhite;
+  color: white;
   font-family: Poppins, sans-serif;
   font-weight: bold;
   transition: 0.4s ease-in-out;
+  text-shadow: 4px 4px 15px #373737;
+  outline: invert;
 }
 
 ul li a:hover {
   color: #ff7200;
 }
+
 
 a.button,
 button {
@@ -92,7 +126,8 @@ a.button:hover {
   justify-content: center;
   text-align: center;
   max-width: 1170px;
-  margin: 0 auto;
+  margin-bottom:2%;
+  margin-left:15%;
   padding: 20px;
 }
 
@@ -105,22 +140,26 @@ a.button:hover {
 }
 
 .info {
+  top: 70%; /* Adjust the top value to move the section lower */
   padding: 80px 0 0;
   align-items: center;
-
+  background-color: white; /* White background */
 }
 
 .info-content {
   flex: 0 0 66.66%;
   max-width: 66.66%;
   padding: 0 15px;
+  background-color: white; /* White background */
+  top: 100%; /* Adjust the top value to move the section lower */
+
+
 }
 
 .section-title {
   flex: 0 0 100%;
   max-width: 100%;
   padding: 0 15px;
-  margin-top: 7%;
 
 }
 
@@ -161,7 +200,6 @@ a.button:hover {
 
 .logo {
   text-decoration: none;
-  /* Remove underline from logo link */
   cursor: pointer;
   font-style: italic;
   color: #ff7200;
@@ -170,7 +208,7 @@ a.button:hover {
   padding-left: 20px;
   margin: 5px 0;
   z-index: 9999;
-  /* Space above and below the logo */
+  text-shadow: 4px 4px 15px #6f6c6c;
 }
 
 .icon p {
@@ -182,33 +220,13 @@ a.button:hover {
   margin: 0;
 }
 
-.homeText {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  margin: 0 auto;
-  color: antiquewhite;
-  font-family: Poppins, sans-serif;
-  text-align: center;
-  position: relative;
-}
 
-
-.homeText h1,
-h3 {
-  font-family: Poppins, sans-serif;
-  font-size: 50px;
-  letter-spacing: 2px;
-  margin: 0;
-}
 
 .row {
   display: flex;
   align-items: center;
   flex-direction: row;
+  max-height: 80px;
 }
 
 .stats {
@@ -225,28 +243,23 @@ h3 {
 .stat-box {
   display: flex;
   justify-content: center;
-  /* Center content within each stat box */
   flex-direction: column;
-  /* Stack the heading and subheading vertically */
   color: rgb(57, 56, 56);
   font-weight: bold;
   text-align: center;
-  /* Center the text within the stat box */
   flex: 1;
-  /* Allow each stat box to grow and fill space evenly */
   margin: 0 10px;
-  /* Optional: add margin for spacing between boxes */
 }
 
 .stat-box h2 {
-  font-style: italic;
+  font-family: Poppins, sans-serif;
   font-size: 40px;
   color: #000;
   margin: 0 0 5px;
 }
 
 .stat-box h5 {
-  font-style: italic;
+  font-family: Poppins, sans-serif;
   font-size: 15px;
   color: gray;
   font-weight: 600;
@@ -256,16 +269,11 @@ h3 {
 #signUp,
 #logIn {
   background-color: #c9c5c5;
-  /* Light gray background color, change as needed */
   padding: 20px 10px;
-  /* Add padding to create space inside the section */
   color: #7e7777;
-  /* Text color for better contrast, adjust as needed */
   border-radius: 70px;
-  /* Rounded corners */
-
 }
 
 section {
-  margin-top: 10%;
+  margin-top: 1%;
 }

@@ -114,12 +114,12 @@ if (isset($_POST['logIn'])) {
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($usernameClass); ?>">
                     <label for="username">Username</label>
-                    <input type="text" name="username" placeholder="annamariya11" id="username">
+                    <input type="text" name="username" placeholder="" id="username">
                     <small><?php echo htmlspecialchars($invalidUserName); ?></small>
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($passwdClass); ?>">
                     <label for="password">Password</label>
-                    <input type="password" name="password" placeholder="password" id="password">
+                    <input type="password" name="password" placeholder="" id="password">
                     <small><?php echo htmlspecialchars($invalidPasswd); ?></small>
                 </div>
                 <div class="form-control">

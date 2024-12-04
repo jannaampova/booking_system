@@ -12,7 +12,7 @@ if (!isset($_SESSION['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Properties</title>
+    <title>Your Properties</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../../css/viewProp.css" />
@@ -94,7 +94,7 @@ if (!isset($_SESSION['name'])) {
 
                 // Now output the HTML for each property
                 foreach ($propertiesWithImages as $propertyData) {
-                    echo "<div class='row'>
+                    echo "<div class='row' style='margin-top:10%;'>
 
         <div class='service-item'>
             <div class='service-item-inner'>

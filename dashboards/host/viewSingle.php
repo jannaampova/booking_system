@@ -20,6 +20,13 @@
             width: 100%;
         }
 
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            box-shadow: 0px 0px 0px 0px #192d2d66;
+            color: white;
+        }
+
         .inner-flex {
             display: flex;
             flex-direction: column;
@@ -254,7 +261,7 @@ if (!isset($_SESSION['name'])) {
                         </div>
                     </div>
 
-                    <div class="form-control">
+                    <div class="property-info">
                         <div class="form-control">
                             <label>Select amenities:</label>
                             <div class="checkbox-grid">
@@ -329,14 +336,15 @@ if (!isset($_SESSION['name'])) {
                     </div>
 
 
-                    <div class="description">
+                    <div class="property-info">
                         <div class="form-control">
                             <label>Description</label>
                             <textarea rows="5" cols="180" name="desc"
                                 readonly><?php echo htmlspecialchars($propDesc); ?></textarea>
                         </div>
                     </div>
-                    <div style="display: flex; flex-direction:row; justify-content: space-between; width: 100%;margin-top:2%;">
+                    <div
+                        style="display: flex; flex-direction:row; justify-content: space-between; width: 100%;margin-top:2%;">
                         <button type='button' name='saveChanges' onclick="toggleEditMode(event)">Edit</button>
                         <button type='submit' name='deleteProp'>Delete Property</button>
                     </div>

@@ -21,6 +21,19 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/logIn.css">
     <link rel="stylesheet" href="../../css/addEditAdminHost.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+    <style>
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            box-shadow: 0px 0px 0px 0px #192d2d66;
+            color: white;
+        }
+        .form-control label {
+            font-weight: 600;
+            color: #333;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
