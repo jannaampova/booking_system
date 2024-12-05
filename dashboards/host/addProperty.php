@@ -9,10 +9,11 @@ if (!isset($_SESSION['name'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Host Properties Dashboard</title>
+    <title>Add Property</title>
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/check.css">
@@ -20,6 +21,19 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/logIn.css">
     <link rel="stylesheet" href="../../css/addEditAdminHost.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+    <style>
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            box-shadow: 0px 0px 0px 0px #192d2d66;
+            color: white;
+        }
+        .form-control label {
+            font-weight: 600;
+            color: #333;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -126,12 +140,19 @@ if (!isset($_SESSION['name'])) {
                 </div>
                 <div class="form-control">
                     <label>Available from:</label>
-                    <input type="date" name="fromDate" required min="<?php echo date('Y-m-d'); ?>">
+                    <input type="date" name="fromDate" id="fromDate" required min="<?php echo date('Y-m-d'); ?>">
                 </div>
+
                 <div class="form-control">
                     <label>Available to:</label>
-                    <input type="date" name="toDate" required min="<?php echo date('Y-m-d'); ?>">
+                    <input type="date" name="toDate" id="toDate" required min="<?php echo date('Y-m-d'); ?>">
                 </div>
+                <script>
+                    document.getElementById('fromDate').addEventListener('change', function () {
+                        var fromDate = document.getElementById('fromDate').value;
+                        document.getElementById('toDate').setAttribute('min', fromDate); // Set min of toDate to the selected fromDate
+                    });
+                </script>
                 <div class="form-control">
                     <label>Select images:</label>
                     <input type="file" name="images[]" multiple accept="image/*">

@@ -1,240 +1,279 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    
-  }
-  
-  .main {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  .navbar {
-    position: absolute;
-    top: 20px;
-    right:25px;
-  
-  }
-  
-  ul {
-    display: flex;
-    gap:20px;
-    flex-direction: row;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+
+}
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.homeText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  margin: 0 auto;
+  top:60%;
+  color: antiquewhite;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+
+.homeText h1,
+h3 {
+  font-family: Poppins, sans-serif;
+  font-size: 50px;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:20vh;
+  top:20%;
+  margin: 0 auto;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+ul {
+  display: flex;
+  gap: 30px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+ul li {
+  list-style: none;
+  font-size: 20px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: white;
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  transition: 0.4s ease-in-out;
+  text-shadow: 4px 4px 15px #373737;
+  outline: invert;
+}
+
+ul li a:hover {
+  color: #ff7200;
+}
+
+
+a.button,
+button {
+  display: inline-block;
+  margin-top: 5%;
+  padding: 10px 40px;
+  background-color: rgb(57, 56, 56);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+
+}
+
+a.button:hover {
+  background-color: rgb(187, 183, 178);
+  transition: 0.5s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   ul li {
-    list-style: none;
-    font-size: 20px;
-  }
-  
-  ul li a {
-    text-decoration: none;
-    color: antiquewhite;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
-  }
-  
-  ul li a:hover {
-    color: #ff7200;
-  }
-  
-  a.button, button {
-    display: inline-block;
-    margin-top: 5%;
-    padding: 10px 40px;
-    background-color: rgb(57, 56, 56);
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-
-  }
-  
-  a.button:hover {
-    background-color: rgb(187, 183, 178);
-    transition: 0.5s;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    ul li {
-      margin-left: 20px;
-      font-size: 16px;
-    }
-  
-    a.button, button {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
+    margin-left: 20px;
+    font-size: 16px;
   }
 
-  .content{
-    display: flex;                   /* Use flexbox */
-    flex-direction: column;         /* Arrange children in a column */
-    align-items: center;            /* Center children horizontally */
-    justify-content: center;        /* Center children vertically */
-    text-align: center;             /* Center text within children */
-    max-width: 1170px;              /* Optional: to control maximum width */
-    margin: 0 auto;                 /* Center the content area itself */
-    padding: 20px;                  /* Optional: padding around the content */
+  a.button,
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
-.content p{
-    margin-top: 2%;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    color: rgb(57, 56, 56);
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1170px;
+  margin-bottom:2%;
+  margin-left:15%;
+  padding: 20px;
+}
+
+.content p {
+  margin-top: 2%;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  color: rgb(57, 56, 56);
 
 }
-.info{
-    padding: 80px 0 0;
-    align-items: center;
+
+.info {
+  top: 70%; /* Adjust the top value to move the section lower */
+  padding: 80px 0 0;
+  align-items: center;
+  background-color: white; /* White background */
+}
+
+.info-content {
+  flex: 0 0 66.66%;
+  max-width: 66.66%;
+  padding: 0 15px;
+  background-color: white; /* White background */
+  top: 100%; /* Adjust the top value to move the section lower */
+
 
 }
- .info-content{
-    flex: 0 0 66.66%;
-    max-width: 66.66%;
-    padding: 0 15px;
+
+.section-title {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 15px;
+
 }
- .section-title{
-    flex:0 0 100%;
-    max-width: 100%;
-    padding: 0 15px;
-    margin-top: 7%;
-    
+
+.section-title h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: rgb(57, 56, 56);
+  font-weight: bold;
+  font-family: Poppins, sans-serif;
+  margin: 0%;
+  font-weight: 700;
+  position: relative;
 }
-.section-title h1{
-display: flex;
-justify-content: center;
-    font-size: 40px;
-    color: rgb(57, 56, 56);
-    font-weight: bold;
-    margin: 0%;
-    font-weight: 700;
-    position: relative;
-}
-.section-title h1::before{
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    bottom: -5px;
-    width: 35%;
-    height: 3px;
-    background-color:#ff7200;
+
+.section-title h1::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  bottom: -5px;
+  width: 35%;
+  height: 3px;
+  background-color: #ff7200;
 }
 
 .icon {
-    width: 200px;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  width: 200px;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 
-.logo {   
-    text-decoration: none; /* Remove underline from logo link */
-
-    font-style: italic;
-    color: #ff7200;
-    font-size: 35px;
-    font-family: Arial, sans-serif;
-    padding-left: 20px;
-    margin: 5px 0; /* Space above and below the logo */
+.logo {
+  text-decoration: none;
+  cursor: pointer;
+  font-style: italic;
+  color: #ff7200;
+  font-size: 35px;
+  font-family: Poppins, sans-serif;
+  padding-left: 20px;
+  margin: 5px 0;
+  z-index: 9999;
+  text-shadow: 4px 4px 15px #6f6c6c;
 }
 
 .icon p {
-    font-style: italic;
-    font-weight: bold;
-    color: #ff7200;
-    padding-left: 20px;
-    font-family: Arial, sans-serif;
-    margin: 0;
-}
-.homeText {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center vertically */
-    align-items: center;     /* Center horizontally */
-    width: 100%;
-    height: 100vh;           /* Full viewport height */
-    margin: 0 auto;
-    color: antiquewhite;
-    font-family: monospace;
-    text-align: center;      /* Center text */
-    position: relative;
+  font-style: italic;
+  font-weight: bold;
+  color: #ff7200;
+  padding-left: 20px;
+  font-family: Poppins, sans-serif;
+  margin: 0;
 }
 
 
-.homeText h1,h3 {
-    font-family: Arial, sans-serif;
-    font-size: 50px;
-    letter-spacing: 2px;
-    margin: 0;
-}
 
-.row{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  max-height: 80px;
 }
 
 .stats {
-    display: flex;                     /* Use flexbox for the stats container */
-    justify-content: space-around;     /* Space between stat-boxes */
-    align-items: center;               /* Center items vertically within the row */
-    margin-top: 4%;                  /* Add some top margin for spacing */
+  display: flex;
+  /* Use flexbox for the stats container */
+  justify-content: space-around;
+  /* Space between stat-boxes */
+  align-items: center;
+  /* Center items vertically within the row */
+  margin-top: 4%;
+  /* Add some top margin for spacing */
 }
 
 .stat-box {
-    display: flex;
-    justify-content: center;            /* Center content within each stat box */
-    flex-direction: column;             /* Stack the heading and subheading vertically */
-    color: rgb(57, 56, 56);
-    font-weight: bold;
-    text-align: center;                 /* Center the text within the stat box */
-    flex: 1;                            /* Allow each stat box to grow and fill space evenly */
-    margin: 0 10px;                    /* Optional: add margin for spacing between boxes */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: rgb(57, 56, 56);
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
 }
 
 .stat-box h2 {
-    font-style: italic;
-    font-size: 40px;
-    color: #000;
-    margin: 0 0 5px;
+  font-family: Poppins, sans-serif;
+  font-size: 40px;
+  color: #000;
+  margin: 0 0 5px;
 }
 
 .stat-box h5 {
-    font-style: italic;
-    font-size: 15px;
-    color: gray;
-    font-weight: 600;
-    text-transform: uppercase;
+  font-family: Poppins, sans-serif;
+  font-size: 15px;
+  color: gray;
+  font-weight: 600;
+  text-transform: uppercase;
 }
-#signUp, #logIn{
-    background-color: #c9c5c5; /* Light gray background color, change as needed */
-    padding: 20px 10px; /* Add padding to create space inside the section */
-    color: #7e7777; /* Text color for better contrast, adjust as needed */
-    border-radius: 70px; /* Rounded corners */
 
+#signUp,
+#logIn {
+  background-color: #c9c5c5;
+  padding: 20px 10px;
+  color: #7e7777;
+  border-radius: 70px;
 }
-section{
-    margin-top: 10%;
+
+section {
+  margin-top: 1%;
 }

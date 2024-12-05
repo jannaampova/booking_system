@@ -4,8 +4,46 @@
   justify-content: center; /* Center items horizontally */
   gap: 30px; /* Add space between rows and items */
   width: 100%;
-  margin-top: 10%;
+  margin-top: 3%;
 }
+
+.details {
+  background-color: rgba(41, 87, 87, 0.319);
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 5px;
+}
+
+.details h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.details p {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #888;
+}
+
+.view-details-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #567375ad;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #2b3a3ba2;
+}
+
 
 .row {
   width: 30%; /* Each property takes up 30% of the width */
@@ -52,7 +90,7 @@
 }
 
 .service-item {
-  background-color: #f5f5f5; /* Background color for the service items */
+  background-color: #f5f5f500; /* Background color for the service items */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

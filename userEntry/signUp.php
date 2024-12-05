@@ -204,28 +204,28 @@
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($classUsername); ?>">
                     <label for="username">Username</label>
-                    <input type="text" name="username" placeholder="annamariya11" id="username">
+                    <input type="text" name="username" placeholder="jana" id="username">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
                     <small><?php echo htmlspecialchars($usernameInvalid); ?></small>
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($classEmail); ?>">
                     <label for="email">Email</label>
-                    <input type="email" name="email" placeholder="hello@annamariya.com" id="email">
+                    <input type="email" name="email" placeholder="jana@mail.com" id="email">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
                     <small><?php echo htmlspecialchars($emailInvalid); ?></small>
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($classPasswd); ?>">
                     <label for="password">Password</label>
-                    <input type="password" name="password" placeholder="password" id="password">
+                    <input type="password" name="password" placeholder="" id="password">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
                     <small><?php echo htmlspecialchars($passwdInvalid); ?></small>
                 </div>
                 <div class="form-control <?php echo htmlspecialchars($classPasswd2); ?>">
                     <label for="password2">Repeat Password</label>
-                    <input type="password" name="password2" placeholder="check password" id="password2">
+                    <input type="password" name="password2" placeholder="" id="password2">
                     <i class="fas fa-check-circle"></i>
                     <i class="fas fa-exclamation-circle"></i>
                     <small><?php echo htmlspecialchars($passwd2Invalid); ?></small>

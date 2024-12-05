@@ -1,13 +1,12 @@
-
-
 .main {
   width: 100%;
-  height: 127vh;
+  min-height: 100vh;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -20,66 +19,88 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-#signUp{
-  display:flex;
+
+#signUp {
+  display: flex;
   flex-direction: column;
-  margin:30px;
-  backdrop-filter: blur(15px);
-  color: #f9f4f4; /* Text color for better contrast, adjust as needed */
-  border-radius: 60px; /* Rounded corners */
+  margin: 30px;
+  backdrop-filter: blur(18px);
+  background-color: #f9f4f411;
+  color: #f9f4f4;
+  /* Text color for better contrast, adjust as needed */
+  border-radius: 30px;
+  /* Rounded corners */
   box-shadow: 0 10px 12px rgba(12, 12, 12, 0.814);
   align-items: right;
-  margin:0 auto;
+  margin: 0 auto;
   justify-content: center;
-  width:60%;
+  width: 60%;
 }
 
 .container {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 50%);
-  border-radius: 20px;
-  width: 50%; /* Adjust to desired width on mobile */
-  height: auto; /* Allow height to adjust dynamically */
+  border-radius: 15px;
+  width: 55%;
+  /* Adjust to desired width on mobile */
+  height: auto;
+  /* Allow height to adjust dynamically */
   overflow: hidden;
-  margin: 0 auto; /* Center horizontally */
-  display: block; /* Ensure the button is displayed as a block element */
-  padding-top:6%;
-  padding-bottom:6%;
+  margin: 0 auto;
+  /* Center horizontally */
+  display: block;
+  /* Ensure the button is displayed as a block element */
+  padding-top: 6%;
+  padding-bottom: 6%;
 
 }
-
 
 .form {
   padding: 30px 20px;
   color: #242321;
-  margin-top:10%;
-  margin-bottom:10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
+
 .form-control {
   margin-bottom: 5px;
   padding-bottom: 10px;
   position: relative;
   color: #2d2a26;
 }
+
 .form-control label {
   display: inline-block;
   text-align: center;
+  letter-spacing: 0.2px;
   margin-bottom: 3%;
-  color: rgb(170, 164, 157);
+  font-weight: 400;
+  font-size: 1rem;
+  color: antiquewhite;
+  margin-top:10px;
 }
-  
+
 .form-control input,
 .form-control select,
 .form-control textarea {
   background: #68858775;
-  border: 2px solid #000000;
-  border-radius: 15px;
+  border: none;
+  box-shadow: 3px 3px 5px 6px #192d2d66;
+  border-radius: 17px;
   display: block;
+  color:antiquewhite;
   width: 100%;
   height: 100%;
   font-size: 14px;
   font-family: inherit;
   padding: 15px;
 }
+
+::placeholder {
+  color: rgb(123, 121, 121);
+  opacity: 1;
+}
+
+
 .form-control button {
   background-color: #ff7200;
   border: 2px solid #ff7200;
@@ -89,70 +110,95 @@ body {
   border-radius: 20px;
   padding: 12px;
   margin-top: 20px;
-  display: block; /* Ensure the button is displayed as a block element */
-  margin: 0 auto; /* Center the button horizontally */
+  display: block;
+  /* Ensure the button is displayed as a block element */
+  margin: 0 auto;
+  /* Center the button horizontally */
   width: 30%;
 }
+
 .form-control button:hover {
-  background-color: #ff7200;
+  background-color: #e66903;
   transition: 0.5s;
-  cursor:pointer;
+  cursor: pointer;
 }
+
 .form-control a {
   text-decoration: none;
   color: rgb(170, 164, 157);
-  display: block; /* Ensure the button is displayed as a block element */
-  margin: 0 auto; /* Center the button horizontally */
-  text-align:center;
+  display: block;
+  /* Ensure the button is displayed as a block element */
+  margin: 0 auto;
+  /* Center the button horizontally */
+  text-align: center;
   width: 100%;
 }
+
 .form-control input:focus {
   outline: 0;
   border-color: #000000;
 }
+
 .form-control i {
   visibility: hidden;
   position: absolute;
   top: 40px;
   right: -50px;
 }
+
 .form-control small {
   visibility: hidden;
   position: absolute;
   bottom: -5px;
   left: 0;
 }
+
 .form-control.success input {
   border-color: rgb(36, 125, 36);
 }
+
 .form-control.error input {
   border-color: #931414;
 }
+
 .form-control.success i.fa-check-circle {
   background: none;
   color: #3e721b;
   visibility: visible;
 }
+
 .form-control.error i.fa-exclamation-circle {
   visibility: visible;
   background: none;
 
   color: #931414;
 }
+
 .form-control small {
-  visibility: hidden; /* Hide error message by default */
-  color: #931414; /* Error message color */
-  position: absolute; /* Position it absolutely */
-  bottom: -10px; /* Position below the input */
-  right: 0; /* Align to the right */
-  font-size: 12px; /* Smaller font size */
+  visibility: hidden;
+  /* Hide error message by default */
+  color: #931414;
+  /* Error message color */
+  position: absolute;
+  /* Position it absolutely */
+  bottom: -10px;
+  /* Position below the input */
+  right: 0;
+  /* Align to the right */
+  font-size: 12px;
+  /* Smaller font size */
 }
+
 .form-control i {
-  visibility: hidden; /* Hide error message by default */
-  position: absolute; /* Position it absolutely */
-  right: -12px; /* Align to the right */
+  visibility: hidden;
+  /* Hide error message by default */
+  position: absolute;
+  /* Position it absolutely */
+  right: -12px;
+  /* Align to the right */
   top: 44px;
 }
+
 .form-control.error small {
   visibility: visible;
   color: #931414;
@@ -160,28 +206,31 @@ body {
 }
 
 .form .link {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Poppins, sans-serif;
   font-size: 17px;
   padding-top: 20px;
   text-align: center;
 }
 
-
 .icons a {
   text-decoration: none;
   color: antiquewhite;
 }
+
 .icons ion-icon {
   color: antiquewhite;
   font-size: 25px;
   transition: 0.3s ease;
 }
+
 .icons ion-icon:hover {
   color: #ff7200;
 }
+
 .icons {
   margin-left: 13px;
 }
+
 .greeting {
   color: #624e24;
   text-align: center;
@@ -199,14 +248,17 @@ body {
   align-items: flex-start;
 }
 
-.logo {   
-  text-decoration: none; /* Remove underline from logo link */
+.logo {
+  text-decoration: none;
+  /* Remove underline from logo link */
   font-style: italic;
   color: #ff7200;
+  cursor: pointer;
   font-size: 35px;
-  font-family: Arial, sans-serif;
+  font-family: Poppins, sans-serif;
   padding-left: 20px;
-  margin: 5px 0; /* Space above and below the logo */
+  margin: 5px 0;
+  /* Space above and below the logo */
 }
 
 .icon p {
@@ -214,6 +266,6 @@ body {
   font-weight: bold;
   color: #ff7200;
   padding-left: 20px;
-  font-family: Arial, sans-serif;
+  font-family: Poppins, sans-serif;
   margin: 0;
 }
