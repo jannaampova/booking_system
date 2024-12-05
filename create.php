@@ -153,13 +153,14 @@ $booking = "CREATE TABLE IF NOT EXISTS Booking (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     clientID INT UNSIGNED,
     propID INT UNSIGNED,
-    bookingStatus VARCHAR(10) CHECK (bookingStatus IN ('approved','declined','pending')),
+    bookingStatus VARCHAR(40),
     fromDate DATE,
     toDate DATE,
     totalPrice INT,
     FOREIGN KEY (propID) REFERENCES Property(id) ON DELETE CASCADE,
     FOREIGN KEY (clientID) REFERENCES User(id) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
 
 if (mysqli_query($dbConn, $booking)) {
     echo "Booking table created or already exists.<br>";

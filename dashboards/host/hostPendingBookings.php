@@ -25,13 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Approve the booking
             $approveSql = "UPDATE Booking SET bookingStatus = 'approved' WHERE id = '$bookingID'";
             if (mysqli_query($dbConn, $approveSql)) {
+                $updateBookedDates = "UPDATE Availabilities SET propStatus='booked' WHERE  propID = $propertyID 
+                                    AND fromDate <= '$checkInDate' 
+                                    AND toDate >= '$checkOutDate'";
+                mysqli_query($dbConn, $updateBookedDates);
 
                 // Update availabilities
                 $availabilitySql = "SELECT * FROM Availabilities 
                                     WHERE propID = $propertyID 
                                     AND fromDate <= '$checkInDate' 
                                     AND toDate >= '$checkOutDate'";
-
                 $result = mysqli_query($dbConn, $availabilitySql);
                 if ($row = mysqli_fetch_assoc($result)) {
                     $originalFromDate = $row['fromDate'];
@@ -43,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         mysqli_query($dbConn, $deleteSql);
                     } elseif ($checkInDate == $originalFromDate) {
                         $updateSql = "UPDATE Availabilities 
-                                      SET fromDate = $checkOutDate;
+                                      SET fromDate = $checkOutDate
                                       WHERE id = {$row['id']}";
                         mysqli_query($dbConn, $updateSql);
                     } elseif ($checkOutDate == $originalToDate) {
@@ -63,19 +66,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         mysqli_query($dbConn, $splitSql2);
                     }
 
-                } else {
                 }
-            } else {
-                echo "<p>Error approving booking: " . mysqli_error($dbConn) . "</p>";
             }
         } elseif (isset($_POST['cancelBtn'])) {
             // Cancel the booking
-            $sql = "UPDATE Booking SET bookingStatus = 'Declined' WHERE id = $bookingID";
-            if (mysqli_query($dbConn, $sql)) {
-                echo "<p>Booking with ID $bookingID has been declined.</p>";
-            } else {
-                echo "<p>Error updating booking: " . mysqli_error($dbConn) . "</p>";
-            }
+            $sql = "UPDATE Booking SET bookingStatus = 'declined' WHERE id = $bookingID";
+            $deleteReeserved = "DELETE * FROM Availabilities WHERE propID = $propertyID 
+                                    AND fromDate = '$checkInDate' 
+                                    AND toDate = '$checkOutDate'";
+            mysqli_query($dbConn, $sql);
+            mysqli_query($dbConn, $returnToFree);
         }
     }
 }
@@ -94,9 +94,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../css/nav.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <style>
-        h2, h3 { margin-top: 0; color: #222; margin-bottom: 15px; font-weight: 600; }
-        button { background-color: #688587; color: white; border: none; font-size: 14px; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #2b3a3b; }
+        h2,
+        h3 {
+            margin-top: 0;
+            color: #222;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        button {
+            background-color: #688587;
+            color: white;
+            border: none;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2b3a3b;
+        }
     </style>
 </head>
 

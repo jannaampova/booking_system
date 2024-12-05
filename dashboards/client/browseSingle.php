@@ -164,7 +164,7 @@ if (!isset($_SESSION['name'])) {
                 </div>
                 <div class="property-details-amenities">
                     <div class="property-info">
-                    <h2>Amenities</h2>
+                        <h2>Amenities</h2>
                         <ul style="list-style-type:disc;">
                             <?php
                             $sqlAmenities = "
@@ -198,7 +198,7 @@ if (!isset($_SESSION['name'])) {
 
                     if (selectedCheckIn && selectedCheckOut) {
                         // Update the link dynamically
-                        bookNowLink.href = `confirmBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
+                        bookNowLink.href = `reserveBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
                     } else {
                         // Alert the user if dates are not selected
                         alert("Please select both Check-In and Check-Out dates.");
@@ -208,10 +208,25 @@ if (!isset($_SESSION['name'])) {
                 const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
                 document.addEventListener("DOMContentLoaded", function () {
                     const isDateDisabled = (date) => {
-                        const normalizedDate = new Date(date.toDateString()); // Remove time component
+                        const normalizeDate = (d) => {
+                            const normalized = new Date(d);
+                            normalized.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+                            return normalized;
+                        };
+
+                        const normalizedDate = normalizeDate(date); // Normalize the input date
+                        const today = normalizeDate(new Date());   // Normalize the system date (today)
+
+                        // Check if the date is before today
+                        if (normalizedDate < today) {
+                            return true; // Disable dates before today
+                        }
+
+                        // Check if the date is outside the availability ranges
                         return !availabilityRanges.some(range => {
-                            const fromDate = new Date(range.from);
-                            const toDate = new Date(range.to);
+                            const fromDate = normalizeDate(range.from);
+                            const toDate = normalizeDate(range.to);
+
                             return normalizedDate >= fromDate && normalizedDate <= toDate;
                         });
                     };
@@ -229,7 +244,6 @@ if (!isset($_SESSION['name'])) {
                             checkOut.set("minDate", dateStr);
                         },
                     });
-
                     const checkOut = flatpickr("#checkOutCalendar", {
                         dateFormat: "Y-m-d",
                         inline: true,

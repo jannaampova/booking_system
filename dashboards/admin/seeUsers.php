@@ -7,23 +7,27 @@ if (!isset($_SESSION['name'])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>View Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
-    <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/table.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
+    <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <style>
-        .main{
-            width: 120%;
-    flex-direction: row;
-    display: flex;
-    align-items: flex-start;
-}
+        .info-bubbles a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .info-bubbles a:hover {
+            background-color: #688587a2;
+        }
     </style>
 </head>
 
@@ -40,80 +44,54 @@ if (!isset($_SESSION['name'])) {
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
 
-                <a href="adminBoard.php">Home page</a>
                 <a href='seeUsers.php'>View Users</a>
+                <a href='adminBoard.php'>Dashboard</a>
                 <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+
             </div>
         </div>
-        <div class="table-container">
+        <div class="column">
+            <div class="first-line">
+                <header>
+                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1> <!-- Display admin name -->
+                </header>
+            </div>
+            <div class="info-bubbles">
+                <?php
+                include "../../config.php";
+                $sql = "SELECT id, roleName FROM Roles";
+                $res = mysqli_query($dbConn, $sql);
+                if ($res) {
+                    while ($role = mysqli_fetch_assoc($res)) {
+                        $roleID = $role['id'];
+                        $roleName = $role['roleName'];
 
-            <?php
-            include "../../config.php";
+                        $sqlCount = "SELECT COUNT(*) AS userCount FROM User WHERE roleID = $roleID";
+                        $countRes = mysqli_query($dbConn, $sqlCount);
+                        $countRow = mysqli_fetch_assoc($countRes);
+                        $userCount = $countRow['userCount'];
 
-            // Handle the form submission and delete the user
-            if (isset($_POST['deleteUser'])) {
-                $user_id = $_POST['user_id'];
-                $sql_delete = "DELETE FROM User WHERE id = '$user_id'";
-
-                if (mysqli_query($dbConn, $sql_delete)) {
-                    echo "User deleted successfully!";
-                    // Refresh the page to reflect the deletion
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    exit;
+                        echo "
+            <a href='userDetails.php?role=$roleID' id='info-bubble' class='info-bubble'>
+                <p><b>" . ucfirst($roleName) . "s</b><br>
+                    <i>$userCount</i><br>
+                    <i class='fas fa-users'></i>
+                </p>
+            </a>";
+                    }
                 } else {
-                    echo "Error deleting user.";
+                    echo "<p>Error fetching roles.</p>";
                 }
-            }
+                ?>
+            </div>
 
 
-            // Query to get users
-            $sql = "SELECT * FROM User";
-            $result = mysqli_query($dbConn, $sql);
 
-            echo "<table border='1'>";
-            echo "<tr><th>Name</th><th>Phone</th><th>Role</th><th>Username</th><th>Email</th><th colspan=2>Modify</th></tr>";
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    if ($row['fullName'] == $_SESSION['name']) {
-                        continue;
-                    }
-                    echo "<tr>";
-                    echo "<td>" . $row['fullName'] . "</td>";
-                    echo "<td>" . $row['phone'] . "</td>";
-
-                    // Corrected SQL query for fetching roleName
-                    $sql2 = "SELECT roleName FROM Roles WHERE id=" . $row['roleID'];
-                    $res2 = mysqli_query($dbConn, $sql2);
-
-                    // Fetch the role name from the result set
-                    if ($res2 && $roleRow = mysqli_fetch_assoc($res2)) {
-                        echo "<td>" . $roleRow['roleName'] . "</td>";
-                    } else {
-                        echo "<td>Unknown Role</td>";
-                    }
-
-                    echo "<td>" . $row['username'] . "</td>";
-                    echo "<td>" . $row['email'] . "</td>";
-
-                    // Edit link
-                    echo "<td><a href='editUser.php?id=" . $row['id'] . "' class='edit-link'><i class='fas fa-pencil-alt'></i></a></td>";
-
-                    // Delete form with hidden input to pass user ID
-                    echo "<td>
-                        <form class='form' name='deleteForm' method='post'>
-                                <input type='hidden' name='user_id' value='" . $row['id'] . "'>
-                                <button type='submit' name='deleteUser' class='action-button delete'><i class='fas fa-trash-alt'></i></button>
-                        </form>
-                </td>";
-
-                    echo "</tr>";
-                }
-            }
-            //mustnt see admins or be able to edit and delete them
-            ?>
         </div>
+
     </div>
+
+
 </body>
 
 </html>
