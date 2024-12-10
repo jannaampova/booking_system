@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Confirm Booking</title>
+    <title>Request Booking</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/logIn.css">
     <link rel="stylesheet" href="../../css/admin.css">
@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/buttonAndSelect.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+    <style>
+        .form-control label {
+            font-weight: 600;
+            color: #333;
+            margin-right: 10px;
+        }
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            box-shadow: 0px 0px 0px 0px #192d2d66;
+            color: white;
+        }
+    </style>
 </head>
 <?php
 session_start(); // Start the session
@@ -37,7 +50,7 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
                 <?php echo htmlspecialchars($_SESSION['name']); ?>
             </a>
 
-            <a href='bookings.php'>View Users</a>
+            <a href='yourBookings.php'>Bookings</a>
             <a href='clientBoard.php'>Dashboard</a>
             <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
 
@@ -95,7 +108,7 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
                     <input type="text" name="price" value="<?php echo htmlspecialchars($totalPrice); ?>"><br>
                 </div>
                 <div class="form-control">
-                    <button type="submit" name="confirmBooking">Request Booking</button>
+                    <button type="submit" name="confirmBooking" style="color:white;">Request Booking</button>
                 </div>
             </form>
         </div>

@@ -37,7 +37,9 @@ if ($row) {
             window.location.href = 'yourBookings.php'; // Redirect to the bookings page
             </script>";
         } else {
-            echo "You cannot cancel the booking within 3 days of the check-in date.";
+            echo "<script>
+            window.location.href = 'payment.php'; // Redirect to the payment page
+            </script>";
         }
     } else {
         echo "No matching availability found.";

@@ -45,7 +45,7 @@ if (!isset($_SESSION['name'])) {
                 </a>
 
                 <a href="clientBoard.php">Dashboard</a>
-                <a href="bookings.php">Bookings</a>
+                <a href="yourBookings.php">Bookings</a>
                 <a href="../admin/logOut.php">Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
@@ -149,7 +149,30 @@ if (!isset($_SESSION['name'])) {
                         'to' => $availability['toDate'],
                     ];
                 }
+
+                $sqlReserved = "
+                 SELECT fromDate, toDate 
+                FROM Availabilities 
+                WHERE propID = $propertyId 
+                AND propStatus IN ('reserved', 'booked')
+";
+                $reservedResult = mysqli_query($dbConn, $sqlReserved);
+
+                $reservedRanges = [];
+                while ($reserved = mysqli_fetch_assoc($reservedResult)) {
+                    $reservedRanges[] = [
+                        'from' => $reserved['fromDate'],
+                        'to' => $reserved['toDate'],
+                    ];
+                }
+                $availabilityRanges = [
+                    'free' => $availabilityRanges, 
+                    'reserved' => $reservedRanges,
+                ];
+
                 ?>
+
+
                 <div class="property-details">
                     <div class="property-info">
                         <label>Check-In:</label>
@@ -197,66 +220,68 @@ if (!isset($_SESSION['name'])) {
                     const userID = "<?php echo htmlspecialchars($_SESSION['userID']); ?>";
 
                     if (selectedCheckIn && selectedCheckOut) {
-                        // Update the link dynamically
                         bookNowLink.href = `reserveBooking.php?id=${userID}&propertyID=${propertyID}&checkIN=${selectedCheckIn}&checkOUT=${selectedCheckOut}`;
                     } else {
-                        // Alert the user if dates are not selected
                         alert("Please select both Check-In and Check-Out dates.");
-                        event.preventDefault(); // Prevent navigation if no dates are selected
+                        event.preventDefault();
                     }
                 }
                 const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
                 document.addEventListener("DOMContentLoaded", function () {
+
                     const isDateDisabled = (date) => {
                         const normalizeDate = (d) => {
                             const normalized = new Date(d);
-                            normalized.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+                            normalized.setHours(0, 0, 0, 0); // Reset time
                             return normalized;
                         };
 
-                        const normalizedDate = normalizeDate(date); // Normalize the input date
-                        const today = normalizeDate(new Date());   // Normalize the system date (today)
+                        const normalizedDate = normalizeDate(date);
+                        const today = normalizeDate(new Date());
 
-                        // Check if the date is before today
                         if (normalizedDate < today) {
-                            return true; // Disable dates before today
+                            return true;
                         }
 
-                        // Check if the date is outside the availability ranges
-                        return !availabilityRanges.some(range => {
+                        const isInReservedRange = availabilityRanges.reserved.some(range => {
                             const fromDate = normalizeDate(range.from);
                             const toDate = normalizeDate(range.to);
-
                             return normalizedDate >= fromDate && normalizedDate <= toDate;
                         });
+
+                        if (isInReservedRange) {
+                            return true;
+                        }
+
+                        const isInFreeRange = availabilityRanges.free.some(range => {
+                            const fromDate = normalizeDate(range.from);
+                            const toDate = normalizeDate(range.to);
+                            return normalizedDate >= fromDate && normalizedDate <= toDate;
+                        });
+
+                        return !isInFreeRange;
                     };
 
                     const checkIn = flatpickr("#checkInCalendar", {
                         dateFormat: "Y-m-d",
                         inline: true,
-                        disable: [
-                            function (date) {
-                                return isDateDisabled(date);
-                            }
-                        ],
+                        disable: [isDateDisabled],
                         onChange: function (selectedDates, dateStr) {
                             selectedCheckIn = dateStr;
                             checkOut.set("minDate", dateStr);
                         },
                     });
+
                     const checkOut = flatpickr("#checkOutCalendar", {
                         dateFormat: "Y-m-d",
                         inline: true,
-                        disable: [
-                            function (date) {
-                                return isDateDisabled(date);
-                            }
-                        ],
+                        disable: [isDateDisabled],
                         onChange: function (selectedDates, dateStr) {
                             selectedCheckOut = dateStr;
                             checkIn.set("maxDate", dateStr);
                         },
                     });
+
                 });
             </script>
             <a href="#" id="bookNowLink">
