@@ -166,7 +166,7 @@ if (!isset($_SESSION['name'])) {
                     ];
                 }
                 $availabilityRanges = [
-                    'free' => $availabilityRanges, 
+                    'free' => $availabilityRanges,
                     'reserved' => $reservedRanges,
                 ];
 
@@ -228,14 +228,13 @@ if (!isset($_SESSION['name'])) {
                 }
                 const availabilityRanges = <?php echo json_encode($availabilityRanges); ?>;
                 document.addEventListener("DOMContentLoaded", function () {
+                    const normalizeDate = (d) => {
+                        const normalized = new Date(d);
+                        normalized.setHours(0, 0, 0, 0); // Reset time
+                        return normalized;
+                    };
 
                     const isDateDisabled = (date) => {
-                        const normalizeDate = (d) => {
-                            const normalized = new Date(d);
-                            normalized.setHours(0, 0, 0, 0); // Reset time
-                            return normalized;
-                        };
-
                         const normalizedDate = normalizeDate(date);
                         const today = normalizeDate(new Date());
 
@@ -243,6 +242,7 @@ if (!isset($_SESSION['name'])) {
                             return true;
                         }
 
+                        // Check if the date falls in any reserved range
                         const isInReservedRange = availabilityRanges.reserved.some(range => {
                             const fromDate = normalizeDate(range.from);
                             const toDate = normalizeDate(range.to);
@@ -253,6 +253,7 @@ if (!isset($_SESSION['name'])) {
                             return true;
                         }
 
+                        // Check if the date falls in any free range
                         const isInFreeRange = availabilityRanges.free.some(range => {
                             const fromDate = normalizeDate(range.from);
                             const toDate = normalizeDate(range.to);
@@ -260,6 +261,23 @@ if (!isset($_SESSION['name'])) {
                         });
 
                         return !isInFreeRange;
+                    };
+
+                    const isRangeValid = (checkInDate, checkOutDate) => {
+                        const normalizedCheckIn = normalizeDate(checkInDate);
+                        const normalizedCheckOut = normalizeDate(checkOutDate);
+
+                        return !availabilityRanges.reserved.some(range => {
+                            const fromDate = normalizeDate(range.from);
+                            const toDate = normalizeDate(range.to);
+
+                            // Check if reserved range overlaps with the selected range
+                            return (
+                                (fromDate >= normalizedCheckIn && fromDate <= normalizedCheckOut) ||
+                                (toDate >= normalizedCheckIn && toDate <= normalizedCheckOut) ||
+                                (normalizedCheckIn >= fromDate && normalizedCheckOut <= toDate)
+                            );
+                        });
                     };
 
                     const checkIn = flatpickr("#checkInCalendar", {
@@ -279,10 +297,17 @@ if (!isset($_SESSION['name'])) {
                         onChange: function (selectedDates, dateStr) {
                             selectedCheckOut = dateStr;
                             checkIn.set("maxDate", dateStr);
+
+                            // Validate the selected range
+                            if (selectedCheckIn && selectedCheckOut && !isRangeValid(selectedCheckIn, selectedCheckOut)) {
+                                alert("The selected range includes reserved dates. Please choose different dates.");
+                                checkOut.clear(); // Clear the invalid check-out date
+                                selectedCheckOut = null;
+                            }
                         },
                     });
-
                 });
+
             </script>
             <a href="#" id="bookNowLink">
                 <button class="book-now-button" onclick="handleBooking()">Book</button>
