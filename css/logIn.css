@@ -39,14 +39,10 @@ body {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 50%);
   border-radius: 15px;
   width: 55%;
-  /* Adjust to desired width on mobile */
   height: auto;
-  /* Allow height to adjust dynamically */
   overflow: hidden;
   margin: 0 auto;
-  /* Center horizontally */
   display: block;
-  /* Ensure the button is displayed as a block element */
   padding-top: 6%;
   padding-bottom: 6%;
 

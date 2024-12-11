@@ -80,8 +80,6 @@ if (isset($_POST['logIn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="stylesheet" href="../css/logIn.css">
-    <link rel="stylesheet" href="../css/select.css">
-    <link rel="stylesheet" href="../css/button.css">
 </head>
 
 <body>

@@ -228,4 +228,4 @@ if (mysqli_query($dbConn, $imgToProperty)) {
     echo "Error creating ImgToProp table: " . mysqli_error($dbConn) . "<br>";
 }
 
-mysqli_close($dbConn); // Close the database connection
+mysqli_close($dbConn); 

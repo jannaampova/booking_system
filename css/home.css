@@ -20,6 +20,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .homeText {
   display: flex;
   flex-direction: column;
@@ -28,11 +29,13 @@ body {
   width: 100%;
   height: 70vh;
   margin: 0 auto;
-  top:60%;
+  top: 60%;
   color: antiquewhite;
   font-family: Poppins, sans-serif;
   text-align: center;
   position: relative;
+  user-select: none; 
+
 }
 
 
@@ -50,8 +53,8 @@ h3 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height:20vh;
-  top:20%;
+  height: 20vh;
+  top: 20%;
   margin: 0 auto;
   font-family: Poppins, sans-serif;
   text-align: center;
@@ -126,8 +129,8 @@ a.button:hover {
   justify-content: center;
   text-align: center;
   max-width: 1170px;
-  margin-bottom:2%;
-  margin-left:15%;
+  margin-bottom: 2%;
+  margin-left: 15%;
   padding: 20px;
 }
 
@@ -140,37 +143,37 @@ a.button:hover {
 }
 
 .info {
-  top: 70%; /* Adjust the top value to move the section lower */
+  top: 70%;
   padding: 80px 0 0;
   align-items: center;
-  background-color: white; /* White background */
+  background-color: white;
 }
 
 .info-content {
   flex: 0 0 66.66%;
-  max-width: 66.66%;
+  max-width: 100%;
   padding: 0 15px;
-  background-color: white; /* White background */
-  top: 100%; /* Adjust the top value to move the section lower */
+  background-color: white;
+  top: 100%;
 
 
 }
 
-.section-title {
+.section-title, .section-title2 {
   flex: 0 0 100%;
   max-width: 100%;
   padding: 0 15px;
 
 }
 
-.section-title h1 {
+.section-title h1, .section-title2 h1 {
   display: flex;
   justify-content: center;
   font-size: 40px;
   color: rgb(57, 56, 56);
   font-weight: bold;
   font-family: Poppins, sans-serif;
-  margin: 0%;
+  margin: 4%;
   font-weight: 700;
   position: relative;
 }
@@ -184,7 +187,15 @@ a.button:hover {
   height: 3px;
   background-color: #ff7200;
 }
-
+.section-title2 h1::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 20px;
+  width: 55%;
+  height: 2.5px;
+  background-color: #ff7200;
+}
 .icon {
   width: 200px;
   height: auto;
@@ -223,47 +234,48 @@ a.button:hover {
 
 
 .row {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  max-height: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .stats {
   display: flex;
-  /* Use flexbox for the stats container */
   justify-content: space-around;
-  /* Space between stat-boxes */
   align-items: center;
-  /* Center items vertically within the row */
-  margin-top: 4%;
-  /* Add some top margin for spacing */
+  margin-top: 5%;
 }
 
 .stat-box {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  color: rgb(57, 56, 56);
+  color: rgb(141, 136, 136);
   font-weight: bold;
   text-align: center;
   flex: 1;
   margin: 0 10px;
 }
 
+
 .stat-box h2 {
   font-family: Poppins, sans-serif;
   font-size: 40px;
-  color: #000;
+  color: #aca5a5;
   margin: 0 0 5px;
 }
 
 .stat-box h5 {
   font-family: Poppins, sans-serif;
   font-size: 15px;
-  color: gray;
+  color: #bbb4b4;
   font-weight: 600;
   text-transform: uppercase;
+}
+.stat-box:hover {
+  cursor: default;
+  user-select: none; 
+
 }
 
 #signUp,
@@ -276,4 +288,83 @@ a.button:hover {
 
 section {
   margin-top: 1%;
+}
+
+.property-details {
+  width: 100%;
+  font-family: Poppins, sans-serif;
+  color: #444;
+  line-height: 1.8;
+  font-size: 16px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 10px 12px rgba(12, 12, 12, 0.224);
+  transition: transform 0.6s ease, box-shadow 0.6s ease, border-color 0.6s ease; 
+}
+
+.property-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 20px rgba(12, 12, 12, 0.3);
+  user-select: none; 
+
+}
+
+.property-info {
+  margin-bottom: 25px;
+  padding: 10px 0;
+}
+
+.property-info h2 {
+  font-weight: 600;
+  color: #333;
+  margin-right: 10px;
+}
+
+footer {
+  background-color: #08242100;
+  color: #000000;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  user-select: none; 
+
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-content p {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+
+}
+
+.socials {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.socials li {
+  margin: 0 10px;
+}
+
+.socials a {
+  color: #010101;
+  text-decoration: none;
+  font-size: 20px;
+  text-shadow: 4px 4px 15px #37373700;
+font-weight:lighter;
+}
+
+.socials a:hover {
+  color: #ff7200;
 }

@@ -17,11 +17,10 @@ header {
 
 h1,h3 {
     position: relative;
-    margin-left: 0%;
     margin-top: 13%;
     color: #333; 
     text-shadow: 2px 2px 2px #ddd; 
-    font-size: 20px;
+    font-size: 30px;
 }
 
 footer {
@@ -55,13 +54,13 @@ footer {
     flex-direction: row;
     width: 100%;
     max-width: 120%;
-    height: 40%;
+    max-height: 40%;
     background-color: rgba(36, 90, 121, 0.486);
     box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
     border-radius: 35px;
     border-color: black;
-    margin-top: 10%;
-    margin-left: 20%;
+    margin-top: 20%;
+    margin-left: 32%;
     padding: 30px;
     gap: 100px;
     
@@ -86,7 +85,7 @@ footer {
     display: flex;
     flex-direction: row;
     margin-top: 0%;
-    margin-left:10%;
+    margin-left:32%;
 }
 .column{
     display: flex;

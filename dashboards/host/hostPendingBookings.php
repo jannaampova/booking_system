@@ -22,15 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (isset($_POST['approveBtn'])) {
-            // Approve the booking
             $approveSql = "UPDATE Booking SET bookingStatus = 'approved' WHERE id = '$bookingID'";
             if (mysqli_query($dbConn, $approveSql)) {
                 $updateBookedDates = "UPDATE Availabilities SET propStatus='booked' WHERE  propID = $propertyID 
-                                    AND fromDate <= '$checkInDate' 
-                                    AND toDate >= '$checkOutDate'";
+                                    AND fromDate >= '$checkInDate' 
+                                    AND toDate <= '$checkOutDate'";
                 mysqli_query($dbConn, $updateBookedDates);
 
-                // Update availabilities
                 $availabilitySql = "SELECT * FROM Availabilities 
                                     WHERE propID = $propertyID 
                                     AND fromDate <= '$checkInDate' 
@@ -71,10 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (isset($_POST['cancelBtn'])) {
             // Cancel the booking
             $sql = "UPDATE Booking SET bookingStatus = 'declined' WHERE id = $bookingID";
-            $deleteReeserved = "DELETE * FROM Availabilities WHERE propID = $propertyID 
+            $deleteReserved = "DELETE FROM Availabilities WHERE propID = $propertyID 
                                     AND fromDate = '$checkInDate' 
                                     AND toDate = '$checkOutDate'";
             mysqli_query($dbConn, $sql);
+            mysqli_query($dbConn, $deleteReserved);
+
         }
     }
 }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
-    <style></style>
 </head>
 
 <body>
@@ -41,55 +40,99 @@
 
     </div>
 
-    
+
     <section id="info">
-            <div class="content">
-
-                <div class="info-content">
-                    <div class="row">
-                        <div class="section-title">
-                            <h1> About us</h1>
+        <div class="content">
+            <div class="info-content">
+                <div class="section-title">
+                    <h1> About us</h1>
+                </div>
+                <div class="row">
+                    <div class="property-details">
+                        <div class="property-info">
+                            <h2>Our Story</h2>
+                            <p>EasyStay is your go-to platform for hassle-free hotel bookings!</p>
+                            <p> We are two
+                                enthusiastic
+                                students who share
+                                a
+                                passion for travel and technology. Our journey began during our time at university,
+                                where we
+                                recognized the challenges faced by travelers in finding the perfect accommodation.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property-info">
+                            <h2>Our Mission</h2>
+                            <p>Driven by a commitment to exceptional service, we are dedicated to helping you find the
+                                ideal
+                                stay that fits your budget and preferences. Whether you're traveling for business,
+                                leisure, or a
+                                special occasion, EasyStay is here to make your hotel booking experience enjoyable and
+                                straightforward.
+                            </p>
                         </div>
                     </div>
 
-                    <p>Welcome to EasyStay, your go-to platform for hassle-free hotel bookings! We are two enthusiastic
-                        students, <strong>Jana Ampova</strong> and <strong>Teodora Stoycheva</strong>, who share a
-                        passion for travel and technology. Our journey began during our time at university, where we
-                        recognized the challenges faced by travelers in finding the perfect accommodation.</p>
-
-                    <p>With our combined skills in web development and design, we set out to create an intuitive website
-                        that simplifies the hotel booking process. At EasyStay, we believe that everyone deserves a
-                        seamless experience when planning their adventures. Our user-friendly interface allows you to
-                        explore a wide range of hotels, compare prices, and read genuine reviews—all in one place.</p>
-
-                    <p>Driven by a commitment to exceptional service, we are dedicated to helping you find the ideal
-                        stay that fits your budget and preferences. Whether you're traveling for business, leisure, or a
-                        special occasion, EasyStay is here to make your hotel booking experience enjoyable and
-                        straightforward.</p>
-
-                    <p><b>Thank you for choosing EasyStay. We look forward to being part of your travel journey!</b></p>
-
-
-                    <div class="stats">
-                        <div class="row">
-                            <div class="stat-box">
-                                <h2>150+</h2>
-                                <h5>Properties</h5>
-                            </div>
-                            <div class="stat-box">
-                                <h2>500+</h2>
-                                <h5>Hosts</h5>
-                            </div>
-                            <div class="stat-box">
-                                <h2>1К+</h2>
-                                <h5>Clients</h5>
-                            </div>
+                    <div class="property-details">
+                        <div class="property-info">
+                            <h2>Our Product</h2>
+                            <p>With our combined skills we set out to create an intuitive
+                                website
+                                that simplifies the hotel booking process. We believe that everyone
+                                deserves a
+                                seamless experience. Our user-friendly interface allows
+                                you to
+                                explore a wide range of housing, compare prices, and read genuine reviews—all in one
+                                place.
+                            </p>
                         </div>
                     </div>
+
+
                 </div>
 
+                <div class="stats">
+                    <div class="row">
+                        <div class="stat-box">
+                            <h2>10+</h2>
+                            <h5>Properties</h5>
+                        </div>
+                        <div class="stat-box">
+                            <h2>5+</h2>
+                            <h5>Hosts</h5>
+                        </div>
+                        <div class="stat-box">
+                            <h2>5+</h2>
+                            <h5>Clients</h5>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="section-title2" >
+                    <h1> </h1>
+                </div>
             </div>
-        </section>
+        </div>
+       
+
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 TJ EasyStay.</p>
+            <ul class="socials">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <style>
+
+    </style>
 
 
 

@@ -14,7 +14,7 @@ if (!isset($_SESSION['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store</title>
+    <title>Users</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
@@ -53,7 +53,7 @@ if (!isset($_SESSION['name'])) {
         <div class="column">
             <div class="first-line">
                 <header>
-                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1> <!-- Display admin name -->
+                    <h1 style="margin-top:15%;">All registered users</h1>
                 </header>
             </div>
             <div class="info-bubbles">
