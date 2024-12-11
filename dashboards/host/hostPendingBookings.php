@@ -8,20 +8,15 @@ if (!isset($_SESSION['name'])) {
 }
 
 include "../../config.php";
-require '../../src/PHPMailer.php';
-require '../../src/SMTP.php';
-require '../../src/Exception.php';
-// Use PHPMailer classes
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-$mail = new PHPMailer(true);
+include "../../emailing.php";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['bookingID'])) {
         $bookingID = intval($_POST['bookingID']);
         $propertyID = $_POST['propertyID'] ?? null;
         $checkInDate = $_POST['checkInDate'] ?? null;
         $checkOutDate = $_POST['checkOutDate'] ?? null;
-        $flag = false;
+        $flag = 0;
 
         if (!$bookingID || !$propertyID || !$checkInDate || !$checkOutDate) {
             echo "<p>Error: Missing required data for processing the request.</p>";
@@ -29,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (isset($_POST['approveBtn'])) {
-            $flag = true;
-            // Approve the booking
+            $flag = 1;
             $approveSql = "UPDATE Booking SET bookingStatus = 'approved' WHERE id = '$bookingID'";
             if (mysqli_query($dbConn, $approveSql)) {
                 $updateBookedDates = "UPDATE Availabilities SET propStatus='booked' WHERE  propID = $propertyID 
@@ -83,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     AND toDate = '$checkOutDate'";
             mysqli_query($dbConn, $sql);
             mysqli_query($dbConn, $deleteReserved);
-
-
-        }
+            
+     }
 
 
         $emailSql = "SELECT clientID, u.email as clientEmail, u.fullName as clientName, 
@@ -105,44 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $propertyName = $emailRow['propName'];
             $host = $emailRow['hostName'];
 
-            try {
-                // Server settings
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'webprojecttj@gmail.com'; // Your Gmail address
-                $mail->Password = 'arzh mctp sgap jjkm';    // Gmail App Password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-
-                // Recipients
-                $mail->setFrom('webprojecttj@gmail.com', 'TJ EasyStay');
-                $mail->addAddress($email, $name);
-
-                // Content
-                $mail->isHTML(true);
-                if ($flag) {
-                    $mail->Subject = 'Approved booking';
-                    $mail->Body = "Thank you <b>$name</b> for booking with us,<br>Wishing you a pleasant stay at <b>$propertyName</b> hosted BY $host!<br>Enjoy!";
-                    $mail->AltBody = 'Thank you for booking with us. Wishing you a pleasant stay. Enjoy!';
-                } else {
-                    $mail->Subject = 'Booking Declined';
-                    $mail->Body = "Dear <b>$name</b>,<br>We regret to inform you that your booking for <b>$propertyName</b> has been declined.<br>Please feel free to reach out to us for further assistance.";
-                    $mail->AltBody = 'Dear ' . $name . ', we regret to inform you that your booking has been declined. Please feel free to reach out to us for further assistance.';
-
-                }
-
-                // Send the email
-                $mail->send();
-                header("Location: " . $_SERVER['PHP_SELF']);
-                exit(); 
-
-            } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-            }
+            sendEmail($email, $name, $flag, $propertyName, $host);
         }
-
-
     }
 }
 ?>

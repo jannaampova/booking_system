@@ -85,7 +85,10 @@ if (!isset($_SESSION['name'])) {
             $res = mysqli_query($dbConn, $sql);
 
     
-            echo "<header><h1>Users with Role: " . ucfirst($roleName) . "<a href='hostDetails.php?role={$roleID}' class=viewHost> Host Details<a></h1></header>";
+            echo "<header><h1>Users with Role: " . ucfirst($roleName);
+            if($roleID==2){
+                echo "<a href='hostDetails.php?role={$roleID}' class=viewHost> Host Details<a></h1></header>";
+            }else echo "</h1></header>";
             echo "<table border='1'>";
             echo "<tr><th>Name</th><th>Phone</th><th>Username</th><th>Email</th><th>Edit</th><th>Delete</th></tr>";
 
