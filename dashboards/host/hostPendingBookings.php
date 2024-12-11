@@ -82,8 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     AND fromDate = '$checkInDate' 
                                     AND toDate = '$checkOutDate'";
             mysqli_query($dbConn, $sql);
-        }
+            mysqli_query($dbConn, $deleteReserved);
 
+
+        }
 
 
         $emailSql = "SELECT clientID, u.email as clientEmail, u.fullName as clientName, 
