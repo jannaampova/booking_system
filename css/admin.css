@@ -17,6 +17,7 @@ header {
 
 h1,h3 {
     position: relative;
+    margin-left: 0%;
     margin-top: 13%;
     color: #333; 
     text-shadow: 2px 2px 2px #ddd; 
@@ -54,7 +55,7 @@ footer {
     flex-direction: row;
     width: 110%;
     max-width: 120%;
-    max-height: 40%;
+    height: 40%;
     background-color: rgba(36, 90, 121, 0.486);
     box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
     border-radius: 35px;
@@ -63,40 +64,9 @@ footer {
     margin-left: 20%;
     padding: 30px;
     gap: 100px;
-    
+}
 
-}
-.info-bubble-prop {
-    width: 300px;
-    height: 300px;
-    border-radius: 35px;
-    box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
-    background-color: rgba(96, 60, 34, 0.381);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding: 10px;
-    margin-left: 10%;
-    gap: 20px;
-}
-.info-bubbles-prop {
-    display: flex;
-    flex-direction: row;
-    width: 110%;
-    max-width: 120%;
-    height: 150%;
-    box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
-    background-color: rgba(174, 121, 83, 0.577);
-    border-radius: 35px;
-    border-color: black;
-    margin-top: 5%;
-    margin-left: 28%;
-    padding: 30px;
-    align-items: center;
-}
-.info-bubble {
+.info-bubble{
     width: 200px!important; /* Set a fixed width */
     height: 200px!important; /* Set a fixed height */
     border-radius: 35px;
@@ -112,12 +82,11 @@ footer {
     padding: 5px;
 }
 
-
 .first-line{
     display: flex;
     flex-direction: row;
     margin-top: 0%;
-    margin-left:32%;
+    margin-left:10%;
 }
 .column{
     display: flex;

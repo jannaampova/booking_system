@@ -69,8 +69,6 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
             margin-left: 45%;
             width: 90%;
         }
-
-
         .detail {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
