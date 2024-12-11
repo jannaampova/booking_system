@@ -272,10 +272,14 @@ p{
 <body>
     <div class="main">
         <div id="signUp">
-            <div class="container">
+            <div class="container">s
                 <form action="" method="POST" class="form">
                     <div class="greeting">
-                        <h2>Payment</h2>
+                    <?php
+                    $price=$_GET['totalPrice'];
+                 echo "<h2>Payment</h2> <br><h3>You need to pay $price before cancelling your booking</h3>";
+                    ?>
+                        
                     </div>
                     <div class="rightside">
             <h1>CheckOut</h1>

@@ -5,14 +5,17 @@ $propId = $_GET['propid'];
 $today = new DateTime();
 
 // Get booking dates
-$sql = "SELECT fromDate, toDate FROM Booking WHERE id = $bookId";
+$sql = "SELECT fromDate, toDate,totalPrice FROM Booking WHERE id = $bookId";
 $res = mysqli_query($dbConn, $sql);
 $row = mysqli_fetch_assoc($res);
+
 
 // Check if query returns a valid result
 if ($row) {
     $bookedFrom = $row['fromDate'];
     $bookedTo = $row['toDate'];
+    $price=$row['totalPrice'];
+    
 
     $sql = "SELECT fromDate, toDate FROM Availabilities WHERE propID = $propId AND fromDate = '$bookedFrom' AND toDate = '$bookedTo'";
     $res = mysqli_query($dbConn, $sql);
@@ -37,9 +40,11 @@ if ($row) {
             window.location.href = 'yourBookings.php'; // Redirect to the bookings page
             </script>";
         } else {
+            $price=($price/100)*30;
             echo "<script>
-            window.location.href = 'payment.php'; // Redirect to the payment page
-            </script>";
+            window.location.href = 'payment.php?totalPrice=$price';
+      </script>";
+
         }
     } else {
         echo "No matching availability found.";

@@ -10,13 +10,14 @@ if (!isset($_SESSION['name'])) {
 <html>
 
 <head>
-    <title>View Activities</title>
+    <title>View Users</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/table.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
-    <link rel="stylesheet" href="../../css/allBookings.css">  
+    <link rel="stylesheet" href="../../css/allBookings.css">
+    
 </head>
 
 <body>
@@ -31,9 +32,8 @@ if (!isset($_SESSION['name'])) {
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
-                <a href="adminBoard.php">Home page</a>
-                <a href='seeUsers.php'>View Users</a>
-                <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+                <a href="hostBoard.php">Dashboard</a>
+                <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
 
@@ -47,13 +47,14 @@ if (!isset($_SESSION['name'])) {
                 $filterBy = $_POST['filterBy'];
                 $filterValue = mysqli_real_escape_string($dbConn, $_POST['filterValue']);
 
-                if ($filterBy === 'host') {
-                    $filterQuery = "WHERE uh.fullName = '$filterValue'";
+                if ($filterBy === 'status') {
+                    $filterQuery = "WHERE bookingStatus = '$filterValue'";
                 } elseif ($filterBy === 'client') {
                     $filterQuery = "WHERE u.fullName = '$filterValue'";
                 }
             }
 
+            // Query to fetch data with optional filter
             $sqlRole = "
     SELECT 
         b.id AS bookingID,
@@ -69,13 +70,13 @@ if (!isset($_SESSION['name'])) {
     JOIN Property p ON b.propID = p.id
     JOIN User u ON b.clientID = u.id
     JOIN User uh ON p.hostID = uh.id
-    $filterQuery
-
+$filterQuery
 ";
 
 
             // Fetch all hosts and clients for dropdown options
-            $hosts = mysqli_query($dbConn, "SELECT DISTINCT uh.fullName AS hostName FROM Property p JOIN User uh ON p.hostID = uh.id");
+            $statusSql = "SELECT DISTINCT bookingStatus from Booking";
+            $status = mysqli_query($dbConn, $statusSql);
             $clients = mysqli_query($dbConn, "SELECT DISTINCT u.fullName AS clientName FROM User u JOIN Booking b ON u.id = b.clientID");
             ?>
             <h1>All Bookings:</h1>
@@ -83,7 +84,7 @@ if (!isset($_SESSION['name'])) {
                 <label for="filterBy">Filter By:</label>
                 <select name="filterBy" id="filterBy" onchange="this.form.submit()" required>
                     <option value="">Select Filter</option>
-                    <option value="host" <?php echo (isset($_POST['filterBy']) && $_POST['filterBy'] === 'host') ? 'selected' : ''; ?>>Host</option>
+                    <option value="status" <?php echo (isset($_POST['filterBy']) && $_POST['filterBy'] === 'status') ? 'selected' : ''; ?>>Status</option>
                     <option value="client" <?php echo (isset($_POST['filterBy']) && $_POST['filterBy'] === 'client') ? 'selected' : ''; ?>>Client</option>
                 </select>
 
@@ -91,14 +92,14 @@ if (!isset($_SESSION['name'])) {
                 <select name="filterValue" id="filterValue" required>
                     <option value="">Select Value</option>
                     <?php
-                    if (isset($_POST['filterBy']) && $_POST['filterBy'] === 'host') {
-                        if ($hosts && mysqli_num_rows($hosts) > 0) {
-                            while ($row = mysqli_fetch_assoc($hosts)) {
-                                $selected = (isset($_POST['filterValue']) && $_POST['filterValue'] === $row['hostName']) ? 'selected' : '';
-                                echo "<option value='" . htmlspecialchars($row['hostName']) . "' $selected>" . htmlspecialchars($row['hostName']) . "</option>";
+                    if (isset($_POST['filterBy']) && $_POST['filterBy'] === 'status') {
+                        if ($status && mysqli_num_rows($status) > 0) {
+                            while ($row = mysqli_fetch_assoc($status)) {
+                                $selected = (isset($_POST['filterValue']) && $_POST['filterValue'] === $row['bookingStatus']) ? 'selected' : '';
+                                echo "<option value='" . htmlspecialchars($row['bookingStatus']) . "' $selected>" . htmlspecialchars($row['bookingStatus']) . "</option>";
                             }
                         } else {
-                            echo "<option value=''>No hosts found</option>";
+                            echo "<option value=''>No status found</option>";
                         }
                     } elseif (isset($_POST['filterBy']) && $_POST['filterBy'] === 'client') {
                         if ($clients && mysqli_num_rows($clients) > 0) {
@@ -146,16 +147,15 @@ if (!isset($_SESSION['name'])) {
                         <th>Stay</th>
                         <th>Client Name</th>
                         <th>Property Name</th>
-                        <th>Host Name</th>
                     </tr>
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['bookingStatus']); ?></td>
                             <td><?php echo htmlspecialchars($row['fromDate']); ?> to
-                                <?php echo htmlspecialchars($row['toDate']); ?></td>
+                                <?php echo htmlspecialchars($row['toDate']); ?>
+                            </td>
                             <td><?php echo htmlspecialchars($row['clientName']); ?></td>
                             <td><?php echo htmlspecialchars($row['propName']); ?></td>
-                            <td><?php echo htmlspecialchars($row['hostName']); ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </table>
