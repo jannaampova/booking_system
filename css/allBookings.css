@@ -1,0 +1,41 @@
+.main {
+  width: 120%;
+  flex-direction: row;
+  display: flex;
+  align-items: flex-start;
+}
+
+form {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+label {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+
+select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  padding: 8px 15px;
+  background-color: #688587a2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+button:hover {
+  background-color: #45a049;
+}

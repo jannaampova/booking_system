@@ -22,33 +22,121 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
+    <link rel="stylesheet" href="../../css/allBookings.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    
+    <STYle>
+        .inner-flex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 500px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            margin: 0;
+        }
+
+        .property-details h3 {
+            color: orange;
+            margin: 0;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .left-container {
+            width: 15%;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .property-info {
+            margin-bottom: 25px;
+            padding: 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-bubbles {
+            margin-left: 45%;
+            width: 90%;
+        }
+
+
+        .detail {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 1050px;
+        }
+
+        .inner-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 5%;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin-left: 40%;
+            width: 100%;
+        }
+
+        header {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 75%;
+            text-align: center;
+            width: 100%;
+        }
+
+
+        .property-details {
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #444;
+            line-height: 1.8;
+            font-size: 18px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: #fff;
+            margin-top: 5%;
+        }
+    </STYle>
 </head>
 
 <body>
     <div class="main">
         <div class="left-container">
             <div class="options">
-            <?php
-                        $fullName = $_SESSION['name'];
-                        $firstName = explode(' ', $fullName)[0]; // Get the first name
-                        ?>
-                        <a href="../userSettings.php">
-                            <i class="fas fa-user-edit"></i>
-                            <?php echo htmlspecialchars($firstName); ?>
-                        </a>
-                        <a href="viewProperties.php">View Your Properties</a>
-                        <a href="addProperty.php">Add Property</a>
-                        <a href="hostPendingBookings.php">Pending bookings</a>
-                        <a href="hostAllBookings.php">All bookings</a>
-                        <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
-                        </div>
+                <?php
+                $fullName = $_SESSION['name'];
+                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                ?>
+                <a href="../userSettings.php">
+                    <i class="fas fa-user-edit"></i>
+                    <?php echo htmlspecialchars($firstName); ?>
+                </a>
+                <a href="viewProperties.php">View Your Properties</a>
+                <a href="addProperty.php">Add Property</a>
+                <a href="hostPendingBookings.php">Pending bookings</a>
+                <a href="allBookings.php">All bookings</a>
+                <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
         </div>
         <div class="column">
             <div class="first-line">
                 <header>
-                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</h1> <!-- Display admin name -->
+                    <h1 class="h1">Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></h1>
                 </header>
 
             </div>
@@ -75,6 +163,7 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         <i class="fa-solid fa-house"></i>
                     </p>
                 </div>
+
                 <div class="info-bubble">
                     <p><b>You were booked</b><br>
                         <?php
@@ -98,8 +187,8 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         echo "$bookingCounter times.";
 
                         ?>
-                      <br>
-                      <i class="fa-regular fa-calendar"></i>
+                        <br>
+                        <i class="fa-regular fa-calendar"></i>
                     </p>
                 </div>
                 <div class="info-bubble">
@@ -130,10 +219,91 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                     </p>
                 </div>
             </div>
+            <div class="inner-flex">
+                <div class="inner-flex-header">
+                    <h2 class="section-title">Upcoming Bookings this month</h2>
+                    <form method="POST">
+                        <label for="sortBy">Sort By Date:</label>
+                        <select name="sortBy" id="sortBy" onchange="this.form.submit()">
+                            <option value="">Select Filter</option>
+                            <option value="asc" <?php echo (isset($_POST['sortBy']) && $_POST['sortBy'] === 'asc') ? 'selected' : ''; ?>>Earliest</option>
+                            <option value="desc" <?php echo (isset($_POST['sortBy']) && $_POST['sortBy'] === 'desc') ? 'selected' : ''; ?>>Latest</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="detail">
+                    <?php
+                    include "../../config.php";
 
+                    $startDate = date('Y-m-01');
+                    $endDate = date('Y-m-t');
+
+                    $sqlBookings = "SELECT 
+                        p.propName AS propName,
+                        g.guestNum AS guestNum,
+                        u.fullName AS clientName,
+                        p.id as propID,
+                        b.id as bookingID,
+                        b.fromDate, 
+                        b.toDate, 
+                        b.totalPrice, 
+                        b.bookingStatus as bookingStatus
+                    FROM Booking b
+                    JOIN User u ON b.clientID = u.id
+                    JOIN Property p ON b.propID = p.id
+                    JOIN GuestNumber g ON p.guestNumID = g.id
+                    WHERE p.hostID = {$_SESSION['userID']} 
+                    AND b.fromDate >= '$startDate' 
+                    AND b.toDate <= '$endDate'
+                    AND b.bookingStatus='approved'";
+
+                    if (isset($_POST['sortBy'])) {
+                        $sortBy = $_POST['sortBy'] ?? '';
+                        switch ($sortBy) {
+                            case 'asc':
+                                $sqlBookings .= " ORDER BY b.fromDate ASC";
+                                break;
+                            case 'desc':
+                                $sqlBookings .= " ORDER BY b.fromDate DESC";
+                                break;
+                        }
+                    } else {
+                        $sqlBookings .= " ORDER BY b.fromDate ASC";
+                    }
+
+                    $sqlBookings .= " LIMIT 10";
+                    $res = mysqli_query($dbConn, $sqlBookings);
+
+                    if (mysqli_num_rows($res) > 0) {
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            echo "
+                            <div class='property-details'>
+                                <h3>" . htmlspecialchars($row['propName']) . "</h3>
+                                <p><b>Client:</b> " . htmlspecialchars($row['clientName']) . "</p>
+                                <p><b>Check-in date:</b> " . htmlspecialchars($row['fromDate']) . "</p>
+                                <p><b>Check-out date:</b> " . htmlspecialchars($row['toDate']) . "</p>
+                                <p><b>Total Price:</b> $" . htmlspecialchars($row['totalPrice']) . "</p>
+                                <p><b>Booking status:</b> <i style='color:green'>" . strtoupper(htmlspecialchars($row['bookingStatus'])) . "</i></p>
+                            </div>
+                            ";
+                        }
+                    } else {
+                        echo "<p>No upcoming bookings this month.</p>";
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
 
     </div>
+
+
+
+    </div>
+
+
+    </div>
+
 
 
 </body>

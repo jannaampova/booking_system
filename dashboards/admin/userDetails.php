@@ -23,6 +23,25 @@ if (!isset($_SESSION['name'])) {
             display: flex;
             align-items: flex-start;
         }
+        header{
+            margin-top:10%;
+            margin-bottom:3%;
+        }
+        header a {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 60%;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            background-color: rgba(36, 90, 121, 0.486);
+            color: black;
+            padding: 5px;
+            border-radius: 20px;
+        }
+        header a:hover{
+            background-color: #688587a2;
+
+        }
     </style>
 </head>
 
@@ -65,7 +84,8 @@ if (!isset($_SESSION['name'])) {
             $sql = "SELECT id, fullName, phone, username, email FROM User WHERE roleID = $roleID";
             $res = mysqli_query($dbConn, $sql);
 
-            echo "<h1>Users with Role: " . ucfirst($roleName) . "</h1>";
+    
+            echo "<header><h1>Users with Role: " . ucfirst($roleName) . "<a href='hostDetails.php?role={$roleID}' class=viewHost> Host Details<a></h1></header>";
             echo "<table border='1'>";
             echo "<tr><th>Name</th><th>Phone</th><th>Username</th><th>Email</th><th>Edit</th><th>Delete</th></tr>";
 
@@ -75,6 +95,7 @@ if (!isset($_SESSION['name'])) {
                 echo "<td>{$row['phone']}</td>";
                 echo "<td>{$row['username']}</td>";
                 echo "<td>{$row['email']}</td>";
+                
 
                 echo "<td>
         <a href='editUser.php?id={$row['id']}' class='edit-link'>
@@ -88,7 +109,8 @@ if (!isset($_SESSION['name'])) {
                 <i class='fas fa-trash-alt'></i>
             </button>
         </form>
-    </td>";
+    </td>" ;
+ 
 
                 echo "</tr>";
             }

@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="../../css/admin.css" />
     <link rel="stylesheet" href="../../css/addEditAdminHost.css" />
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-
     <style>
         .main {
             width: 100%;
