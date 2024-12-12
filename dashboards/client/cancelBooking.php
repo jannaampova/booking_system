@@ -41,8 +41,9 @@ if ($row) {
             </script>";
         } else {
             $price=($price/100)*30;
+
             echo "<script>
-            window.location.href = 'payment.php?totalPrice=$price';
+            window.location.href = 'payment.php?totalPrice=$price&bookId=$bookId&source=cancelBooking&propId=$propId&from=$from&to=$to';
       </script>";
 
         }

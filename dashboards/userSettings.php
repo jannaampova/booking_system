@@ -9,9 +9,10 @@ if (!isset($_SESSION['name'])) {
 
 // Retrieve user details
 $username = $_SESSION['name'];
-$sql = "SELECT * FROM User WHERE fullName = ?";
+$id = $_SESSION['userID'];
+$sql = "SELECT * FROM User WHERE id = ?";
 $stmt = $dbConn->prepare($sql);
-$stmt->bind_param("s", $username);
+$stmt->bind_param("s", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
@@ -65,120 +66,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/payment.css">
+
     <title>User Settings</title>
     <style>
         .main {
-            width: 100%;
-            height: 127vh;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #signUp {
-            display: flex;
-            flex-direction: column;
-            margin: 30px;
-            backdrop-filter: blur(15px);
-            color: #f9f4f4;
-            border-radius: 60px;
-            box-shadow: 0 10px 12px rgba(12, 12, 12, 0.814);
-            margin: 0 auto;
-            justify-content: center;
-            width: 60%;
-            margin-top: 50px;
-        }
-
-        .container {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 50%);
-            border-radius: 20px;
-            width: 50%;
-            margin: 0 auto;
-            padding-top: 6%;
-            padding-bottom: 6%;
-        }
-
-        .form {
-            padding: 10px 10px;
-            margin: 10% 0;
-        }
-
-        .form h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ff7200;
-        }
-
-        .form-control {
-            margin-bottom: 5px;
-            padding-bottom: 10px;
-            color: #2d2a26;
-        }
-
-        ::placeholder {
-            color: rgb(252, 246, 246);
-            opacity: 1;
-            /* Firefox */
-        }
-
-        .form-control label {
-            display: block;
-            margin-bottom: 3%;
-            color: rgb(170, 164, 157);
-        }
-
-        .form-control input {
-            background: #68858775;
-            border: 2px solid #000000;
-            border-radius: 15px;
-            display: block;
-            width: 100%;
-            font-size: 14px;
-            color: rgb(252, 246, 246);
-            padding: 15px;
-        }
-
-        .form-control button,
-        .form-control a {
-            background-color: #ff7200;
-            border: 2px solid #ff7200;
-            color: black;
-            border-radius: 20px;
-            padding: 12px;
-            margin-top: 20px;
-            display: block;
-            margin: 0 auto;
-            width: 30%;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .form-control button:hover,
-        .form-control a:hover {
-            background-color: #ff7200;
-            transition: 0.5s;
-            cursor: pointer;
-        }
-
-        .greeting {
-            color: #624e24;
-            text-align: center;
-        }
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%), url(../newImg.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
     </style>
+  
 </head>
 
 <body>

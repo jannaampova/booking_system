@@ -23,8 +23,21 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/allBookings.css">
+    <link rel="stylesheet" href="../../css/footer.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <STYle>
+        footer {
+    background-color: #08242100;
+    color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    margin-left:30%;
+    bottom: 0;
+    width: 100%;
+    user-select: none; 
+  
+  }
         .inner-flex-header {
             display: flex;
             justify-content: space-between;
@@ -66,9 +79,11 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
         }
 
         .info-bubbles {
-            margin-left: 45%;
+            margin-top: 3%;
+            margin-left: 35%;
             width: 90%;
         }
+
         .detail {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -81,17 +96,20 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
             flex-direction: column;
             align-items: flex-start;
             margin-top: 5%;
+            margin-bottom: 5%;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            margin-left: 40%;
+            margin-left: 30%;
             width: 100%;
+
         }
 
         header {
+            text-wrap: nowrap;
             font-family: 'Poppins', sans-serif;
-            margin: 0 75%;
+            margin-left: 55%;
             text-align: center;
             width: 100%;
         }
@@ -291,6 +309,17 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                     ?>
                 </div>
             </div>
+            <footer>
+                <div class="footer-content">
+                    <p>&copy; 2024 TJ EasyStay.</p>
+                    <ul class="socials">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
 
     </div>

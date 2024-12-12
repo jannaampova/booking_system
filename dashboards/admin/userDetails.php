@@ -23,11 +23,14 @@ if (!isset($_SESSION['name'])) {
             display: flex;
             align-items: flex-start;
         }
-        header{
+        .table-desc{
             margin-top:10%;
             margin-bottom:3%;
         }
-        header a {
+        .table-desc h1{
+            text-wrap: nowrap;
+        }
+        .table-desc a {
             font-family: 'Poppins', sans-serif;
             margin: 0 60%;
             text-align: center;
@@ -38,7 +41,7 @@ if (!isset($_SESSION['name'])) {
             padding: 5px;
             border-radius: 20px;
         }
-        header a:hover{
+        .table-desc a:hover{
             background-color: #688587a2;
 
         }
@@ -85,10 +88,10 @@ if (!isset($_SESSION['name'])) {
             $res = mysqli_query($dbConn, $sql);
 
     
-            echo "<header><h1>Users with Role: " . ucfirst($roleName);
+            echo "<div class='table-desc'><h1>Users with Role: " . ucfirst($roleName);
             if($roleID==2){
-                echo "<a href='hostDetails.php?role={$roleID}' class=viewHost> Host Details<a></h1></header>";
-            }else echo "</h1></header>";
+                echo "<a href='hostDetails.php?role={$roleID}'>Host Details<a></h1></div>";
+            }else echo "</h1></div>";
             echo "<table border='1'>";
             echo "<tr><th>Name</th><th>Phone</th><th>Username</th><th>Email</th><th>Edit</th><th>Delete</th></tr>";
 

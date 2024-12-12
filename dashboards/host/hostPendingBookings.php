@@ -9,7 +9,6 @@ if (!isset($_SESSION['name'])) {
 
 include "../../config.php";
 include "../../emailing.php";
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['bookingID'])) {
         $bookingID = intval($_POST['bookingID']);
@@ -41,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $originalFromDate = $row['fromDate'];
                     $originalToDate = $row['toDate'];
 
-                    // Handle availability ranges
                     if ($checkInDate == $originalFromDate && $checkOutDate == $originalToDate) {
                         $deleteSql = "DELETE FROM Availabilities WHERE id = {$row['id']}";
                         mysqli_query($dbConn, $deleteSql);
@@ -77,8 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     AND toDate = '$checkOutDate'";
             mysqli_query($dbConn, $sql);
             mysqli_query($dbConn, $deleteReserved);
-            
-     }
+
+
+        }
 
 
         $emailSql = "SELECT clientID, u.email as clientEmail, u.fullName as clientName, 
@@ -97,9 +96,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $emailRow['clientName'];
             $propertyName = $emailRow['propName'];
             $host = $emailRow['hostName'];
+            sendEmail($email, $name, $flag, $propertyName, $host,'');
 
-            sendEmail($email, $name, $flag, $propertyName, $host);
         }
+
+
     }
 }
 ?>
@@ -157,21 +158,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="inner-flex">
             <div class="detail">
                 <?php
-                $sqlBookings = "SELECT 
-                    p.propName AS propName,
-                    g.guestNum AS guestNum,
-                    u.fullName AS clientName,
-                    p.id as propID,
-                    b.id as bookingID,
-                    b.fromDate, 
-                    b.toDate, 
-                    b.totalPrice, 
-                    b.bookingStatus
-                FROM Booking b
-                JOIN User u ON b.clientID = u.id
-                JOIN Property p ON b.propID = p.id
-                JOIN GuestNumber g ON p.guestNumID = g.id
-                WHERE p.hostID = {$_SESSION['userID']} AND b.bookingStatus = 'pending'";
+               $today = new DateTime();
+               $todayFormatted = $today->format('Y-m-d'); 
+               
+               $sqlBookings = "SELECT 
+                                   p.propName AS propName,
+                                   g.guestNum AS guestNum,
+                                   u.fullName AS clientName,
+                                   p.id AS propID,
+                                   b.id AS bookingID,
+                                   b.fromDate, 
+                                   b.toDate, 
+                                   b.totalPrice, 
+                                   b.bookingStatus
+                               FROM Booking b
+                               JOIN User u ON b.clientID = u.id
+                               JOIN Property p ON b.propID = p.id
+                               JOIN GuestNumber g ON p.guestNumID = g.id
+                               WHERE p.hostID = {$_SESSION['userID']} 
+                               AND b.bookingStatus = 'pending' 
+                               AND b.fromDate >= '$todayFormatted'";
+               
 
                 $res = mysqli_query($dbConn, $sqlBookings);
 

@@ -16,7 +16,7 @@
     <section class="service-section">
         <div class="cont">
             <?php
-            function view($res)
+            function view($res, $source)
             {
                 include "../../config.php";
 
@@ -59,11 +59,17 @@
                         <div class='swiper-wrapper'>";
 
                     foreach ($propertyData['images'] as $imagePath) {
-                        echo "<a href='browseSingle.php?id=" . htmlspecialchars($propertyData['id']) . "' class='swiper-slide'>
+                        if (!$source) {
+                            echo "<a href='browseSingle.php?id=" . htmlspecialchars($propertyData['id']) . "' class='swiper-slide'>
                                     <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image'>
                                   </a>";
+                        }
+                        else {
+                             echo "<a href='#' class='swiper-slide' style='cursor:default;'>
+                                    <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image'>
+                                  </a>";
+                        }
                     }
-
                     echo "          </div> <!-- Close swiper-wrapper -->
                         <div class='swiper-pagination'></div>
                         <div class='swiper-button-next'></div>
@@ -72,7 +78,7 @@
                 </div> <!-- Close service-item-inner -->
                 <div class='details'>
                     <h3>" . htmlspecialchars($propertyData['name']) . " </h3>
-                    <p>" . htmlspecialchars($propertyData['type']) . " in " . htmlspecialchars($propertyData['city']) . " for ". htmlspecialchars($propertyData['guests']). " guest(s)</p>
+                    <p>" . htmlspecialchars($propertyData['type']) . " in " . htmlspecialchars($propertyData['city']) . " for " . htmlspecialchars($propertyData['guests']) . " guest(s)</p>
                     <p>BGN " . htmlspecialchars($propertyData['price']) . " per night</p>
                     <p>Hosted by " . htmlspecialchars($propertyData['host']) . "</p>
                 </div>

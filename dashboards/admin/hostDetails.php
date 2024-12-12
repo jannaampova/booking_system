@@ -67,6 +67,7 @@ include "../../config.php";
             background-color: #fff;
             margin-top: 5%;
         }
+
         .inner-flex-header {
             display: flex;
             justify-content: space-between;
@@ -141,9 +142,10 @@ include "../../config.php";
                                     <p><b>Properties:</b> " . htmlspecialchars($propertyCount) . "</p>
                                 </div>
                                 <div class='property-info-buttons'>
-                                    <form method='post'>
-                                        <button name='viewPropeerties.php' type='submit'>View Properties</button>
-                                    </form>
+                                <form method='post' action='viewHostProperties.php?hostID=$host'>
+                                    <input type='hidden' name='hostID' value='<?php echo $host; ?>'>
+                                    <button type='submit'>View Properties</button>
+                                </form>
                                 </div>
                             </div>
                             
