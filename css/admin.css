@@ -14,8 +14,8 @@ body {
 header {
     text-wrap: nowrap;
     font-family: 'Poppins', sans-serif;
-    margin-top:3%;
-    margin-left:47%;
+    margin-top:2;
+    margin-left:55%;
     text-align: center;
     width: 100%;
 }
@@ -58,16 +58,16 @@ footer {
 .info-bubbles{
     display: flex;
     flex-direction: row;
-    width: 110%;
+    width: 108%;
     max-width: 120%;
-    height: 40%;
+    max-height: 40%;
     background-color: rgba(36, 90, 121, 0.486);
     box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
     border-radius: 35px;
     border-color: black;
     margin-top: 10%;
-    margin-left: 20%;
-    padding: 30px;
+    margin-left: 30%;
+    padding: 27px;
     gap: 100px;
 }
 
@@ -84,6 +84,7 @@ footer {
     justify-content: center;
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 2%;
     padding: 5px;
 }
 
