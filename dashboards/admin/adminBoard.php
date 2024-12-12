@@ -25,17 +25,22 @@ if (!isset($_SESSION['name'])) {
             color: #000000;
             text-align: center;
             padding: 20px 0;
-            position: fixed;
+            position: relative;
+            margin-left: 50%;
             bottom: 0;
-            width: 83%;
+            width: 100%;
             user-select: none;
-
+        }
+        .left-container {
+            width: 15%;
+            height: 100vh;
+            position: fixed;
         }
 
         .info-bubbles {
             width: 108%;
             margin-top: 3%;
-            margin-left: 30%;
+            margin-left: 50%;
             margin-bottom: 0;
             padding: 27px;
         }
@@ -48,7 +53,7 @@ if (!isset($_SESSION['name'])) {
 
         header {
             margin-top: 0;
-            margin-left: 59%;
+            margin-left: 85%;
         }
     </style>
 </head>
@@ -58,8 +63,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>

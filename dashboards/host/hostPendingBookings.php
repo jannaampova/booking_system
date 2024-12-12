@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="options">
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
-                    <?php echo htmlspecialchars($_SESSION['name']); ?>
+                    <?php   echo "".explode(' ', $_SESSION['name'])[0].""; ?>
                 </a>
                 <a href="hostBoard.php">Dashboard</a>
                 <a href="allBookings.php">All Bookings</a>

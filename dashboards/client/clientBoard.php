@@ -67,8 +67,7 @@ if (!isset($_SESSION['name'])) {
 
             <nav>
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0];
+                $firstName = explode(' ', $_SESSION['name'])[0];
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -116,12 +115,9 @@ if (!isset($_SESSION['name'])) {
                             <option value="name_desc">Name: Z to A</option>
                         </select>
                     </div>
-
             </header>
-
-
-
         </div>
+
         <div class="search-bubble-btn">
             <button type="submit" name="search">Explore</i></button>
         </div>
@@ -208,7 +204,7 @@ if (!isset($_SESSION['name'])) {
 
                     $res = mysqli_query($dbConn, $sql);
                     if ($res) {
-                        view($res,'');
+                        view($res, '');
                     } else {
                         echo "Error: " . mysqli_error($dbConn);
                     }
@@ -219,6 +215,4 @@ if (!isset($_SESSION['name'])) {
 
     </div>
 </body>
-
-
 </html>

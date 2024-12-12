@@ -140,8 +140,7 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ',  $_SESSION['name'])[0]; // Get the first name
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -212,7 +211,6 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
                                     <a class="button" style="background-color: grey; pointer-events: none; cursor: default;">Declined Booking</a>
                                 <?php endif; ?>
                                 <a class="button" href="browseSingle.php?id=<?php echo htmlspecialchars($propID); ?>">View Property</a>
-
                                 <?php if ($bookingStatus === 'approved' && $pmtStatus==='pending' && $pmtMethod==='card' ) : ?>
                                     <a class="button" href="payment.php?totalPrice=<?php echo htmlspecialchars($totalPrice); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">Make Payment</a>
                                 <?php endif; ?>

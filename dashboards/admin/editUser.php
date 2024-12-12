@@ -26,8 +26,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="hostSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -111,7 +110,7 @@ if (!isset($_SESSION['name'])) {
             $email = trim($_POST['email']);
             $telNum = trim($_POST['phone']);
             $name = trim($_POST['fullName']);
-            $userID = intval($_POST['userID']); // Make sure to retrieve user ID here
+            $userID = intval($_POST['userID']); 
         
             // Validation logic
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -138,7 +137,7 @@ if (!isset($_SESSION['name'])) {
             // Update user if no validation errors
             if (empty($usernameInvalid) && empty($emailInvalid) && empty($telNumInvalid) && empty($nameInvalid)) {
                 // Get role ID based on role name (if needed)
-                $roleID = null; // Assuming you want to update the role based on its name
+                $roleID = null; 
                 $sqlRole = "SELECT id FROM Roles WHERE roleName='" . mysqli_real_escape_string($dbConn, $_POST['roleName']) . "'";
                 $resRole = mysqli_query($dbConn, $sqlRole);
 
@@ -150,7 +149,7 @@ if (!isset($_SESSION['name'])) {
                 $sql = "UPDATE User SET fullName='$name', email='$email', username='$username', phone='$telNum', roleID='$roleID' WHERE id=$userID";
                 if (mysqli_query($dbConn, $sql)) {
                     header("Location: seeUsers.php");
-                    exit(); // Always exit after a header redirect
+                    exit(); 
                 } else {
                     echo "Error updating user: " . mysqli_error($dbConn);
                 }

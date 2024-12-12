@@ -24,8 +24,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $$_SESSION['name'])[0]; // Get the first name
                 ?>
                 <a href="hostSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -46,7 +45,6 @@ if (!isset($_SESSION['name'])) {
             if (isset($_POST['filterBy']) && !empty($_POST['filterValue'])) {
                 $filterBy = $_POST['filterBy'];
                 $filterValue = mysqli_real_escape_string($dbConn, $_POST['filterValue']);
-
                 if ($filterBy === 'host') {
                     $filterQuery = "WHERE uh.fullName = '$filterValue'";
                 } elseif ($filterBy === 'client') {

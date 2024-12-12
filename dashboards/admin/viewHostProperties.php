@@ -70,13 +70,9 @@ if (!isset($_SESSION['name'])) {
         <div class="options">
             <?php
             include "../../config.php";
-
-            $fullName = $_SESSION['name'];
-            $firstName = explode(' ', $fullName)[0]; // Get the first name
+            $firstName = explode(' ', $_SESSION['name'])[0]; // Get the first name
             $host = $_GET['hostID'];
             $hostName = mysqli_fetch_assoc(mysqli_query($dbConn, "SELECT fullName FROM User WHERE id = $host"))['fullName'];
-
-
             ?>
             <a href="../userSettings.php">
                 <i class="fas fa-user-edit"></i>

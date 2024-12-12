@@ -95,8 +95,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -113,8 +112,8 @@ if (!isset($_SESSION['name'])) {
             <div class="cont">
                 <?php
                 $propertyId = isset($_GET['id']) ? intval($_GET['id']) : 0;
-                $sql = "SELECT * FROM Property WHERE id=$propertyId";
-                $res = mysqli_query($dbConn, $sql);
+
+                $res = mysqli_query($dbConn, "SELECT * FROM Property WHERE id=$propertyId");
                 $rowProperty = mysqli_fetch_assoc($res);
 
                 $propAddress = $rowProperty['propAddress'];
@@ -166,8 +165,7 @@ if (!isset($_SESSION['name'])) {
                         <label>Host Name: </label>
                         <span>
                             <?php
-                            $hostQuery = "SELECT fullName FROM User WHERE id = {$rowProperty['hostID']}";
-                            $hostResult = mysqli_query($dbConn, $hostQuery);
+                            $hostResult = mysqli_query($dbConn, "SELECT fullName FROM User WHERE id = {$rowProperty['hostID']}");
                             $hostName = mysqli_fetch_assoc($hostResult)['fullName'];
                             echo htmlspecialchars($hostName);
                             ?>
@@ -177,8 +175,7 @@ if (!isset($_SESSION['name'])) {
                         <label>Property Type: </label>
                         <span>
                             <?php
-                            $typeQuery = "SELECT propType FROM PropertyType WHERE id = {$rowProperty['propTypeID']}";
-                            $typeResult = mysqli_query($dbConn, $typeQuery);
+                            $typeResult = mysqli_query($dbConn, "SELECT propType FROM PropertyType WHERE id = {$rowProperty['propTypeID']}");
                             $propType = mysqli_fetch_assoc($typeResult)['propType'];
                             echo htmlspecialchars($propType);
                             ?>
@@ -188,8 +185,7 @@ if (!isset($_SESSION['name'])) {
                         <label>Maximum Guests: </label>
                         <span>
                             <?php
-                            $guestQuery = "SELECT guestNum FROM GuestNumber WHERE id = {$rowProperty['guestNumID']}";
-                            $guestResult = mysqli_query($dbConn, $guestQuery);
+                            $guestResult = mysqli_query($dbConn, "SELECT guestNum FROM GuestNumber WHERE id = {$rowProperty['guestNumID']}");
                             $guestNum = mysqli_fetch_assoc($guestResult)['guestNum'];
                             echo htmlspecialchars($guestNum);
                             ?>
@@ -207,14 +203,13 @@ if (!isset($_SESSION['name'])) {
                         10:00 AM
                         </span>
                     </div>
-
                 </div>
 
                 <?php
                 $sqlAvail = "SELECT fromDate, toDate FROM Availabilities WHERE propID = $propertyId AND propStatus = 'free'";
                 $availResult = mysqli_query($dbConn, $sqlAvail);
-
                 $availabilityRanges = [];
+
                 while ($availability = mysqli_fetch_assoc($availResult)) {
                     $availabilityRanges[] = [
                         'from' => $availability['fromDate'],
@@ -226,11 +221,10 @@ if (!isset($_SESSION['name'])) {
                  SELECT fromDate, toDate 
                 FROM Availabilities 
                 WHERE propID = $propertyId 
-                AND propStatus IN ('reserved', 'booked')
-";
+                AND propStatus IN ('reserved', 'booked')";
                 $reservedResult = mysqli_query($dbConn, $sqlReserved);
-
                 $reservedRanges = [];
+                
                 while ($reserved = mysqli_fetch_assoc($reservedResult)) {
                     $reservedRanges[] = [
                         'from' => $reserved['fromDate'],
@@ -434,7 +428,6 @@ if (!isset($_SESSION['name'])) {
             <a href="#" id="bookNowLink">
                 <button class="book-now-button" onclick="handleBooking()">Book</button>
             </a>
-
         </div>
     </div>
     </div>

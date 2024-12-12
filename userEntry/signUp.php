@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/logIn.css">
-
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -127,9 +125,6 @@
             }
         }
         ?>
-
-
-
         <!-----------------------------------------------------------------HTML-------------------------------------------------------------->
         <div class="container" id="vhod">
             <form action="" class="form" method="POST" name="signUpForm" id="signUp">
