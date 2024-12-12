@@ -170,26 +170,17 @@ body {
 
 .form-control small {
   visibility: hidden;
-  /* Hide error message by default */
   color: #931414;
-  /* Error message color */
   position: absolute;
-  /* Position it absolutely */
   bottom: -10px;
-  /* Position below the input */
   right: 0;
-  /* Align to the right */
   font-size: 12px;
-  /* Smaller font size */
 }
 
 .form-control i {
   visibility: hidden;
-  /* Hide error message by default */
   position: absolute;
-  /* Position it absolutely */
   right: -12px;
-  /* Align to the right */
   top: 44px;
 }
 

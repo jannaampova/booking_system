@@ -26,6 +26,11 @@
             color: white;
         }
 
+
+        .form-control select {
+            color: black !important;
+        }
+
         .inner-flex {
             display: flex;
             flex-direction: column;

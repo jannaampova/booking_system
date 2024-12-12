@@ -25,13 +25,18 @@ if (!isset($_SESSION['name'])) {
         .form-control input,
         .form-control select,
         .form-control textarea {
-            box-shadow: 0px 0px 0px 0px #192d2d66;
+            box-shadow: 1px 2px 4px 2px #192d2d66;
             color: white;
         }
+
         .form-control label {
             font-weight: 600;
             color: #333;
             margin-right: 10px;
+        }
+
+        .form-control select {
+            color: black !important;
         }
     </style>
 </head>
