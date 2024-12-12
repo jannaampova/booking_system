@@ -1,7 +1,6 @@
 <?php
-session_start(); // Start the session
+session_start();
 
-// Check if the user is logged in
 if (!isset($_SESSION['name'])) {
     header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
     exit();
@@ -20,19 +19,38 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/footer.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-<style>
-   footer {
-    background-color: #08242100;
-    color: #000000;
-    text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    width: 83%;
-    user-select: none; 
-  
-  }
-</style>
+    <style>
+        footer {
+            background-color: #08242100;
+            color: #000000;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 83%;
+            user-select: none;
+
+        }
+
+        .info-bubbles {
+            width: 108%;
+            margin-top: 3%;
+            margin-left: 30%;
+            margin-bottom: 0;
+            padding: 27px;
+        }
+
+        .info-bubble {
+            margin-top: 1%;
+            margin-left: 2%;
+            margin-bottom: 1%;
+        }
+
+        header {
+            margin-top: 0;
+            margin-left: 59%;
+        }
+    </style>
 </head>
 
 <body>
@@ -111,6 +129,94 @@ if (!isset($_SESSION['name'])) {
 
                 </div>
             </div>
+
+            <div class="info-bubbles" style="background-color:#225e6fb9;
+;
+">
+                <div class="info-bubble">
+                    <p><b>Top Property</b> <br>
+                        <?php
+                        include "../../config.php";
+                        $sql = "SELECT Property.propName, COUNT(*) as booking_count 
+                                FROM Booking 
+                                JOIN Property ON Booking.propID = Property.id 
+                                GROUP BY propID 
+                                ORDER BY booking_count DESC 
+                                LIMIT 1";
+                        $res = mysqli_query($dbConn, $sql);
+                        if ($row = mysqli_fetch_assoc($res)) {
+                            $mostBookedPropertyName = $row['propName'];
+                            $bookings = $row['booking_count'];
+                            echo "$mostBookedPropertyName<br>";
+                            echo "<i style='font-size: 1 rem; color:#282e2a'>booked <b>$bookings</b> times</i>";
+
+                        } else {
+                            echo "<i>No bookings found</i>";
+                        }
+                        ?>
+                        <br>
+                        <i class="fa-solid fa-house"></i>
+                        <br>
+
+                    </p>
+                </div>
+                <div class="info-bubble">
+                    <p><b>Top Host</b> <br>
+                        <?php
+                        $sql = "SELECT User.fullName, COUNT(*) as client_count 
+                            FROM Booking 
+                            JOIN Property ON Booking.propID = Property.id 
+                            JOIN User ON Property.hostID = User.id 
+                            GROUP BY User.id 
+                            ORDER BY client_count DESC 
+                            LIMIT 1";
+                        $res = mysqli_query($dbConn, $sql);
+                        if ($row = mysqli_fetch_assoc($res)) {
+                            $mostBookedHostName = $row['fullName'];
+                            $bookings = $row['client_count'];
+                            echo "<i>$mostBookedHostName</i><br>";
+                            echo "<i style='font-size: 1 rem; color:#282e2a'>booked <b>$bookings</b> times</i>";
+                        } else {
+                            echo "<i>No hosts found</i>";
+                        }
+                        ?>
+                        <br>
+                        <i class="fas fa-user"></i>
+                    </p>
+
+                </div>
+                <div class="info-bubble">
+                    <p><b>Top Client</b> <br>
+                        <?php
+                        $sql = "SELECT User.fullName, COUNT(*) as booking_count
+                        FROM Booking
+                        JOIN User ON Booking.clientID = User.id
+                        GROUP BY User.id
+                        ORDER BY booking_count DESC
+                        LIMIT 1";
+
+                        $res = mysqli_query($dbConn, $sql);
+
+                        if ($res) {
+                            if ($row = mysqli_fetch_assoc($res)) {
+                                $mostFrequentClient = $row['fullName'];
+                                $bookings = $row['booking_count'];
+                                echo "<i>$mostFrequentClient</i><br>";
+                                echo "<i style='font-size: 1 rem; color:#282e2a'>made <b>$bookings</b> bookings</i>";
+                            } else {
+                                echo "<i>No clients found</i>";
+                            }
+                        } else {
+                            echo "Error: " . mysqli_error($dbConn);
+                        }
+                        ?>
+                        <br>
+                        <i class="fa-regular fa-calendar"></i>
+                    </p>
+
+                </div>
+            </div>
+
             <footer>
                 <div class="footer-content">
                     <p>&copy; 2024 TJ EasyStay.</p>
