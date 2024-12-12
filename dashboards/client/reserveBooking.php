@@ -10,61 +10,12 @@
     <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/buttonAndSelect.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-    <style>
-        .form-control label {
-            font-weight: 600;
-            color: #333;
-            margin-right: 10px;
-        }
-
-        .form-control input,
-        .form-control select,
-        .form-control textarea {
-            box-shadow: 0px 0px 0px 0px #192d2d66;
-            color: white;
-        }
-
-        .radio-flex {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .radio-input {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 2px solid #888;
-            appearance: none;
-            cursor: pointer;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .radio-input:checked {
-            background-color: #2b3a3ba2;
-
-        }
-
-        .radio-label {
-            font-size: 14px;
-            text-wrap: nowrap;
-            color: #333;
-            cursor: pointer;
-            font-weight: 600;
-        }
-    </style>
+ 
 </head>
 <?php
-session_start(); // Start the session
+session_start(); 
 if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
-    header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
+    header("Location: ../../userEntry/logIn.php"); 
     exit();
 }
 $checkInDate = isset($_GET['checkIN']) ? $_GET['checkIN'] : null;
@@ -74,19 +25,15 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
 ?>
 
 <body>
-
-
     <div class="left-container">
         <div class="options">
             <?php
-            $fullName = $_SESSION['name'];
-            $firstName = explode(' ', $fullName)[0]; // Get the first name
+            $firstName = explode(' ', $_SESSION['name'])[0]; 
             ?>
             <a href="../userSettings.php">
                 <i class="fas fa-user-edit"></i>
                 <?php echo htmlspecialchars($_SESSION['name']); ?>
             </a>
-
             <a href='yourBookings.php'>Bookings</a>
             <a href='clientBoard.php'>Dashboard</a>
             <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
@@ -94,7 +41,6 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
         </div>
     </div>
     <?php
-
     include '../../config.php';
     include '../../userEntry/functions.php';
     ob_start();
@@ -141,29 +87,21 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
                             <label class="radio-label" for="prop">Pay on property</label>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="form-control">
                     <label>Total Price:</label>
                     <?php
-                    // SQL query for fetching role name
-                    $sql2 = "SELECT pricePerNight FROM Property WHERE id= '$propertyId'";
-                    $res2 = mysqli_query($dbConn, $sql2);
-                    $row = mysqli_fetch_assoc($res2);
-                    $price = $row['pricePerNight'];
+                    $price = mysqli_fetch_assoc(mysqli_query($dbConn, "SELECT pricePerNight FROM Property WHERE id= '$propertyId'"))['pricePerNight'];
                     $date1 = new DateTime($checkInDate);
                     $date2 = new DateTime($checkOutDate);
                     $interval = $date1->diff($date2);
                     $totalPrice = $interval->days * $price;
-
                     ?>
                     <input type="text" name="price" value="<?php echo htmlspecialchars($totalPrice); ?>"><br>
                 </div>
-                <div class="form-control">
+                 <div class="form-control">
                     <button type="submit" name="confirmBooking" style="color:white;">Request Booking</button>
-                </div>
+                 </div>
             </form>
         </div>
         <?php
@@ -171,18 +109,13 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
         echo "User not found.";
     }
 
-
-
     if (isset($_POST['confirmBooking'])) {
-        // Sanitize and validate input data
         $paymentMethod = mysqli_real_escape_string($dbConn, $_POST['payment']);
-        $userId = intval($userId); // Assuming $userId is retrieved from the session
-        $propertyId = intval($propertyId); // Assuming $propertyId is passed in context
+        $userId = intval($userId);
+        $propertyId = intval($propertyId); 
         $checkInDate = mysqli_real_escape_string($dbConn, $checkInDate);
         $checkOutDate = mysqli_real_escape_string($dbConn, $checkOutDate);
-        $totalPrice = floatval($totalPrice); // Assuming $totalPrice is calculated earlier
-    
-        // Start transaction
+        $totalPrice = floatval($totalPrice); 
         mysqli_begin_transaction($dbConn);
     
         try {
@@ -228,7 +161,7 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
             echo "Booking process failed: " . $e->getMessage();
         }
     }
-    ob_end_flush(); // Sends "Hello, World!" after header
+    ob_end_flush();
 
     ?>
     

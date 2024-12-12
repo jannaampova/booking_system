@@ -87,14 +87,44 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
             align-items: center;
             justify-content: center;
             margin: 10% auto;
-
+            position: relative;
         }
-
-      
 
         .button:hover {
             background-color: #2b3a3ba2;
+        }
 
+        .button:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(-10px);
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 80%;
+            background-color:rgba(47, 56, 57, 0.72);
+            color: #FFF;
+            text-align: center;
+            border-radius: 5px;
+            top:100%;
+            padding: 10px;
+            position: absolute;
+            transform: translateX(-50%);
+            transition: opacity 1s ease, transform 1s ease;
+            z-index: 10;
+            font-size: 10px;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
         }
 
         .main {
@@ -145,6 +175,8 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
                 WHERE b.clientID = {$_SESSION['userID']}";
 
                 $res = mysqli_query($dbConn, $sqlBookings);
+                if(mysqli_num_rows($res)>0){
+                    
                 while ($row = mysqli_fetch_assoc($res)) {
                     $propID = $row['propID'];
                     $bookID = $row['bookingID'];
@@ -170,7 +202,10 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
                         <div class="property-info">
                             <form>
                                 <?php if ($bookingStatus === 'approved' || $bookingStatus === 'pending') : ?>
-                                    <a class="button" href="cancelBooking.php?propid=<?php echo htmlspecialchars($propID); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">Cancel Booking</a>
+                                    <a class="button" href="cancelBooking.php?propid=<?php echo htmlspecialchars($propID); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">
+                                        Cancel Booking
+                                        <span class="tooltip-text">If you cancel less than 3 days prior, you'll be charged 30% of the total amount!</span>
+                                    </a>
                                 <?php elseif ($bookingStatus === 'cancelled') : ?>
                                     <a class="button" style="background-color: red; pointer-events: none; cursor: default;">Cancelled Booking</a>
                                 <?php else : ?>
@@ -181,12 +216,14 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
                                 <?php if ($bookingStatus === 'approved' && $pmtStatus==='pending' && $pmtMethod==='card' ) : ?>
                                     <a class="button" href="payment.php?totalPrice=<?php echo htmlspecialchars($totalPrice); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">Make Payment</a>
                                 <?php endif; ?>
-                                
-                                
                             </form>
                         </div>
                     </div>
-                <?php } ?>
+                <?php }
+                }else{
+                echo"<p>You haven't made any bookings!</p>";
+                }
+                ?>
             </div>
         </div>
     </div>

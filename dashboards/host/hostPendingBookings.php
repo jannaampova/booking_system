@@ -151,6 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php echo htmlspecialchars($_SESSION['name']); ?>
                 </a>
                 <a href="hostBoard.php">Dashboard</a>
+                <a href="allBookings.php">All Bookings</a>
                 <a href="../admin/logOut.php">Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>

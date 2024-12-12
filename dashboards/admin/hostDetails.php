@@ -93,6 +93,7 @@ include "../../config.php";
                     <?php echo htmlspecialchars($_SESSION['name']); ?>
                 </a>
                 <a href="adminBoard.php">Dashboard</a>
+                <a href="seeUsers.php">View Users</a>
                 <a href="logOut.php">Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>

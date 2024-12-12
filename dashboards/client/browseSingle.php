@@ -16,8 +16,6 @@ if (!isset($_SESSION['name'])) {
     <title>Property Details</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../../css/viewSingle.css" />
-    <link rel="stylesheet" href="../../css/buttonAndSelect.css" />
-    <link rel="stylesheet" href="../../css/client.css" />
     <link rel="stylesheet" href="../../css/addEditAdminHost.css" />
     <link rel="stylesheet" href="../../css/propInfo.css" />
     <link rel="stylesheet" href="../../css/admin.css" />
@@ -25,13 +23,74 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Modal image */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80%;
+            margin-top: 5%;
+        }
+
+     
+
+        /* Close button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Navigation arrows */
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body>
     <?php
     include "../../config.php";
     ?>
-
     <div class="main">
         <div class="left-container">
             <div class="options">
@@ -78,11 +137,12 @@ if (!isset($_SESSION['name'])) {
                     echo "<div class='service-item'>
                             <div class='service-item-inner'>
                                 <div class='kol'>
-                                    <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image' style='max-width:100%; height:auto;'>
-                                </div>
+                                        <img src='" . htmlspecialchars($imagePath) . "' alt='Property Image' style='max-width:100%; height:auto;'>
+                                 </div>
                             </div>
                           </div>";
                 }
+
                 ?>
             </div>
             <div class="detail">
@@ -133,6 +193,18 @@ if (!isset($_SESSION['name'])) {
                             $guestNum = mysqli_fetch_assoc($guestResult)['guestNum'];
                             echo htmlspecialchars($guestNum);
                             ?>
+                        </span>
+                    </div>
+                    <div class="property-info">
+                        <label>Check In: </label>
+                        <span>
+                        12:00 PM
+                        </span>
+                    </div>
+                    <div class="property-info">
+                        <label>Check Out: </label>
+                        <span>
+                        10:00 AM
                         </span>
                     </div>
 
@@ -210,6 +282,14 @@ if (!isset($_SESSION['name'])) {
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span> <!-- Close button -->
+                <span class="prev">&#10094;</span> <!-- Previous arrow -->
+                <span class="next">&#10095;</span> <!-- Next arrow -->
+                <img class="modal-content" id="modalImg">
+            </div>
+
             <script>
                 let selectedCheckIn = null;
                 let selectedCheckOut = null;
@@ -307,8 +387,50 @@ if (!isset($_SESSION['name'])) {
                         },
                     });
                 });
+                // Variables-Modal
+                let modal = document.getElementById("imageModal");
+                let modalImg = document.getElementById("modalImg");
+                let closeBtn = document.querySelector(".close");
+                let prevBtn = document.querySelector(".prev");
+                let nextBtn = document.querySelector(".next");
+                let images = document.querySelectorAll(".service-item img");
+                let currentIndex = 0;
+
+                // Open modal and display image
+                images.forEach((img, index) => {
+                    img.addEventListener("click", () => {
+                        modal.style.display = "block";
+                        modalImg.src = img.src;
+                        currentIndex = index;
+                    });
+                });
+
+                // Close modal
+                closeBtn.addEventListener("click", () => {
+                    modal.style.display = "none";
+                });
+
+                // Navigate to previous image
+                prevBtn.addEventListener("click", () => {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around
+                    modalImg.src = images[currentIndex].src;
+                });
+
+                // Navigate to next image
+                nextBtn.addEventListener("click", () => {
+                    currentIndex = (currentIndex + 1) % images.length; // Wrap around
+                    modalImg.src = images[currentIndex].src;
+                });
+
+                // Close modal when clicking outside the image
+                window.addEventListener("click", (event) => {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
 
             </script>
+
             <a href="#" id="bookNowLink">
                 <button class="book-now-button" onclick="handleBooking()">Book</button>
             </a>

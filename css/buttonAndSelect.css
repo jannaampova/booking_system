@@ -63,4 +63,52 @@
         width: 100%; /* Single column on small screens */
     }
 }
+.form-control label {
+  font-weight: 600;
+  color: #333;
+  margin-right: 10px;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  box-shadow: 0px 0px 0px 0px #192d2d66;
+  color: white;
+}
+
+.radio-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-input {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #888;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.radio-input:checked {
+  background-color: #2b3a3ba2;
+
+}
+
+.radio-label {
+  font-size: 14px;
+  text-wrap: nowrap;
+  color: #333;
+  cursor: pointer;
+  font-weight: 600;
+}
 

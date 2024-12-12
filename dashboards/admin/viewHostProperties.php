@@ -37,6 +37,7 @@ if (!isset($_SESSION['name'])) {
 
         .cont {
             margin-left: 20% !important;
+            margin-top: 10% !important;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -46,19 +47,20 @@ if (!isset($_SESSION['name'])) {
         }
 
         .details {
-            padding: 10px!important;
-            border-radius: 6px!important;
-            background-color: #688587a2!important;        }
+            padding: 10px !important;
+            border-radius: 6px !important;
+            background-color: #688587a2 !important;
+        }
 
         .details h3 {
-            margin-top:0;
+            margin-top: 0;
             font-size: 1.5rem;
             color: #ffffff;
-            text-shadow: none!important;
+            text-shadow: none !important;
         }
 
         .details p {
-            color: #ffffff!important;
+            color: #ffffff !important;
         }
     </style>
 </head>
@@ -67,8 +69,14 @@ if (!isset($_SESSION['name'])) {
     <div class="left-container">
         <div class="options">
             <?php
+            include "../../config.php";
+
             $fullName = $_SESSION['name'];
             $firstName = explode(' ', $fullName)[0]; // Get the first name
+            $host = $_GET['hostID'];
+            $hostName = mysqli_fetch_assoc(mysqli_query($dbConn, "SELECT fullName FROM User WHERE id = $host"))['fullName'];
+
+
             ?>
             <a href="../userSettings.php">
                 <i class="fas fa-user-edit"></i>
@@ -81,12 +89,15 @@ if (!isset($_SESSION['name'])) {
     </div>
 
     <section class="service-section">
-
+        <div class="row">
+            <div class="section-title">
+            <h1>   <?php echo htmlspecialchars($hostName); ?>
+                Properties</h1>
+            </div>
+        </div>
         <div class="cont">
             <?php
-            include "../../config.php";
             include '../client/viewFunction.php';
-            $host = $_GET['hostID'];
 
             $sql = "SELECT Property.id AS propertyID, Property.propName, Property.pricePerNight AS price, 
                                    PropertyType.propType, GuestNumber.guestNum, User.fullName, City.city
@@ -101,8 +112,8 @@ if (!isset($_SESSION['name'])) {
             $stmt->bind_param("i", $host);
             $stmt->execute();
             $result = $stmt->get_result();
-        $source="viewHostProperties";
-            view($result,  $source);
+            $source = "viewHostProperties";
+            view($result, $source);
             ?>
         </div>
     </section>
