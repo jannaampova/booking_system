@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TJ EasyStay</title>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/footer.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 </head>
@@ -130,14 +131,7 @@
             </ul>
         </div>
     </footer>
-    <style>
-
-    </style>
-
-
-
-
-
+  
 </body>
 
 </html>

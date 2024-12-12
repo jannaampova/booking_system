@@ -8,9 +8,8 @@ if (!isset($_SESSION['name'])) {
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>View Users</title>
+    <title>All Bookings</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/table.css">

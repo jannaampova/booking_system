@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-function sendEmail($email, $name, $flag, $propertyName, $host)
+function sendEmail($email, $name, $flag, $propertyName, $host,$code)
 {
     $mail = new PHPMailer(true);
 
@@ -39,14 +39,14 @@ function sendEmail($email, $name, $flag, $propertyName, $host)
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         }elseif ($flag==3){
             $mail->Subject = 'Payment code';
-            $mail->Body = "Dear <b>$name</b>,<br> Your payment verification code is:<br>CODE<br>Please copy it and return to the payment confirmation page!<br>Enjoy!";
+            $mail->Body = "Dear <b>$name</b>,<br> Your payment verification code is:<br>$code<br>Please copy it and return to the payment confirmation page!<br>Enjoy!";
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         }
         $mail->send();
         if ($flag == 1) {
-            header("Location: " . $_SERVER['dashboards/host/hostPendingBookings.php']);
+            header("Location: hostPendingBookings.php");
         } elseif ($flag == 0) {
-            header("Location: " . $_SERVER['dashboards/host/hostPendingBookings.php']);
+            header("Location: hostPendingBookings.php");
 
         } elseif ($flag == 2) {
             header("Location: logIn.php");

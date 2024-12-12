@@ -17,9 +17,22 @@ if (!isset($_SESSION['name'])) {
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/footer.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
-
+<style>
+   footer {
+    background-color: #08242100;
+    color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 83%;
+    user-select: none; 
+  
+  }
+</style>
 </head>
 
 <body>
@@ -44,7 +57,7 @@ if (!isset($_SESSION['name'])) {
         <div class="column">
             <div class="first-line">
                 <header>
-                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1> 
+                    <h1>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h1>
                 </header>
             </div>
 
@@ -98,8 +111,19 @@ if (!isset($_SESSION['name'])) {
 
                 </div>
             </div>
-
+            <footer>
+                <div class="footer-content">
+                    <p>&copy; 2024 TJ EasyStay.</p>
+                    <ul class="socials">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
+
 
     </div>
 

@@ -7,56 +7,19 @@ if (!isset($_SESSION['name'])) {
     exit();
 }
 
-// Retrieve user details
 $username = $_SESSION['name'];
-$sql = "SELECT * FROM User WHERE fullName = ?";
+$id = $_SESSION['userID'];
+$totalPrice = $_GET['totalPrice'];
+$sql = "SELECT * FROM User WHERE id = ?";
 $stmt = $dbConn->prepare($sql);
-$stmt->bind_param("s", $username);
+$stmt->bind_param("s", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-
 if (!$user) {
     die("User not found in the database.");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fullName = trim($_POST['fullName']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $password = trim($_POST['password']);
-    $errors = [];
-
-    // Validate inputs
-    if (empty($fullName)) {
-        $errors['fullName'] = "Full name cannot be blank.";
-    }
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "Enter a valid email address.";
-    }
-    if (empty($phone) || !preg_match('/^[0-9]{10}$/', $phone)) {
-        $errors['phone'] = "Enter a valid phone number.";
-    }
-    if (!empty($password)) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-    } else {
-        $hashedPassword = $user['passwd']; // Keep current password
-    }
-
-    if (empty($errors)) {
-        // Update user data
-        $sqlUpdate = "UPDATE User SET fullName = ?, email = ?, phone = ?, passwd = ? WHERE id = ?";
-        $stmt = $dbConn->prepare($sqlUpdate);
-        $stmt->bind_param('ssssi', $fullName, $email, $phone, $hashedPassword, $user['id']);
-
-        if ($stmt->execute()) {
-            $_SESSION['name'] = $fullName; // Update session name
-            echo "<script>alert('Settings updated successfully.');</script>";
-        } else {
-            echo "<script>alert('Failed to update settings.');</script>";
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -65,54 +28,106 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/payment.css">
+
     <title>Payment</title>
-    <link rel="stylesheet" href="../../css/payment.css">  
+   
 </head>
 
 <body>
     <div class="main">
         <div id="signUp">
-            <div class="container">s
+            <div class="container">
                 <form action="" method="POST" class="form">
                     <div class="greeting">
-                        <?php
-                        $price = $_GET['totalPrice'];
-                        echo "<h2>Payment</h2> <br><h3>You need to pay $price before cancelling your booking</h3>";
-                        ?>
-
+                        <?php echo "<h2>Payment for $$totalPrice </h2>"; ?>
                     </div>
-                    <div class="rightside">
-                        <h1>CheckOut</h1>
-                        <h2>Payment Information</h2>
-                        <p>Cardholder Name</p>
-                        <input type="text" class="inputbox" name="name" required />
-                        <p>Card Number</p>
-                        <input type="number" class="inputbox" name="card_number" id="card_number" required />
 
-                        <p>Card Type</p>
-                        <select class="inputbox" name="card_type" id="card_type" required>
-                            <option value="">--Select a Card Type--</option>
-                            <option value="Visa">Visa</option>
-                            <option value="RuPay">RuPay</option>
-                            <option value="MasterCard">MasterCard</option>
-                        </select>
-                        <div class="expcvv">
+                    <div class="form-control">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" name="fullName" id="fullName"
+                            value="<?php echo htmlspecialchars($user['fullName'], ENT_QUOTES, 'UTF-8'); ?>" readonly>
+                        <small><?php echo $errors['fullName'] ?? ''; ?></small>
+                    </div>
 
-                            <p class="expcvv_text">Expiry</p>
-                            <input type="date" class="inputbox" name="exp_date" id="exp_date" required />
+                    <div class="form-control">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email"
+                            value="<?php echo htmlspecialchars($user['email']); ?>" readonly>
+                        <small><?php echo $errors['email'] ?? ''; ?></small>
+                    </div>
 
-                            <p class="expcvv_text2">CVV</p>
-                            <input type="password" class="inputbox" name="cvv" id="cvv" required />
-                        </div>
-                        <p></p>
-                        <button type="submit" class="button">CheckOut</button>
+                    <div class="form-control">
+                        <label for="password">Type in the recieved code</label>
+                        <input type="text" name="code" id="code">
+                    </div>
+
+                    <div class="form-control" style="display:flex;flex-direction:row;">
+                        <button type="submit" style="font-size:16px;" name="getCode">Get Code</button>
+                        <button type="submit" style="font-size:16px;" name="confirm">Confirm Payment</button>
+                    </div>
                 </form>
             </div>
-
-            </form>
         </div>
-    </div>
     </div>
 </body>
 
 </html>
+<?php
+
+include "../../emailing.php";
+include "../../config.php";
+function generateRandomCode($length = 6)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomCode = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomCode .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomCode;
+}
+
+$bookID = $_GET['bookId'];
+$source = $_GET['source'];
+$propId = $_GET['propId'];
+$from = $_GET['from'];
+$to = $_GET['to'];
+
+$sql = "SELECT u.fullName as clientName, u.email as email, p.propName as propName From Booking b
+join User u on u.id=b.clientID 
+join Property p on p.id=b.propID where
+b.id=$bookID";
+$res = mysqli_query($dbConn, $sql);
+$row = mysqli_fetch_assoc($res);
+$name = $row['clientName'];
+$email = $row['email'];
+$propName = $row['propName'];
+
+if (isset($_POST['getCode'])) {
+    $code = generateRandomCode();
+    $_SESSION['generated_code'] = $code;
+    sendEmail($email, $name, '3', $propName, '', $code);
+}
+
+if (isset($_POST['confirm'])) {
+    $inputCode = $_POST['code'];
+
+    if (isset($_SESSION['generated_code']) && $inputCode === $_SESSION['generated_code']) {
+        $updatePaySql = "UPDATE Payment SET paymentStatus = 'paid', amount = $totalPrice WHERE bookingID = $bookID";
+        mysqli_query($dbConn, $updatePaySql);
+        unset($_SESSION['generated_code']);
+        if ($source === 'cancelBooking') {
+            $sql = "UPDATE Availabilities SET propStatus = 'free' WHERE propID = $propId AND fromDate = '$from' AND toDate = '$to'";
+            mysqli_query($dbConn, $sql);
+            $sql = "UPDATE Booking SET bookingStatus = 'cancelled' WHERE propID = $propId AND fromDate = '$from' AND toDate = '$to'";
+            mysqli_query($dbConn, $sql);
+        }
+        echo "<script type='text/javascript'>window.location.href = 'yourBookings.php';</script>";
+        exit();
+    } else {
+        echo "Invalid code. Please try again.";
+    }
+}
+
+?>

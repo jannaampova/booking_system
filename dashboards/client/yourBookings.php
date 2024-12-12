@@ -6,14 +6,14 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
     header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
     exit();
 }
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Single Property</title>
+    <title>Your Bookings</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../../css/viewSingle.css" />
     <link rel="stylesheet" href="../../css/buttonAndSelect.css" />
@@ -23,7 +23,6 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
     <link rel="stylesheet" href="../../css/nav.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <style>
         .detail {
@@ -48,8 +47,7 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
             background-color: #fff;
         }
 
-        h2,
-        h3 {
+        h2, h3 {
             margin-top: 0;
             color: #222;
             margin-bottom: 15px;
@@ -58,11 +56,9 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
 
         .property-info {
             width: 250px;
-            /* Set a fixed width */
             height: 250px;
-            /* Set a fixed height */
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(7, 0, 8, 0.499);
+            box-shadow: 0 4px 12px rgba(7, 0, 8, 0.5);
             border-radius: 35px;
             border-color: black;
             margin-left: 5%;
@@ -71,30 +67,26 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
             border-bottom: 1px solid #eee;
         }
 
-
-
         .property-info p {
             font-size: 14px;
             color: #555;
-            margin-bottom: 20px;
-            line-height: 2.5;
+            margin-bottom: 7px;
+            line-height: 2.0;
         }
-
-
 
         .button {
             background-color: #688587a2;
             text-decoration: none;
             color: white;
             border: none;
-            padding: 10px 10px;
-            font-size: 18px;
+            padding: 7px 7px;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20% auto;
+            margin: 10% auto;
 
         }
 
@@ -112,10 +104,7 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
 </head>
 
 <body>
-    <?php
-    include "../../config.php";
-
-    ?>
+    <?php include "../../config.php"; ?>
 
     <div class="main">
         <div class="left-container">
@@ -137,56 +126,69 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['userID'])) {
             <div class="detail">
                 <?php
                 $sqlBookings = "SELECT 
-             p.propName AS propName,
-             g.guestNum AS guestNum,
-             u.fullName AS hostName,
-             p.id as propID,
-             b.id as bookingID,
-             b.fromDate, 
-             b.toDate, 
-             b.totalPrice, 
-             b.bookingStatus
-         FROM Booking b
-         JOIN Property p ON b.propID = p.id
-         JOIN GuestNumber g ON p.guestNumID = g.id
-         JOIN User u ON p.hostID = u.id
-         WHERE b.clientID = {$_SESSION['userID']}";
+                    p.propName AS propName,
+                    g.guestNum AS guestNum,
+                    u.fullName AS hostName,
+                    p.id AS propID,
+                    b.id AS bookingID,
+                    b.fromDate, 
+                    b.toDate, 
+                    b.totalPrice, 
+                    b.bookingStatus,
+                    pmt.paymentMethod as pmtMethod,
+                    pmt.paymentStatus as pmtStatus
+                FROM Booking b
+                JOIN Property p ON b.propID = p.id
+                JOIN Payment pmt on b.id=pmt.bookingID
+                JOIN GuestNumber g ON p.guestNumID = g.id
+                JOIN User u ON p.hostID = u.id
+                WHERE b.clientID = {$_SESSION['userID']}";
 
                 $res = mysqli_query($dbConn, $sqlBookings);
                 while ($row = mysqli_fetch_assoc($res)) {
                     $propID = $row['propID'];
                     $bookID = $row['bookingID'];
                     $bookingStatus = $row['bookingStatus'];
-                    echo "<div class='property-details'>
-        <div class='property-info'>
-            <h3>" . htmlspecialchars($row['propName']) . "</h3>
-            <p>Host: " . htmlspecialchars($row['hostName']) . "</p>
-            <p>Guests: " . htmlspecialchars($row['guestNum']) . "</p> 
-        </div>
-        <div class='property-info'>  
-            <h3>Booking Details</h3>
-            <p>" . htmlspecialchars($row['fromDate']) . " to " . htmlspecialchars($row['toDate']) . "</p>
-            <p>Total Price: $" . htmlspecialchars($row['totalPrice']) . "</p>
-            <p>Status: " . htmlspecialchars($row['bookingStatus']) . "</p>
-        </div>
-        <div class='property-info'>";
-                    ?>
-                    <form name='form'>
-                        <?php if ($bookingStatus === 'approved' || $bookingStatus === 'pending'): ?>
-                            <a class='button'
-                                href='cancelBooking.php?propid=<?= htmlspecialchars($propID) ?>&bookId=<?= htmlspecialchars($bookID) ?>'>Cancel
-                                Booking</a>
-                        <?php elseif ($bookingStatus === 'cancelled'): ?>
-                            <p><a href="#"  class='button' style="background-color: red;pointer-events: none;cursor:arrow;">Cancelled booking</a></p>
-                            <?php else:?>
-                                <p><a href="#"  class='button' style="background-color: grey;pointer-events: none;cursor:arrow;">Declined booking</a></p>
-                       <?php endif; ?>
-                        <a class='button' href='browseSingle.php?id=<?= htmlspecialchars($propID) ?>'>View Property</a>
-                    </form>
+                    $pmtStatus = $row['pmtStatus'];
+                    $pmtMethod = $row['pmtMethod'];
+                    $totalPrice = $row['totalPrice'];
+                ?>
+                    <div class="property-details">
+                        <div class="property-info">
+                            <h3><?php echo htmlspecialchars($row['propName']); ?></h3>
+                            <p>Host: <?php echo htmlspecialchars($row['hostName']); ?></p>
+                            <p>Guests: <?php echo htmlspecialchars($row['guestNum']); ?></p>
+                        </div>
+                        <div class="property-info">
+                            <h3>Booking Details</h3>
+                            <p><?php echo htmlspecialchars($row['fromDate']) . " to " . htmlspecialchars($row['toDate']); ?></p>
+                            <p>Total Price: $<?php echo htmlspecialchars($row['totalPrice']); ?></p>
+                            <p>Status: <?php echo htmlspecialchars($row['bookingStatus']); ?></p>
+                            <p>Payment method: <?php echo htmlspecialchars($row['pmtMethod']); ?></p>
+                            <p>Payment status: <?php echo htmlspecialchars($row['pmtStatus']); ?></p>
+                        </div>
+                        <div class="property-info">
+                            <form>
+                                <?php if ($bookingStatus === 'approved' || $bookingStatus === 'pending') : ?>
+                                    <a class="button" href="cancelBooking.php?propid=<?php echo htmlspecialchars($propID); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">Cancel Booking</a>
+                                <?php elseif ($bookingStatus === 'cancelled') : ?>
+                                    <a class="button" style="background-color: red; pointer-events: none; cursor: default;">Cancelled Booking</a>
+                                <?php else : ?>
+                                    <a class="button" style="background-color: grey; pointer-events: none; cursor: default;">Declined Booking</a>
+                                <?php endif; ?>
+                                <a class="button" href="browseSingle.php?id=<?php echo htmlspecialchars($propID); ?>">View Property</a>
 
-                </div>
+                                <?php if ($bookingStatus === 'approved' && $pmtStatus==='pending' && $pmtMethod==='card' ) : ?>
+                                    <a class="button" href="payment.php?totalPrice=<?php echo htmlspecialchars($totalPrice); ?>&bookId=<?php echo htmlspecialchars($bookID); ?>">Make Payment</a>
+                                <?php endif; ?>
+                                
+                                
+                            </form>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
-        <?php } ?>
+        </div>
     </div>
 </body>
 

@@ -120,13 +120,8 @@
                 $result = mysqli_query($dbConn, $sql);
 
                 if ($result) {
-                    sendEmail($email, $name, 2, '', '');
-                    header("Location: logIn.php");
-                    exit();
-
-
+                    sendEmail($email, $name, 2, '', '','');
                 } else {
-                    // Handle error
                     die('Database Error: ' . mysqli_error($dbConn));
                 }
             }

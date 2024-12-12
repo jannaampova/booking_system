@@ -208,7 +208,7 @@ if (!isset($_SESSION['name'])) {
 
                     $res = mysqli_query($dbConn, $sql);
                     if ($res) {
-                        view($res);
+                        view($res,'');
                     } else {
                         echo "Error: " . mysqli_error($dbConn);
                     }
