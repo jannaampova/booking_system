@@ -100,7 +100,7 @@ if (!isset($_SESSION['name'])) {
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
-                    <?php echo htmlspecialchars($_SESSION['name']); ?>
+                    <?php echo htmlspecialchars($firstName); ?>
                 </a>
 
                 <a href="clientBoard.php">Dashboard</a>

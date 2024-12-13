@@ -80,7 +80,7 @@ if (!isset($_SESSION['name'])) {
 
             <header>
 
-                <h1> Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</h1>
+                <h1> Welcome, <?php echo htmlspecialchars($firstName); ?>.</h1>
                 <form method="post" class="search-bubble">
                     <div class="search-field">
                         <input type="search" name="city" placeholder="Where?" list="city-options">
@@ -91,10 +91,8 @@ if (!isset($_SESSION['name'])) {
                             <option value="Pleven"></option>
                             <option value="Plovdiv"></option>
                             <option value="Ruse"></option>
-                            <option value="Sandanski"></option>
                             <option value="Shumen"></option>
                             <option value="Sofia"></option>
-                            <option value="Targovishte"></option>
                             <option value="Veliko Tarnovo"></option>
                         </datalist>
 
@@ -205,7 +203,7 @@ if (!isset($_SESSION['name'])) {
                             $sql .= " ORDER BY Property.id ASC";
                     }
 
-
+                    // $sql .= " LIMIT 9";
                     $res = mysqli_query($dbConn, $sql);
                     if ($res) {
                         view($res,'');
