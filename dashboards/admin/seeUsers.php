@@ -36,14 +36,12 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0];
                 ?>
                 <a href="hostSettings.php">
                     <i class="fas fa-user-edit"></i>
                     <?php echo htmlspecialchars($firstName); ?>
                 </a>
-
                 <a href='seeUsers.php'>View Users</a>
                 <a href='adminBoard.php'>Dashboard</a>
                 <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
@@ -65,12 +63,7 @@ if (!isset($_SESSION['name'])) {
                     while ($role = mysqli_fetch_assoc($res)) {
                         $roleID = $role['id'];
                         $roleName = $role['roleName'];
-
-                        $sqlCount = "SELECT COUNT(*) AS userCount FROM User WHERE roleID = $roleID";
-                        $countRes = mysqli_query($dbConn, $sqlCount);
-                        $countRow = mysqli_fetch_assoc($countRes);
-                        $userCount = $countRow['userCount'];
-
+                        $userCount = mysqli_fetch_assoc(mysqli_query($dbConn, "SELECT COUNT(*) AS userCount FROM User WHERE roleID = $roleID"))['userCount'];
                         echo "
             <a href='userDetails.php?role=$roleID' id='info-bubble' class='info-bubble'>
                 <p><b>" . ucfirst($roleName) . "s</b><br>
@@ -84,14 +77,7 @@ if (!isset($_SESSION['name'])) {
                 }
                 ?>
             </div>
-
-
-
         </div>
-
     </div>
-
-
 </body>
-
 </html>

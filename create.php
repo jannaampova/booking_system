@@ -183,24 +183,6 @@ if (mysqli_query($dbConn, $payment)) {
 } else {
     echo "Error creating Payment table: " . mysqli_error($dbConn) . "<br>";
 }
-
-// Create Messages table
-$messages = "CREATE TABLE IF NOT EXISTS Messages (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    senderID INT UNSIGNED,
-    receiverID INT UNSIGNED,
-    timeAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    msg TEXT,
-    FOREIGN KEY (senderID) REFERENCES User(id) ON DELETE CASCADE,
-    FOREIGN KEY (receiverID) REFERENCES User(id) ON DELETE CASCADE
-) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-if (mysqli_query($dbConn, $messages)) {
-    echo "Messages table created or already exists.<br>";
-} else {
-    echo "Error creating Messages table: " . mysqli_error($dbConn) . "<br>";
-}
-
 // SQL to create Images table
 $img = "CREATE TABLE IF NOT EXISTS Images (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

@@ -73,7 +73,6 @@ if (!$user) {
 
 </html>
 <?php
-
 include "../../emailing.php";
 include "../../config.php";
 function generateRandomCode($length = 6)
@@ -111,7 +110,6 @@ if (isset($_POST['getCode'])) {
 
 if (isset($_POST['confirm'])) {
     $inputCode = $_POST['code'];
-
     if (isset($_SESSION['generated_code']) && $inputCode === $_SESSION['generated_code']) {
         $updatePaySql = "UPDATE Payment SET paymentStatus = 'paid', amount = $totalPrice WHERE bookingID = $bookID";
         mysqli_query($dbConn, $updatePaySql);

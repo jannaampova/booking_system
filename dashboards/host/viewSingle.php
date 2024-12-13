@@ -108,8 +108,7 @@ if (!isset($_SESSION['name'])) {
             <div class="options">
 
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>

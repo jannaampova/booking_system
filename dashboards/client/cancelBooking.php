@@ -5,8 +5,7 @@ $propId = $_GET['propid'];
 $today = new DateTime();
 
 // Get booking dates
-$sql = "SELECT fromDate, toDate,totalPrice FROM Booking WHERE id = $bookId";
-$res = mysqli_query($dbConn, $sql);
+$res = mysqli_query($dbConn, "SELECT fromDate, toDate,totalPrice FROM Booking WHERE id = $bookId");
 $row = mysqli_fetch_assoc($res);
 
 
@@ -27,7 +26,6 @@ if ($row) {
 
         $fromDate = new DateTime($from);
         $toDate = new DateTime($to);
-
         $interval = $fromDate->diff($today);
 
         if ($interval->days > 3) {
@@ -41,7 +39,6 @@ if ($row) {
             </script>";
         } else {
             $price=($price/100)*30;
-
             echo "<script>
             window.location.href = 'payment.php?totalPrice=$price&bookId=$bookId&source=cancelBooking&propId=$propId&from=$from&to=$to';
       </script>";

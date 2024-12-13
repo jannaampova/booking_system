@@ -46,8 +46,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $fullName = $_SESSION['name'];
-                $firstName = explode(' ', $fullName)[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -77,8 +76,7 @@ if (!isset($_SESSION['name'])) {
                     <select name="selectType" id="selectType" required>
                         <?php
                         include '../../config.php';  // Adjust path accordingly
-                        $sql = "SELECT * FROM PropertyType";
-                        $result = mysqli_query($dbConn, $sql);
+                        $result = mysqli_query($dbConn, "SELECT * FROM PropertyType");
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<option value='" . htmlspecialchars($row["id"]) . "'>" . htmlspecialchars($row["propType"]) . "</option>";
                         }
@@ -89,8 +87,7 @@ if (!isset($_SESSION['name'])) {
                     <label>Guest Number:</label>
                     <select name="selectNum" id="selectNum" required>
                         <?php
-                        $sql = "SELECT * FROM GuestNumber";
-                        $result = mysqli_query($dbConn, $sql);
+                        $result = mysqli_query($dbConn, "SELECT * FROM GuestNumber");
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<option value='" . htmlspecialchars($row["id"]) . "'>" . htmlspecialchars($row["guestNum"]) . "</option>";
                         }

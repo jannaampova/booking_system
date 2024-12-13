@@ -37,7 +37,6 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
             <a href='yourBookings.php'>Bookings</a>
             <a href='clientBoard.php'>Dashboard</a>
             <a href='../admin/logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
-
         </div>
     </div>
     <?php
