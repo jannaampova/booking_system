@@ -15,10 +15,10 @@ body {
 .main {
   width: 100%;
   min-height: 100vh;
-  /* Allow .main to grow with content */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%),
     url(../newImg.jpg);
   background-position: center;
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
