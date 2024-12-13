@@ -77,7 +77,7 @@ include "../../emailing.php";
 include "../../config.php";
 function generateRandomCode($length = 6)
 {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomCode = '';
     for ($i = 0; $i < $length; $i++) {
