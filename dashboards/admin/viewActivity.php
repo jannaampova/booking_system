@@ -10,7 +10,7 @@ if (!isset($_SESSION['name'])) {
 <html>
 
 <head>
-    <title>View Activities</title>
+    <title>View Bookings</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
     <script src="https://kit.fontawesome.com/876722883c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/table.css">
@@ -24,7 +24,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $firstName = explode(' ', $$_SESSION['name'])[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="hostSettings.php">
                     <i class="fas fa-user-edit"></i>
