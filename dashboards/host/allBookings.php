@@ -1,13 +1,14 @@
 <?php
-session_start(); // Start the session
-// Check if the user is logged in
+session_start();
 if (!isset($_SESSION['name'])) {
-    header("Location: ../../userEntry/logIn.php"); // Redirect to login if not logged in
+    header("Location: ../../userEntry/logIn.php"); 
     exit();
 }
+$hostID = $_SESSION['userID']; 
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>All Bookings</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap">
@@ -16,7 +17,7 @@ if (!isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/nav.css">
     <link rel="stylesheet" href="../../css/allBookings.css">
-    
+
 </head>
 
 <body>
@@ -24,7 +25,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $firstName = explode(' ', $_SESSION['name'])[0]; 
+                $firstName = explode(' ', $_SESSION['name'])[0];
                 ?>
                 <a href="hostSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -40,7 +41,7 @@ if (!isset($_SESSION['name'])) {
             include "../../config.php";
 
             // Handle the filter form submission
-            $filterQuery = "";
+            $filterQuery = "WHERE p.hostID = $hostID";
             if (isset($_POST['filterBy']) && !empty($_POST['filterValue'])) {
                 $filterBy = $_POST['filterBy'];
                 $filterValue = mysqli_real_escape_string($dbConn, $_POST['filterValue']);
