@@ -108,7 +108,7 @@ if (!isset($_SESSION['name'])) {
             <div class="options">
 
                 <?php
-                $firstName = explode(' ', $_SESSION['name'])[0]; 
+                $firstName = explode(' ', $_SESSION['name'])[0];
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -188,8 +188,11 @@ if (!isset($_SESSION['name'])) {
 
                     $sql_delete = "DELETE FROM Images WHERE id = '$imgID'";
                     if (mysqli_query($dbConn, $sql_delete)) {
-                        header("Location: " . $_SERVER['PHP_SELF']);
-                        exit;
+                        ob_start();
+                        // Your script logic and output
+                        header("Location: viewSingle.php?id=$propertyId");
+                        ob_end_flush(); // Flush and send the output buffer
+                
                     } else {
                         echo "Error deleting image.";
                     }
