@@ -1,7 +1,6 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
-// Check if the user is logged in
 if (!isset($_SESSION['name'])) {
     header("Location: ../../userEntry/logIn.php");
     exit();
@@ -25,13 +24,13 @@ if (!isset($_SESSION['name'])) {
 
     <style>
   .left-container {
-    width: 200px; /* Adjust width to fit your design */
-    height: 100vh; /* Full height of the viewport */
-    position: fixed; /* Stay fixed on the left */
+    width: 200px;
+    height: 100vh; 
+    position: fixed; 
     top: 0;
     left: 0;
-    background-color: #333; /* Set background for visibility */
-    z-index: 10; /* Ensure it stays on top */
+    background-color: #333;
+    z-index: 10; 
 }
 
 .cont{
@@ -44,7 +43,7 @@ if (!isset($_SESSION['name'])) {
         <div class="left-container">
             <div class="options">
                 <?php
-                $firstName = explode(' ', $_SESSION['name'])[0]; // Get the first name
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -56,7 +55,7 @@ if (!isset($_SESSION['name'])) {
             </div>
         </div>
 
-        <section class="service-section" id="vynl"> <!--С хипервръзка свързано с мени-->
+        <section class="service-section" id="vynl"> 
             <div class="row">
                 <div class="section-title">
                     <h1>Your Properties</h1>
@@ -86,7 +85,7 @@ if (!isset($_SESSION['name'])) {
 
                     $propertiesWithImages[] = [
                         'id' => $row['id'],
-                        'name' => $row['propName'], // Assuming the property name is stored in the 'name' field
+                        'name' => $row['propName'], 
                         'images' => $images
                     ];
                 }
@@ -123,7 +122,6 @@ if (!isset($_SESSION['name'])) {
 </div>";
                 }
                 ?>
-
                 <!-- Swiper Initialization Script -->
                 <script>
                     const swipers = document.querySelectorAll('.swiper-container');

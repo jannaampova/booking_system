@@ -78,6 +78,9 @@ function sendEmail($email, $name, $flag, $propertyName, $host,$code)
         } elseif ($flag == 2) {
             header("Location: logIn.php");
         }
+        elseif ($flag == 3) {
+            header("Location: adminBoard.php");
+        }
         exit();
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;

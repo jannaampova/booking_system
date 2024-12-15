@@ -12,6 +12,7 @@ if (!isset($_SESSION['name'])) {
 <html lang="en">
 <?php
 $fullName = $_SESSION['name'];
+$ID = $_SESSION['userID'];
 $firstName = explode(' ', $fullName)[0]; // Get the first name
 ?>
 
@@ -81,7 +82,7 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
         .info-bubbles {
             margin-top: 3%;
             margin-left: 35%;
-            width: 90%;
+            width: 100%;
         }
 
         .detail {
@@ -101,7 +102,7 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
             background-color: #f9f9f9;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            margin-left: 30%;
+            margin-left: 35%;
             width: 100%;
 
         }
@@ -231,6 +232,35 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                         ?>
                         <br>
                         <i class="fas fa-user"></i>
+                    </p>
+                </div>
+                <div class="info-bubble">
+                    <p><b>You have earned</b><br>
+                        <?php
+                        include "../../config.php";
+                        
+                        $totalEarnings = 0;
+                        $fullName = mysqli_real_escape_string($dbConn, $_SESSION['name']); // Escape session value
+                        
+                        // Query to calculate total earnings
+                        $sql = "SELECT SUM(Payment.amount) AS totalEarnings
+                                FROM Payment
+                                JOIN Booking ON Payment.bookingID = Booking.id
+                                JOIN Property ON Booking.propID = Property.id
+                                JOIN User ON Property.hostID = User.id
+                                WHERE User.id = '$ID' AND Payment.paymentStatus = 'paid'";
+                        
+                        $res = mysqli_query($dbConn, $sql);
+                        
+                        if ($row = mysqli_fetch_assoc($res)) {
+                            $totalEarnings = $row['totalEarnings'] ?? 0; // Use 0 if no results
+                        }
+                        
+                        echo "$$totalEarnings "; // Display the total earnings
+
+                        ?>
+                        <br>
+                        <i class="fas fa-money-check-alt"></i>
                     </p>
                 </div>
             </div>
