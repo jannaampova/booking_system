@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $availabilitySql = "SELECT * FROM Availabilities 
                                     WHERE propID = $propertyID 
                                     AND fromDate <= '$checkInDate' 
-                                    AND toDate >= '$checkOutDate'";
+                                    AND toDate >= '$checkOutDate'
+                                    AND propStatus = 'reserved'";
                 $result = mysqli_query($dbConn, $availabilitySql);
                 if ($row = mysqli_fetch_assoc($result)) {
                     $originalFromDate = $row['fromDate'];
