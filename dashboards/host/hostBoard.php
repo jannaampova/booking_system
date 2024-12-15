@@ -269,7 +269,6 @@ $firstName = explode(' ', $fullName)[0]; // Get the first name
                     JOIN GuestNumber g ON p.guestNumID = g.id
                     WHERE p.hostID = {$_SESSION['userID']} 
                     AND b.fromDate >= '$startDate' 
-                    AND b.toDate <= '$endDate'
                     AND b.bookingStatus='approved'";
 
                     if (isset($_POST['sortBy'])) {

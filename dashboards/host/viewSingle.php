@@ -108,7 +108,9 @@ if (!isset($_SESSION['name'])) {
             <div class="options">
 
                 <?php
-                $firstName = explode(' ', $_SESSION['name'])[0];
+                ob_start(); 
+                $firstName = explode(' ', $_SESSION['name'])[0]; 
+                ob_end_flush(); 
                 ?>
                 <a href="../userSettings.php">
                     <i class="fas fa-user-edit"></i>
@@ -125,6 +127,7 @@ if (!isset($_SESSION['name'])) {
 
             <div class="cont">
                 <?php
+                ob_start(); 
 
                 $propertyId = isset($_GET['id']) ? intval($_GET['id']) : 0;
                 $sql = "SELECT * FROM Property WHERE id=$propertyId";
@@ -173,30 +176,36 @@ if (!isset($_SESSION['name'])) {
                             <div class='overlay'>
                                 <form class='form' name='deleteImg' method='post'>
                                 <input type='hidden' name='img' value='" . $imagePath . "'>
-                                <button type='submit' name='deleteImg' class='action-button delete'>DELETE</button>
+                                <button type='submit' name='deleteImg' class='action-button delete'>Delete</button>
                         </form>
                             </div>
                         </div>
                       </div>";
                     }
                 }
-                if (isset($_POST['deleteImg'])) {
-                    $imagePath = $_POST['img'];
-                    $sqlGetImgID = "SELECT id from Images where imgPath='$imagePath' ";
+                if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteImg'])) {
+                    $imagePath = mysqli_real_escape_string($dbConn, $_POST['img']); // Sanitize input
+                    $sqlGetImgID = "SELECT id FROM Images WHERE imgPath='$imagePath'";
                     $resImgID = mysqli_query($dbConn, $sqlGetImgID);
-                    $imgID = mysqli_fetch_assoc($resImgID)['id'];
-
-                    $sql_delete = "DELETE FROM Images WHERE id = '$imgID'";
-                    if (mysqli_query($dbConn, $sql_delete)) {
-                        ob_start();
-                        // Your script logic and output
-                        header("Location: viewSingle.php?id=$propertyId");
-                        ob_end_flush(); // Flush and send the output buffer
                 
+                    if ($resImgID && $imgIDRow = mysqli_fetch_assoc($resImgID)) {
+                        $imgID = $imgIDRow['id'];
+                
+                        // Delete the image entry from the database
+                        $sql_delete = "DELETE FROM Images WHERE id = '$imgID'";
+                        if (mysqli_query($dbConn, $sql_delete)) {
+                            // Redirect to the same page to refresh state
+                            header("Location: " . $_SERVER['PHP_SELF'] . "?id=$propertyId");
+                            exit;
+                        } else {
+                            echo "Error deleting image: " . mysqli_error($dbConn);
+                        }
                     } else {
-                        echo "Error deleting image.";
+                        echo "Error: Image not found in the database.";
                     }
                 }
+                ob_end_flush(); 
+
                 ?>
             </div>
 
@@ -360,7 +369,7 @@ if (!isset($_SESSION['name'])) {
 
 
         <?php
-
+ob_start();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if (isset($_POST['deleteProp'])) {
@@ -392,22 +401,17 @@ if (!isset($_SESSION['name'])) {
 
             $updateAvailabilitySQL = "UPDATE Availabilities SET fromDate='$newFrom', toDate='$newTo', propStatus='free' WHERE propID=$propertyId";
 
-            if (mysqli_query($dbConn, $updateSQL) && mysqli_query($dbConn, $updateAvailabilitySQL)) {
+            $deleteAmenitiesSQL = "DELETE FROM PropAmenities WHERE propID=$propertyId";
+            mysqli_query($dbConn, $deleteAmenitiesSQL);
 
-                // First, delete existing amenities
-                $deleteAmenitiesSQL = "DELETE FROM PropAmenities WHERE propID=$propertyId";
-                mysqli_query($dbConn, $deleteAmenitiesSQL);
-
-                // Then, insert the new amenities
-                if (!empty($newAmenities)) {
-                    foreach ($newAmenities as $amenityID) {
-                        $insertAmenitiesSQL = "INSERT INTO PropAmenities (propID, amenityID) VALUES ($propertyId, $amenityID)";
-                        mysqli_query($dbConn, $insertAmenitiesSQL);
-                    }
+            if (!empty($newAmenities)) {
+                foreach ($newAmenities as $amenityID) {
+                    $insertAmenitiesSQL = "INSERT INTO PropAmenities (propID, amenityID) VALUES ($propertyId, $amenityID)";
+                    mysqli_query($dbConn, $insertAmenitiesSQL);
                 }
             }
 
-            if (isset($_FILES['images'])) {
+                  if (isset($_FILES['images'])) {
                 $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . '/booking system/upload/';
                 foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
                     $fileName = basename($_FILES['images']['name'][$key]);
@@ -429,14 +433,14 @@ if (!isset($_SESSION['name'])) {
                     }
                 }
             }
-
-
-
-            if (mysqli_query($dbConn, $updateSQL)) {
+ob_clean();
+            if (mysqli_query($dbConn, $updateSQL) && mysqli_query($dbConn, $updateAvailabilitySQL)) {
+         
             } else {
-                echo "<p>Error updating property: " . mysqli_error($dbConn) . "</p>";
+                echo "Error updating property: " . mysqli_error($dbConn);
             }
         }
+ob_end_flush()
         ?>
 
         <script>

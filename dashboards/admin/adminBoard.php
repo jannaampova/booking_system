@@ -178,7 +178,7 @@ if (!isset($_SESSION['name'])) {
                         if ($row = mysqli_fetch_assoc($res)) {
                             $mostBookedHostName = $row['fullName'];
                             $bookings = $row['client_count'];
-                            echo "<i>$mostBookedHostName</i><br>";
+                            echo "$mostBookedHostName<br>";
                             echo "<i style='font-size: 1 rem; color:#282e2a'>booked <b>$bookings</b> times</i>";
                         } else {
                             echo "<i>No hosts found</i>";
@@ -205,7 +205,7 @@ if (!isset($_SESSION['name'])) {
                             if ($row = mysqli_fetch_assoc($res)) {
                                 $mostFrequentClient = $row['fullName'];
                                 $bookings = $row['booking_count'];
-                                echo "<i>$mostFrequentClient</i><br>";
+                                echo "$mostFrequentClient<br>";
                                 echo "<i style='font-size: 1 rem; color:#282e2a'>made <b>$bookings</b> bookings</i>";
                             } else {
                                 echo "<i>No clients found</i>";
