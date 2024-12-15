@@ -72,6 +72,7 @@ if (!isset($_SESSION['name'])) {
 
                 <a href='seeUsers.php'>View Users</a>
                 <a href='viewActivity.php'>View Activities</a>
+                <a href='addAdmin.php'>Add new admin</a>
                 <a href='logOut.php'>Log Out <i class="fa-solid fa-right-from-bracket"></i></a>
 
             </div>
