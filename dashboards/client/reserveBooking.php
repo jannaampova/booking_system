@@ -78,11 +78,11 @@ $userId = isset($_GET['id']) ? $_GET['id'] : null;
                 <div class="form-control">
                     <div class="radio-flex">
                         <div class="radio-item">
-                            <input type="radio" name="payment" id="code" value="card" class="radio-input">
+                            <input type="radio" name="payment" id="code" value="card" class="radio-input" required>
                             <label class="radio-label" for="code">Pay via confirmation code</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" name="payment" id="prop" value="cash" class="radio-input">
+                            <input type="radio" name="payment" id="prop" value="cash" class="radio-input" required>
                             <label class="radio-label" for="prop">Pay on property</label>
                         </div>
                     </div>
